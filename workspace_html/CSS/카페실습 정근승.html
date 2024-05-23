@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>카페실습 정근승</title>
+    <style>
+        body {
+            width: 80%;
+            margin: 0 auto;
+        }
+        
+        .top,
+        .top2,
+        .bottom {
+            display: inline-block;
+        }
+
+        .top2 {
+            margin-right: 15px;
+        }
+
+        .wide {
+            width: 100%;
+        }
+
+        .right {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .type {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        .center {
+            text-align: center;
+        }
+
+        table td:nth-child(3) {
+            text-align: left;
+            padding-left: 15px;
+        }
+
+        table {
+            line-height: 1.8;
+            border-collapse: collapse;
+        }
+
+        td {
+            border-bottom: 1px solid rgb(211, 211, 211, 0.7);
+            
+        }
+
+        .green {
+            color: white;
+            background-color: rgb(0, 196, 0);
+            padding: 10px 15px;
+            border: 0;
+            margin-left: 0;
+            margin: 0;
+            transform: translateX(-3px);
+        }
+
+        .searchbar {
+            height: 38px;
+            vertical-align: top;
+            padding: 0 0 0 0;
+            margin-right: 0;
+        }
+
+        form {
+            border: 1px solid gray;
+        }
+
+        .middle {
+            border-bottom: 1px solid rgb(24, 24, 24);
+            padding-bottom: 10px;
+            margin-bottom: 10px;
+        }
+
+        select {
+            width: 130px;
+            height: 40px;
+        }
+
+        .select2 {
+            width: 100px;
+            height: 30px;
+            margin: 0;
+        }
+
+        .paging {
+            margin: 20px;
+        }
+
+        .back-gray {
+            background-color: rgb(243, 243, 243, 0.7);
+            padding-bottom: 30px;
+            box-shadow: 1px 1px 5px 5px rgb(243, 243, 243, 0.7);
+            border-radius: 1px;
+        }
+
+        .글쓰기 {
+            background-color: rgb(204, 204, 204);
+            border: 0;
+            width: 70px;
+            height: 40px;
+            font-weight: 600;
+            margin: 10px 0 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="top wide right">
+        <form action="">
+            <input class="searchbar" type="search" placeholder=""></input>
+            <input class="green" type="submit" value="검색"></input>
+        </form>
+    </div>
+    <div class="top header wide">
+        <h2>
+            09. 생산관리 프로그래밍 기초C#(과제제출)
+        </h2>
+    </div>
+    <div class="top wide right middle">
+        <div class="top2">
+            <span>새글 구독</span>
+            <input type="checkbox" name="" id=""></input>
+        </div>
+        <div class="top2">
+            <input type="checkbox" name="" id="">공지 숨기기</input>
+        </div>
+        <div class="top2">
+            <button>ㅁ</button>
+            <button>ㅁ</button>
+            <button>ㅁ</button>
+        </div>
+        <div class="top2 select">
+            <form action="">
+                <select class="select2" name="" id="">
+                    <option value="1">5개씩</option>
+                    <option value="2">10개씩</option>
+                    <option value="3">15개씩</option>
+                    <option value="4">20개씩</option>
+                    <option value="5">30개씩</option>
+                    <option value="6">40개씩</option>
+                    <option value="7">50개씩</option>
+                </select>
+            </form>
+        </div>
+    </div>
+    <div class="wide center">
+        <table class="wide">
+            <thead>
+                <tr>
+                    <th colspan="3">제목</th>
+                    <th>작성자</th>
+                    <th>작성일</th>
+                    <th>조회</th>
+                    <th>좋아요</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><input type="checkbox"></td>
+                    <td>1</td>
+                    <td>생산관리 프로그래밍기초C#(과제제출)-정근승</td>
+                    <td>정근승</td>
+                    <td>2024.01.01.</td>
+                    <td>100</td>
+                    <td>100</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox"></td>
+                    <td>2</td>
+                    <td>생산관리 프로그래밍기초C#(과제제출)-정근승</td>
+                    <td>정근승</td>
+                    <td>2024.01.01.</td>
+                    <td>500</td>
+                    <td>200</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox"></td>
+                    <td>3</td>
+                    <td>생산관리 프로그래밍기초C#(과제제출)-정근승</td>
+                    <td>정근승</td>
+                    <td>2024.01.01.</td>
+                    <td>1000</td>
+                    <td>300</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox"></td>
+                    <td>4</td>
+                    <td>생산관리 프로그래밍기초C#(과제제출)-정근승</td>
+                    <td>정근승</td>
+                    <td>2024.01.01.</td>
+                    <td>5000</td>
+                    <td>400</td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox"></td>
+                    <td>5</td>
+                    <td>생산관리 프로그래밍기초C#(과제제출)-정근승</td>
+                    <td>정근승</td>
+                    <td>2024.01.01.</td>
+                    <td>10000</td>
+                    <td>500</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="bottom wide right">
+        <button class="글쓰기">글쓰기</button>
+    </div>
+    <div class="back-gray">
+        <div class="bottom wide center paging">
+            <button>1</button>
+            <button>2</button>
+            <button>3</button>
+            <button>4</button>
+        </div>
+        <div class="bottom center wide paging">
+            <div class="bottom select">
+                <select name="기간" id="">
+                    <option value="">전체기간</option>
+                    <option value="">1일</option>
+                    <option value="">1주일</option>
+                    <option value="">1개월</option>
+                    <option value="">6개월</option>
+                    <option value="">1년</option>
+                </select>
+            </div>
+            <div class="bottom select">
+                <select name="작성자" id="">
+                    <option value="">게시글 + 댓글</option>
+                    <option value="">제목만</option>
+                    <option value="">글작성자</option>
+                    <option value="">댓글내용</option>
+                    <option value="">댓글작성자</option>
+                </select>
+            </div>
+            <div class="bottom">
+                <form action="">
+                    <input class="searchbar" type="search" placeholder=""></input>
+                    <input class="green" type="submit" value="검색"></input>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>디스플레이 수업</title>
+    <style>
+        /* 
+            좌우 전체 너비를 가진다
+            그래서 새로운줄에 표시된다
+            너비가 전체 크기보다 작은 경우 나머지 공간에 정렬할 수 있다.
+        */
+        .block {
+            width: 200px;
+            border: 1px solid red;
+            margin: 0 auto;
+        }
+        /* 
+            딱 내 컨텐츠 만큼만 너비를 가진다
+            width, height 적용 안됨.
+            하지만 margin도 좌우는 되지만 위아래 적용 안됨.
+            padding도 좌우는 되지만 위아래 적용 안됨. 단 border는 밀어진다.
+        */
+        .inline {
+            border: 1px solid red;
+            width: 200px;
+            height: 200px;
+            margin: 500px;
+            /* padding: 30px; */
+        }
+        .bg_blue {
+            background-color: blue;
+            color: white;
+        }
+
+        .parent > div {
+            border: 1px dotted rgb(0,0,255);
+            width: 400px;
+            height: 200px;
+
+            display: inline-block;
+
+            /* inline, inline-block 에만 적용 됨 */
+            vertical-align: top;
+            
+        }
+
+        .parent > div:nth-child(2) {
+            height: 400px;
+        }
+
+        .parent {
+            width: 500px;
+            border: 1px solid #ff0000;
+        }
+
+        #c1 {
+            /* 화면에 보이지 않음. 스크립리더에는 읽힌다 */
+            /* display: none; */
+            /* visibility:hidden 은 화면엔 보이진 않지만, 공간은 남아 있게 된다 */
+            /* visibility: hidden; */
+            opacity: 0.5;
+        }
+        #c1:hover {
+            background-color: red;
+            opacity: 0.3;
+        }
+        .fake_div {
+            border: 1px solid red;
+            display: inline;
+            
+        }
+    </style>
+</head>
+<body>
+    <p class="block">
+        첫번째 p
+    </p>
+    <p class="block">
+        두번째 p
+    </p>
+    <a href="#a" class="inline">
+        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Fugit perspiciatis autem, sint aut optio veniam iste accusamus ipsa saepe. Labore laborum consectetur quae voluptatibus quam debitis id voluptatum quas nobis.
+        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Fugit perspiciatis autem, sint aut optio veniam iste accusamus ipsa saepe. Labore laborum consectetur quae voluptatibus quam debitis id voluptatum quas nobis.
+    </a>
+    <a href="#a2" class="inline">
+        두번째 a
+    </a>
+    <br>
+    <span class="bg_blue"> 첫번째 span </span>
+    <span class="bg_blue"> 두번째 span </span>
+    <br>
+    <span class="bg_blue"> 첫번째 span </span><span class="bg_blue"> 두번째 span </span>
+    <hr>
+    <div class="parent">
+        <div id="c1">목록1</div>
+        <div>
+            목록2<br>목록2에 대한 설명
+        </div>
+    </div>
+    <div class="fake_div"> div였던거</div>
+    <div class="fake_div"> div였던거</div>
+</body>
+</html>

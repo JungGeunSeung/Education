@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>플롯 수업</title>
+    <style>
+        .box {
+            border: 1px solid red;
+
+
+            width: 100px;
+            height: 100px;
+            margin: 10px;
+
+            text-align: center;
+            font-size: 24px;
+            line-height: 100px;
+        }
+
+
+        /* 
+            float은 요소를 inline-block으로 취급한다/
+            float 전용 layer에 표시한다
+            들어갈 곳이 없다면 inline처럼 다음줄에 표시된다
+            아래에 있는 글씨는 float요소를 피해서 표시된다
+        */
+
+
+        /* 
+            부모에게 after를 이용해서 float한 자식들의 정보를 원래 층으로 전달한다
+            div를 놓고 clear를 줄 수 있지만, 의미없는 div를 놓지 않기 위해 이용한다.
+        */
+        .clearfix:after {
+            content:"";
+            display: block;
+            clear: both;
+        }
+
+        .fl1, .fl2 {
+            border: 1px solid blue;
+            float: left;
+        }
+        
+        .rl1, .rl2 {
+            float: right;
+        }
+
+        .d1 {
+            border: 1px solid red;
+            float: left;
+        }
+
+        .d2 {
+            border: 1px solid blue;
+        }
+
+        .cou {
+            text-align: center;
+        }
+        .logo {
+            margin: auto;
+            width: 100px;
+            display: inline-block;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container clearfix">
+        <div class="box fl1">1</div>
+        <div class="box fl2">2</div>
+        <div class="box rl1">3</div>
+        <div class="box rl2">4</div>
+    </div>
+    <div class="clearfix">
+        <div class="d1">d1 float left</div>
+    </div>
+    <div class="d2">d2</div>
+
+    <div style="background-color: red; height: 50px;">
+    </div>
+
+    <div class="clearfix cou">
+        <div class="fl1">카테고리</div>
+        <div class="logo">coupang</div>
+        <div class="rl1">장바구니</div>
+    </div>
+</body>
+
+</html>

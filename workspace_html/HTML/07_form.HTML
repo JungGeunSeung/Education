@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>폼 수업</title>
+</head>
+
+<body>
+    <!--action : 보낼곳 
+        method : 보내는 방식 get, post-->
+    <form action="" method="get">
+        button : <input type="button" value="버튼"><br>
+        checkbox : <input type="checkbox" checked="checkbox"> 김밥<br>
+        checkbox : <input type="checkbox"> 라면<br>
+        color : <input type="color"><br>
+        date : <input type="date"> <br>
+        file : <input type="file"> <br>
+        number : <input type="number"><br>
+        password : <input type="password" name="pw"><br>
+        radio :
+        <input type="radio" name="gender" value="male"> 남자
+        <input type="radio" name="gender" value="female"> 여자
+        <input type="radio" name="gender" checked value="hide"> 비공개<br>
+        text : <input type="text"><br>
+        reset : <input type="reset"><input type="reset" value="다시작성"><br>
+        submit : <input type="submit"><input type="submit" value="회원가입"><br>
+        <input type="hidden" value="2"><br>
+
+    </form>
+    <hr>
+    <form action="https://search.naver.com/search.naver" method="get" target="_blank">
+        <input type="text" name="query" value="휴먼교육센터" readonly>
+        <input type="submit" value="naver search">
+    </form>
+    <form action="https://www.google.com/search" method="get" target="_blank">
+        <input type="text" name="q" placeholder="google">
+        <input type="submit" value="google search">
+    </form>
+    <!--form 안에 form이 있으면 동작이 이상해진다-->
+</body>
+<hr>
+
+<body>
+    <form action="" method="get">
+        <select name="dinner">
+            <option value="1">일식</option>
+            <option value="2">한식</option>
+            <option value="3">양식</option>
+            <option value="4" selected>분식</option>
+        </select>
+        <input type="submit" value="선택">
+    </form>
+    <form>
+        <textarea name="textarea" rows="10" cols="80">작성하고 싶은 내용을 작성하세요</textarea><br>
+        <input type="submit" value="작성완료">
+    </form>
+    <form>
+        <button type="button" onclick="alert('Hello World!')">Click Me!</button>
+        <input type="button" value="Click Me!" onclick="alert('Hello world!')">
+    </form>
+</body>
+
+<body>
+    <form>
+        <fieldset>
+            <legend>Login</legend>
+            Username <input type="text" name="username">
+            Password <input type="text" name="password">
+        </fieldset>
+    </form>
+</body>
+
+</html>

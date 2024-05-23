@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>백그라운드</title>
+
+    <style> 
+        #image1 {
+        height: 250px;
+        border: 1px solid red;
+
+        /* 
+            배경을 이미지로 바꾸기
+            기본값이 상하자우로 반복되어 채워진다.
+            padding 영역까지 적용된다
+            */
+        background-image: url("http://poiemaweb.com/img/bg/dot.png");
+
+        padding: 20px;
+        margin: 20px;
+    }
+
+        #image2 {
+            height: 250px;
+            border: 1px solid red;
+
+            background-image: url("http://poiemaweb.com/img/bg/dot.png");
+            background-repeat: repeat-x;
+        }
+        #image3 {
+            height: 250px;
+            border: 1px solid red;
+
+            background-image: url("http://poiemaweb.com/img/bg/dot.png");
+            background-repeat: repeat-y;
+        }
+        #image4 {
+            height: 250px;
+            border: 1px solid red;
+
+            background-image: url("http://poiemaweb.com/img/bg/dot.png");
+            background-repeat: no-repeat;
+        }
+        #image5 {
+            height: 500px;
+            border: 1px solid red;
+            
+            background-image: url("http://poiemaweb.com/img/bg/stock-photo-125979219.jpg");
+            
+            /* 가로세로 순으로 적는다. px도 가능 */
+            /* background-size: 100% 100%; */
+            
+            /* cover는 모든 배경을 원본비율을 유지하면서 채워준다. 
+            안보이는 그림의 영역이 있을 수 있다
+            채워주는게 목적이다*/
+            /* background-size: cover; */
+            
+            /* 원본 비율을 유지하면서 이미지를 모두 표시한다.
+            베경이미지가 채워지지 않는 영역이 있을수 있다.
+            남는 영역에 repeat 기본값이 적용된다. */
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+        #image6 {
+            height: 500px;
+            border: 1px solid red;
+            
+            background-color: rgb(84, 202, 84);
+            background-image: url(http://poiemaweb.com/img/bg/stock-photo-125979219.jpg);
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: 40%;
+        }
+        </style>
+
+</head>
+<body>
+    <div id="image1">
+        <h3>배경 이미지를 바둑판형식으로 채우기</h3>
+    </div>
+    <div id="image2">
+        <h3>배경 이미지를 repeat-x를 이용하여 채우기</h3>
+    </div>
+    <div id="image3">
+        <h3>배경 이미지를 repeat-y를 이용하여 채우기</h3>
+    </div>
+    <div id="image4">
+        <h3>배경 이미지를 no-repeat을 이용하여 채우지 않기</h3>
+    </div>
+    <div id="image5">
+        <h3>배경 이미지를 size을 이용하여 채우기</h3>
+    </div>
+    <div id="image6">
+        <h3>배경 color</h3>
+    </div>
+</body>
+</html>

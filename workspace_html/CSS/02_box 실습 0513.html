@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>웹툰 따라하기 실습</title>
+    <style>
+        body {
+            width: 700px;
+        }
+
+        img {
+            border-radius: 7px;
+            border: 1px solid rgb(163, 163, 163);
+            height: 100px;
+            width: 120px;
+            margin-right: 5 px;
+        }
+
+        img:hover {
+            width: 123px;
+            height: 103px;
+            
+        }
+
+        #rating {
+            color: gray;
+            font-size: 13px;
+        }
+
+        #ti, #ti2 {
+            font-size: 16px;
+            font-weight: bold;
+            width: 300px;
+        }
+
+        #author {
+            font-size: 14px;
+            height: 20px;
+        }
+
+        #ti::before {
+            content: "UP";
+            color: red;
+            border: 1px solid red;
+            border-radius: 10%;
+            font-size: 10px;
+            margin-right: 3px;
+        }
+
+        p {
+            text-align: right;
+            margin-top: -40px;
+            margin-bottom: 10px;
+            color: rgb(83, 83, 83);
+        }
+
+        a:visited {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        a:link {
+            text-decoration: none;
+        }
+
+        /* CSS의 table 속성인 colspan, rowspan이 적용 되지 않는다. */
+    </style>
+</head>
+
+<body>
+    <h3>추천 베스트도전 & 도전만화</h3>
+    <p><a href="https://comic.naver.com/bestChallenge">베스트도전 전체보기></a></p>
+    <table>
+        <tr>
+            <td rowspan="3">
+                <a href="https://comic.naver.com/bestChallenge/list?titleId=815049">
+                    <img src="https://image-comic.pstatic.net/user_contents_data/challenge_comic/2023/10/09/370449/upload_7077467705797915957_202x164.jpeg"
+                        alt="미로에 빠진 사랑">
+                </a>
+            </td>
+            <td id="ti">
+                <a href="https://comic.naver.com/bestChallenge/list?titleId=815049">미로에 빠진 사람
+                </a>
+            </td>
+            <td rowspan="3">
+                <a href="https://comic.naver.com/bestChallenge/list?titleId=753355">
+                    <img src="https://image-comic.pstatic.net/user_contents_data/challenge_comic/2023/06/04/230622/upload_3618133662164465766_202x164.jpeg"
+                        alt="로마의 법칙">
+                </a>
+            </td>
+            <td id="ti">
+                <a href="https://comic.naver.com/bestChallenge/list?titleId=753355">로마의 법칙
+                </a>
+            </td>
+        </tr>
+
+        <tr>
+            <td id="author">배결준</td>
+            <td id="author">늘보</td>
+        </tr>
+
+        <tr>
+            <td id="rating">★9.78 &nbsp;&nbsp;&nbsp; ◈2만</td>
+            <td id="rating">★9.88 &nbsp;&nbsp;&nbsp; ◈ 43만</td>
+        </tr>
+
+        <tr>
+            <td rowspan="3">
+                <a href="https://comic.naver.com/bestChallenge/list?titleId=52990">
+                    <img src="https://image-comic.pstatic.net/user_contents_data/challenge_comic/2024/05/13/141755/upload_7377796922527332657_202x164.jpeg"
+                        alt="야오네집">
+                </a>
+            </td>
+
+            <td id="ti">
+                <a href="https://comic.naver.com/bestChallenge/list?titleId=52990">야오네집</a>
+            </td>
+
+            <td rowspan="3">
+                <a href="https://comic.naver.com/bestChallenge/list?titleId=726814">
+                    <img src="https://image-comic.pstatic.net/user_contents_data/challenge_comic/2023/03/12/324739/upload_4051322353419891513_202x164.jpeg"
+                        alt="158동 진상부부">
+                </a>
+            </td>
+
+            <td id="ti">
+                <a href="https://comic.naver.com/bestChallenge/list?titleId=726814">158동 진상부부
+                </a>
+            </td>
+        </tr>
+
+        <tr>
+            <td id="author">YAO</td>
+            <td id="author">진상부부</td>
+        </tr>
+
+        <tr>
+            <td id="rating">★9.78 &nbsp;&nbsp;&nbsp; ◈ 92만</td>
+            <td id="rating">★9.54 &nbsp;&nbsp;&nbsp; ◈ 379만</td>
+        </tr>
+
+        <tr>
+            <td rowspan="3">
+                <a href="https://comic.naver.com/challenge/list?titleId=771076">
+                    <img src="https://image-comic.pstatic.net/user_contents_data/challenge_comic/2022/05/18/303129/thumbnail_202x164dfee8ef3_6719_4892_8662_07d1a02bedb6_00004208.JPEG"
+                        alt="단편집">
+                </a>
+            </td>
+
+            <td id="ti2">
+                <a href="https://comic.naver.com/challenge/list?titleId=771076">단편집
+                </a>
+            </td>
+
+            <td rowspan="3">
+                <a href="https://comic.naver.com/challenge/list?titleId=483237">
+                    <img src="https://image-comic.pstatic.net/user_contents_data/challenge_comic/2021/05/16/233067/thumbnail_202x164d0bd834f_ab57_4772_8457_ccadc2b72505_00005203.JPEG"
+                        alt="상상동물">
+                </a>
+            </td>
+
+            <td id="ti2">
+                <a href="https://comic.naver.com/challenge/list?titleId=483237">상상동물
+                </a>
+            </td>
+        </tr>
+
+        <tr>
+            <td id="author">mrle****</td>
+            <td id="author">da2g****</td>
+        </tr>
+
+        <tr>
+            <td id="rating">★9.03 &nbsp;&nbsp;&nbsp; ◈ 2만</td>
+            <td id="rating">★8.991 &nbsp;&nbsp;&nbsp; ◈ 42만</td>
+        </tr>
+
+    </table>
+</body>
+
+</html>

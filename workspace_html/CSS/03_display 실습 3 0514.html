@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>디스플레이 실습 3</title>
+    <style>
+        * {
+            border: 1px solid red;
+            text-align: center;
+            vertical-align: top;
+        }
+        body {
+            width: auto;
+            margin: 0px 300px;
+        }
+
+        .right {
+            width: 350px;
+        }
+        .left {
+            width: 300px;
+        }
+
+        .dis {
+            display: inline-block;
+        }
+
+        p {
+            padding: 0px;
+            margin: 0px;
+            font-size: 12px;
+        }
+
+        p.right {
+            padding: 0px 30px;
+            width: 300px;
+            margin-top: 20px;
+            text-align: left;
+
+        }
+        p.left {
+            margin-top: 0px;
+            padding-top: 0px;
+            text-align: left;
+        }
+
+        h2 {
+            margin-bottom: 0px;
+            text-align: left;
+        }
+        video {
+            height: 250px;
+            border: 1px solid red;
+        }
+
+        p.ed {
+            border-left: 2px solid skyblue;
+            padding-left: 10px;
+            margin: 4px;
+        }
+        img {
+            margin-top: 20px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="dis">
+        <h2 class="left dis">
+            2018 Ivor Novello awards: Dave track attacking Theresa May wins best song
+        </h2>
+        <br>
+        <p class="left dis">
+            British rap music has triumphed at the 2018 Ivor Novello songwriting awards, with Stormzy and Dave picking up prestigious prizes.
+        </p>
+    </div>
+    <video class="right dis"
+        src="https://youtu.be/XQl5KYiiFDI" autoplay loop>
+    </video>
+
+    <img class="left dis"
+        src="https://images01.nicepage.com/bb/1d/bb1d2e5cabdda9d7e02aaf1f96309f50.jpeg" alt="">
+
+    <p class="right dis">
+        Dave, the Streatham rapper who at just 19 has already guested with US superstar Drake, was awarded best contemporary song for Question Time, a seven-minute hip-hop track that criticises Theresa May over lack of NHS funding, military involvement in Syria, wage stagnation and more. The track also castigates David Cameron over Brexit (“You fucked us, resigned, then sneaked out the firing line”) and ponders whether Jeremy Corbyn can be an effective, honest politician. 
+        One particularly heartfelt verse attacks May over her handling of the Grenfell Tower disaster. 
+    </p>
+
+    <p class="left ed">
+        Ed Sheeran was named songwriter of the year, but lost the album prize to Stormzy, with another rapper, Dave, winning best contemporary song for Question Time
+    </p>
+</body>
+</html>

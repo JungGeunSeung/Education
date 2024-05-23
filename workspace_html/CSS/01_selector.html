@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=>, initial-scale=1.0">
+    <title>셀렉터 수업</title>
+
+    <style>
+        /*CSS의 주석
+        
+        #은 [id=???]의 단축어이다.
+        .은 [class~=???]의 단축어이다.
+        */
+        * {
+            color: red;
+        }
+
+        p {
+            border: 1px solid red;
+        }
+
+        #p1 {
+            background-color: yellow;
+        }
+
+        .content {
+            color: blue;
+        }
+
+        .textGreen {
+            color: green;
+        }
+
+        .textBig {
+            font-size: 30px;
+        }
+
+        #content {
+            background-color: pink;
+        }
+
+        .b1 {
+            border: 1px solid blue;
+        }
+
+        [href] {
+            color: black;
+        }
+
+        [href="#p2"] {
+            color: blue;
+        }
+
+        [title="그냥"] {
+            color: green;
+        }
+
+
+        /*
+        #td_1 {
+            border: 1px solid red
+        }
+
+        #td_2 {
+            border: 1px solid red
+        }
+        */
+
+
+        /* td_로 시작하는 id 속성을 가진 tag를 선택 */
+        [id^=td_] {
+            border: 1px solid red
+        }
+
+        /* _td로 끝나는 id 속성을 가진 tag를 선택 */
+        [id$=_td] {
+            border: 1px solid
+        }
+
+        /* td를 포함하는 id 속성을 가진 tag를 선택 하지만 어느상황이나 어느곳에 포함된다면 선택 되기 때문에,
+        잘 사용하진 않는다. ex.id*=st    street test first style의 단어들이 st를 포함하고 있기 때문에 전부 선택된다.*/
+        [id*=td] {
+            background-color: ;
+        }
+
+        div td {
+            color: blue;
+        }
+
+        thead>tr {
+            height: 50px;
+        }
+
+        #mouse {
+            border: 1px solid red
+        }
+        
+        #mouse:hover {
+            background-color: yellow;
+            border: 3px solid blue
+        }
+
+        #mouse:active {
+            background-color: red;
+        }
+
+        input[type=radio]:checked+span {
+            color: blue;
+        }
+
+        #odd tr:nth-child(2n+1) {
+            background-color: greenyellow;
+        }
+
+        #odd tr:not(.head) {
+            height: 50px;
+        }
+
+    </style>
+</head>
+
+<body class="b1">
+    <div>
+    <h1 id="content">CSS 연습</h1>
+    <p id="p1" class="content textGreen">
+        css도 재미있게 배워봅시다<br>
+        div 밖에 있는 P의 글씨
+    </p>
+    <div>
+        <p id="p2" class="content textBig">div안에 있는 p의 글씨</p>
+    </div>
+    <a href="#p1">p1으로 스크롤</a><br>
+    <a title="그냥">그냥 a</a><br>
+    <a href="#p2">p2으로 스크롤</a><br>
+
+    <table>
+        <tr>
+            <td id="td_1">첫번째</td>
+        </tr>
+        <tr>
+            <td id="td_2">두번째</td>
+        </tr>
+    </table>
+    </div>
+    <div>
+        <table>
+            <tr>
+                <td id="1_td">첫번째</td>
+            </tr>
+            <tr>
+                <td id="2_td">두번째</td>
+            </tr>
+        </table>
+    </div>
+
+    <hr>
+
+    <div>
+        <table>
+            <thead>
+                <tr>
+                    <td id="1_td">첫번째</td>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td id="2_td">두번째</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div id="mouse">
+        hover
+    </div>
+    <div>
+        <input type="radio" name="토핑"> <span>올리브</span>
+        <input type="radio" name="토핑"> <span>치즈</span>
+        <input type="radio" name="토핑"> <span>페퍼로니</span>
+        <input type="radio" name="토핑"> <span>감자</span>
+        <input type="radio" name="토핑" checked> <span>버섯</span>
+    
+<hr>
+    
+    </div>
+    <div class="black">
+        <table id="odd" border="1">
+            <tr class="head">
+                <td>제목</td>
+                <td>작성자</td>
+            </tr>
+            <tr>
+                <td>제목</td>
+                <td>작성자</td>
+            </tr>
+            <tr>
+                <td>제목</td>
+                <td>작성자</td>
+            </tr>
+            <tr>
+                <td>제목</td>
+                <td>작성자</td>
+            </tr>
+            <tr>
+                <td>제목</td>
+                <td>작성자</td>
+            </tr>
+            <tr>
+                <td>제목</td>
+                <td>작성자</td>
+            </tr>
+        </table>
+    </div>
+</body>
+
+</html>

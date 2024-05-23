@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>폰트</title>
+    <style>
+        /*밑에 @font-face는 웹에 있는 폰트를 브라우저가 다운로드를 받아 사용자에게 보여주게 하는 tag이다.*/
+        @font-face {
+            font-family: 'HSSanTokki20-Regular';
+            /*왼쪽에 코드는 폰트의 이름이다.*/
+            src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/2405@1.0/HSSanTokki20-Regular.woff2') format('woff2');
+            font-weight: normal;
+            font-style: normal;
+        }
+
+        .size {
+            /* font-size: 32px; */
+            font-size: 2em;
+            font-weight: bold;
+        }
+
+        .webfont {
+            font-family: 'HSSanTokki20-Regular';
+            /* 위에 있는 코드의 폰트 이름을 font-fmaily의 적은 모습*/
+        }
+
+        div.weigt .fw-100 {
+            font-weight: 100;
+        }
+
+        div.weigt .fw-500 {
+            font-weight: 500;
+        }
+
+        div.weigt .fw-900 {
+            font-weight: 900;
+        }
+
+        /* 100~900을 벗어나면 기본 두께가 적용된다. */
+        div.weigt .fw-2000 {
+            font-weight: 1200;
+        }
+
+        .height {
+            line-height: 200%;
+        }
+
+        .height2 {
+            border: 1px solid black;
+            width: 80px;
+            height: 100px;
+
+            /* 
+                줄간격을 조절하는 css인데 글씨가 중앙 나오는 특성을 이용해서
+                부모와 같은 크기를 주면 수직방향 중앙 정렬이 됨
+                이 방법으로 다른 텍스트나 인라인 요소에 중앙정렬로 많이 사용한다
+                */
+            line-height: 100px;
+        }
+
+        .center {
+            text-align: center;
+        }
+
+        .right {
+            text-align: right;
+        }
+
+        .under-line {
+            text-decoration: underline;
+        }
+
+        .line-through {
+            text-decoration: line-through;
+        }
+
+
+        /* 아래있는 css의 속성이 체크가 되었을때 +로 이어서 그 자식이 영향을 준다라는 셀렉터 */
+        [type="checkbox"]:checked+span {
+            text-decoration: line-through;
+        }
+
+        .text {
+            border: 1px solid red;
+            width: 200px;
+        }
+
+        .text.nowrap {
+            /* inline 요소를 자동 줄바꿈 하지 않는다
+            케러셀(브라우저전체에 이미지를 좌우 슬라이드 효과) 등에서 쓰인다 */
+            white-space: nowrap;
+            /* 부모요소의 범위를 넘는 텍스트를 숨겨주는 기능 */
+            overflow: hidden;
+            /* 범위를 넘는 텍스트에 (...)로 끝에 표시 */
+            text-overflow: ellipsis;
+        }
+
+        .word-wrap {
+            /* 원래 한단어로 인식하는 경우 자동 줄바꿈이 되지 않음
+            break-word 적용시 너비를 벗어나지 않게 자동 줄바꿈 해줌
+            원래 자동 줄바꿈 되는게 유지됨. */
+            word-wrap: break-word;
+        }
+
+        .word-break {
+            /* word-wrap: break-word;와 비슷하지만, 원래 자동 줄바꿈 대상을 무시한다 */
+            word-break: break-all;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>h1</h1>
+    <span class="size">h1 fake</span>
+    <hr>
+
+    <div class="webfont">
+        글씨를 좀 적어봅니다. 이 글씨체는 산토끼체 2.0이라고 하네요
+        <div>
+            이 글씨는 div의 안쪽 글씨입니다. 따라서 폰트는 상속된다.
+        </div>
+    </div>
+    <hr>
+
+    <div class="weigt">
+        <div class="fw-100">font 100</div>
+        <div class="fw-500">font 500</div>
+        <div class="fw-900">font 900</div>
+        <div class="fw-200">font 2000</div>
+    </div>
+    <hr>
+
+    <div class="height">
+        첫번째 줄 <br>
+        두번째 줄
+    </div>
+    <div class="height2">
+        read more
+    </div>
+    <hr>
+
+    <h1 class="center"> 가운데 정렬 </h1>
+    <h2 class="right"> 오른쪽 정렬 </h2>
+
+    <!-- 'a' tag나 'span' tag는 inline요소여서 div에 text-align:center;를 적용 하는게 좋다 -->
+    <div style="text-align: center;">
+        <a href="#">a링크</a>
+    </div>
+
+    <div>
+        <span class="under-line"> under-line </span>
+        <br>
+        <span class="line-through"> line-through </span>
+    </div>
+    <hr>
+
+    <div>
+        <input type="checkbox" name="" id=""><span>오저뭐?</span> <br>
+        <input type="checkbox" name="" id=""><span>복습</span> <br>
+        <input type="checkbox" name="" id=""><span>게임한판</span> <br>
+        <input type="checkbox" name="" id=""><span>영화한편</span> <br>
+    </div>
+    <hr>
+</body>
+
+<body>
+    <div class="text">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum pariatur, ad dolore omnis nulla aut itaque
+        eligendi mollitia, voluptate nisi molestias esse labore ex facere sapiente. Sed esse ad delectus.
+    </div>
+    <div class="text nowrap">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatum pariatur, ad dolore omnis nulla aut itaque
+        eligendi mollitia, voluptate nisi molestias esse labore ex facere sapiente. Sed esse ad delectus.
+    </div>
+    <div class="text word-wrap">
+        사랑하긴했었나요스쳐가는인연이였나요 짧지않던우리함께했던시간들이 모두자꾸내마음에가둬두네
+    </div>
+    <div class="text word-break">
+        사랑하긴 했었나요 스쳐가는 인연이 였나요 짧지않던 우리 함께 했던 시간들이 모두 자꾸 내 마음에 가둬두네
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>테이블 연습</title>
+</head>
+
+<body>
+    <!--td나 th에 표현할 내용을 적는다
+    td나 th는 tr의 자식요소여야 한다
+    td나 table의 자식요소여야 한다-->
+
+    <h2>제목</h2>
+    <table border="1">
+        <tr>
+            <th>제목 1</th>
+            <th>제목 2</th>
+            <th>제목 3</th>
+        </tr>
+        <tr>
+            <td>제목보다 긴 글씨 1</td>
+            <td>제목보다 긴 글씨 2</td>
+            <td>제목보다 긴 글씨 3</td>
+        </tr>
+        <tr>
+            <td>제목보다 긴 글씨 4</td>
+            <td>제목보다 긴 글씨 5</td>
+            <td>제목보다 긴 글씨 6</td>
+        </tr>
+        <tr>
+            <td>제목보다 긴 글씨 7</td>
+            <td>제목보다 긴 글씨 8</td>
+            <td>제목보다 긴 글씨 9</td>
+        </tr>
+    </table>
+    <table border="1">
+        <tr>
+            <th colspan="2">제목 1</th>
+            <th colspan="2">제목 2</th>
+            <th colspan="2">제목 3</th>
+        </tr>
+        <tr>
+            <td>긴 글씨 1</td>
+            <td>긴 글씨 2</td>
+            <td>긴 글씨 3</td>
+            <td>긴 글씨 4</td>
+            <td>긴 글씨 5</td>
+            <td>긴 글씨 6</td>
+        </tr>
+        <tr>
+            <td>긴 글씨 7</td>
+            <td>긴 글씨 8</td>
+            <td>긴 글씨 9</td>
+            <td>긴 글씨 10</td>
+            <td>긴 글씨 11</td>
+            <td>긴 글씨 12</td>
+        </tr>
+    </table>
+
+    <!--
+         colspan,rowspan할때 원본을 먼저 코딩하고
+        합쳐질 것들 중 첫번째 칸에 속성을 넣고
+        필요 없어진 코드를 지운다
+    -->
+    <h2>제목3</h2>
+    <table border="1">
+        <tr>
+            <th>제목 1</th>
+            <th colspan="2">제목 2</th>
+        </tr>
+        <tr>
+            <td>제목보다 긴 글씨 1</td>
+            <td>제목보다 긴 글씨 2</td>
+            <td>제목보다 긴 글씨 3</td>
+        </tr>
+        <tr>
+            <td>제목보다 긴 글씨 4</td>
+            <td>제목보다 긴 글씨 5</td>
+            <td>제목보다 긴 글씨 6</td>
+        </tr>
+    </table>
+
+    <h2>제목4</h2>
+    <table border="1">
+        <tr>
+            <th>제목 1</th>
+            <th>제목 2</th>
+            <th>제목 3</th>
+        </tr>
+        <tr>
+            <td rowspan="2">부제목</td>
+            <td>제목보다 긴 글씨 3</td>
+            <td>제목보다 긴 글씨 4</td>
+        </tr>
+        <tr>
+            <td>제목보다 긴 글씨 5</td>
+            <td>제목보다 긴 글씨 6</td>
+        </tr>
+    </table>
+
+    <table border="1">
+        <caption>caption 테이블의 설명</caption>
+        <!--summary 어떤 제목들로 이루어져 있는가?-->
+        <summary>제목1, 제목2</summary>
+        <thead>
+            <tr>
+                <td>제목1</td>
+                <td>제목2</td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>내용1</td>
+                <td>내용2</td>
+            </tr>
+        </tbody>
+    </table>
+    <table border="1">
+        <tr>
+            <td>왼쪽칸</td>
+            <td>
+                <table border="1">
+                    <thead>
+                        <tr>
+                            <td>제목1</td>
+                            <td>제목2</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>내용1</td>
+                            <td>내용2</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+    </table>
+</body>
+
+<body>
+    <table>
+        <tr>
+            <td><img src="https://image-comic.pstatic.net/webtoon/823933/.jpg"
+                    alt="배달왕" width="120" height="200" onerror="this.src=''"></td>
+            <td>
+                <strong>배달왕</strong>
+                <br>박만사
+            </td>
+        </tr>
+        <tr>
+            <td><img src="https://image-comic.pstatic.net/webtoon/823076/thumbnail/thumbnail_IMAG21_e3e05e7f-d9b8-4d5b-937c-33c94c74170d.jpg"
+                    alt="강한누나" width="120" height="200"></td>
+            <td>
+                <strong>강한누나</strong>
+                <br>멋쟁이
+            </td>
+        </tr>
+        <tr>
+            <td><img src="https://image-comic.pstatic.net/webtoon/823663/thumbnail/thumbnail_IMAG21_a6c2cab5-036e-4747-9a56-aafb0ae3b6ff.jpg"
+                    alt="불효자" width="120" height="200"></td>
+            <td>
+                <strong>불효자</strong>
+                <br>정찬
+            </td>
+        </tr>
+        <tr>
+            <td><img src="https://image-comic.pstatic.net/webtoon/823999/thumbnail/thumbnail_IMAG21_db3ba875-37f1-4d05-a7c9-73d9bb43fc62.jpg"
+                    alt="2024 내일 뭐 입지?" width="120" height="200"></td>
+            <td>
+                <strong>2024 내일 뭐 입지?</strong>
+                <br>2024 네이버 웹툰 작가
+            </td>
+        </tr>
+        <tr>
+            <td><img src="https://image-comic.pstatic.net/webtoon/824161/thumbnail/thumbnail_IMAG21_514f2250-5c63-4de1-996f-63535dc3cfbe.jpg"
+                    alt="2024 너네 뭐 먹니?" width="120" height="200"></td>
+            <td>
+                <strong>2024 너네 뭐 먹니?</strong>
+                <br>2024 네이버 웹툰 작가
+            </td>
+        </tr>
+    </table>
+</body>
+
+</html>

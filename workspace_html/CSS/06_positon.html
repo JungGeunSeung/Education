@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>포지션</title>
+    <style>
+        div {
+            border: 1px solid red;
+        }
+
+        .parent {
+            width: 100px;
+            margin: 50px;
+            background-color: green;
+            color: white;
+        }
+
+        .child {
+            background-color: rgba(0,0,255,0.5)
+        }
+
+        .relative {
+            /* 원래 위치를 기준으로 이동
+            기존 공간은 남아 있다
+            부모와 같이 움직이기 때문에 움직이기 편하다 */
+            position: relative;
+            top: 10px;
+            left: 20px;
+        }
+
+        .absolute {
+            /* 
+                body를 기준으로 0,0(좌상담)으로 계산된 위치에 표시된다
+                실제로는 조상요소중에 position이 static(기본값)이 아닌 것 기준, 없으면 body 기준
+                -음수를 이용해 숨겨두기도 한다
+                기존 공간이 사라지고 새로운 layer에 그려진다
+                즉 브라우저가 표시할 계획단계에서는 빠지고 그리는 단계(rendering)에서 표시됨 
+            */
+            position: absolute;
+            top: 370px;
+            left: 200px;
+        }
+
+        .absolute-bottom {
+            position: absolute;
+            right: 10px;
+            bottom: 10px;
+        }
+
+        .fixed {
+            width: 60px;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+
+            /* 
+                브라우저의 해당 위치에 고정
+                스크롤과 관계가 없다 */
+            position: fixed;
+            bottom: 5px;
+            right: 5px;
+        }
+
+        .sticky {
+            /* 원래 위치보다 아래로 브라우저를 스크롤로 내릴때, fixed처럼 동작한다. */
+            position: sticky;
+            top: 20px;
+            left: 0;
+
+            background-color: red;
+        }
+
+        .z1, .z2, .z3 {
+            color: black;
+            height: 30px;
+        }
+
+        .z1 {
+            background: hotpink;
+            top: 20px;
+            left: 20px;
+
+            /* z-index의 기본값은 0이고, 높은 값이 앞에 보이게 됨
+            기본은 늦게 나온 태그가 높게 적용된다 */
+            /* z-index: 1; */
+        }
+        .z2 {
+            background: pink;
+            top: 10px;
+            left: 30px;
+        }
+        .z3 {
+            background: rgb(255, 223, 228);
+            top: 0px;
+            left: 40px;
+        }
+
+        .hidden {
+            height: 100px;
+            overflow: hidden;
+        }
+
+        .scroll {
+            height: 100px;
+            overflow: scroll;
+        }
+
+        .auto {
+            height: 100px;
+            overflow: auto;
+        }
+
+    </style>
+</head>
+<body id="top">
+    <div class="parent">
+        부모2
+        <div class="child">
+            자식1 <br>
+            defult 1
+        </div>
+        아무거나 적어봅시다.
+    </div>
+    <div class="sticky">
+        스티키 : 메뉴1 메뉴2 메뉴3
+    </div>
+    <div class="parent">
+        부모2
+        <div class="child relative">
+            자식2 <br>
+            relative 2
+        </div>
+        아무거나 적어봅시다.
+    </div>
+    <div class="parent">
+        부모3
+        <div class="child absolute">
+            자식3 <br>
+            absolute 3
+        </div>
+        아무거나 적어봅시다.
+    </div>
+    <div class="parent">
+        부모4
+        <div class="child absolute">
+            자식4 <br>
+            absolute 4 겹친다
+        </div>
+        아무거나 적어봅시다.
+    </div>
+    <div class="parent relative">
+        부모5
+        <div class="child absolute">
+            자식5 <br>
+            absolrute 5
+        </div>
+        아무거나 적어봅시다.
+    </div>
+    <div class="parent">
+        부모6
+        <div class="child absolute-bottom">
+            자식6 <br>
+            absolrute 6
+        </div>
+        아무거나 적어봅시다.
+    </div>
+    <div class="fixed">
+        <a href="#top">맨 위로</a>
+    </div>
+    <div class="parent">
+        <div class="relative z1">
+            1번
+        </div>
+        <div class="relative z2">
+            2번
+        </div>
+        <div class="relative z3">
+            3번
+        </div>
+    </div>
+    <div class="parent hidden">
+        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quos nihil aspernatur omnis recusandae expedita accusamus at! Consequuntur voluptates esse aperiam fugiat perferendis accusamus consequatur, ab rem qui at quis iure.
+    </div>
+    <div class="parent scroll">
+        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quos nihil aspernatur omnis recusandae expedita accusamus at! Consequuntur voluptates esse aperiam fugiat perferendis accusamus consequatur, ab rem qui at quis iure.
+    </div>
+    <div class="parent auto">
+        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quos nihil aspernatur omnis recusandae expedita accusamus at! Consequuntur voluptates esse aperiam fugiat perferendis accusamus consequatur, ab rem qui at quis iure.
+    </div>
+</body>
+</html>
