@@ -49,7 +49,7 @@ public class VarExam {
 		}
 		{
 			int i = 0; //메소드블럭 밖에서는 같은 이름으로 선언 가능하다.
-	
+		}
 	
 		
 		}

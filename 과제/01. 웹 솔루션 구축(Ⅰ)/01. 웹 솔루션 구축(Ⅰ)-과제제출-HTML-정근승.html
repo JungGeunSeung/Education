@@ -1,0 +1,779 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>종합과제 2 정근승</title>
+    <!-- --------------------------------------topbar------------------------------------------------------- -->
+    <style>
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        a,
+        span,
+        p {
+            font-family: 'Ubuntu', sans-serif !important;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        body {
+            margin: 0;
+        }
+        
+        .topbar {
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .topbarbg1 {
+            background-color: #84C639;
+            color: white;
+        }
+
+        .topbarbg2 {
+            background-color: #212121;
+            color: white;
+        }
+
+        .topbarbg3 {
+            background-color: #FA1818;
+            color: white;
+        }
+
+        .topbarbg1,
+        .topbarbg2,
+        .topbarbg3 {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        .topleft {
+            float: left;
+            width: 315px;
+            height: 47px;
+            font-size: 18px;
+            font-weight: 500;
+            vertical-align: middle;
+            text-align: center;
+            line-height: 47px;
+            font-family: 'Ubuntu', sans-serif !important;
+        }
+
+        .topright {
+            float: right;
+            width: 170px;
+            height: 47px;
+            font-size: 24px;
+            font-weight: bold;
+            vertical-align: middle;
+            text-align: center;
+            line-height: 40px;
+        }
+
+        .clearfix:after {
+            content: "";
+            display: block;
+            clear: both;
+        }
+
+        .topcenter {
+            width: auto;
+            width: 778px;
+            height: 47px;
+            line-height: 42px;
+        }
+
+        .topsearch {
+            width: 440px;
+        }
+
+        .toptextbar {
+            width: 280px;
+            height: 37px;
+            margin-left: 93px;
+        }
+
+        .topsubmit {
+            width: 45px;
+            height: 20px;
+            /* 높이를 맞추면 밑에 공간이 남아 높이가 맞지 않음 */
+            padding: 0;
+            margin: 0;
+        }
+
+        .topcart {
+            margin: 0 30px;
+            border: 1px solid #84c639;
+            height: 34px;
+            line-height: 34px;
+        }
+
+        .topcart_text {
+            font-size: 14px;
+            padding: 0 0 0 10px;
+            text-align: center;
+        }
+
+        .topcart_img {
+            vertical-align: middle;
+            padding: 3px 5px 3px 3px;
+        }
+
+        .toplogin {
+            margin: 0 0 0 25px;
+        }
+</style>
+<!-- -----------------------------------------logo, kategorie---------------------------------------------- -->
+<style>
+        .kategorie {
+            display: inline-block;
+        }
+
+        .titlediv {
+            margin: 0 0 30px 50px;
+        }
+
+        .title {
+            font-size: 50px;
+            color: black;
+        }
+
+        .titlered {
+            font-size: 14px;
+            color: red;
+        }
+
+        .title-A {
+            font-size: 50px;
+            font-weight: bold;
+            height: 30px;
+            line-height: 0.9;
+            padding: 0;
+        }
+
+        .kategorie ul {
+            list-style: none;
+            display: flex;
+            justify-content: space-between;
+            padding: 0;
+            margin: 0;
+        }
+
+        .kategorie-list1 {
+            width: 500px;
+            margin: 0 50px;
+            vertical-align: middle;
+        }
+
+        .kategorie-list2 {
+            width: 350px;
+        }
+
+        li img {
+            margin: 0 10px;
+        }
+
+        .kategorie-list1 ul li:hover {
+            color: red;
+            transition: all 0.5s;
+        }
+
+        .kategorie-list1 ul li {
+            transition: all 0.5s;
+        }
+</style>
+<!--  -------------------------------------------middle----------------------------------------------------  -->
+<style>
+        
+        .middlebar ul {
+            list-style: none;
+            display: flex;
+            justify-content: space-between;
+            padding: 0;
+            margin: 0;
+            font-size: 14px;
+            vertical-align: middle;
+        }
+
+        .middlebar {
+            width: 200px;
+            padding: 0 30px;
+            vertical-align: middle;
+        }
+
+        .middlebar ul li a img {
+            font-size: 0;
+        }
+
+        .middlebar-color {
+            background-color: #84C639;
+            height: 23px;
+            padding: 16px;
+        }
+</style>
+<!--  ------------------------------------------sidelist-------------------------------------------------- -->
+<style>
+        .Sidelist {
+            display: inline-block;
+            position: relative;
+            width: 20%;
+            float: left;
+        }
+
+        .Sidelist-nav {
+            width: 100%;
+        }
+
+        .Sidelist-list,
+        nav {
+            display: inline-block;
+            width: 100%;
+        }
+
+        .Sidelist-list ul {
+            list-style: none;
+            border: 1px solid rgb(167, 167, 167);
+            width: 100%;
+            line-height: 3em;
+            padding: 0;
+            margin: 0;
+            background-color: rgb(245, 245, 245);
+        }
+
+        .Sidelist-list ul li {
+            border-bottom: 1px dotted gray;
+            margin: 0;
+            padding: 0 40px;
+        }
+
+        .Sidelist-list ul li:hover {
+            background-color: #84C639;
+            transition: .3s;
+        }
+</style>
+<!-- -------------------------------------------backgound--------------------------------------------------- -->
+<style>
+        .backgorund {
+            background-image: url(https://p.w3layouts.com/demos/july-2016/07-07-2016/grocery_store/web/images/16.jpg);
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: 50% 50%;
+            height: 300px;
+            width: 80%;
+            float: right;
+        }
+
+        .backgorund div h1 {
+            font-weight: 100;
+            font-size: 36px;
+            color: red;
+        }
+
+        .backgorund div div {
+            background-color: white;
+            width: 500px;
+            vertical-align: middle;
+            text-align: center;
+            margin-left: 250px;
+        }
+
+        .backgorund .backgorund-div {
+            padding-top: 100px;
+            margin: auto;
+
+        }
+
+        .backgorund .backgorund-div div {
+            margin-left: 200px;
+        }
+</style>
+<!-- ----------------------------------------------item---------------------------------------------------- -->
+<style>
+        .item {
+            float: right;
+            width: 80%;
+            word-wrap: normal;
+        }
+
+        .item-flex {
+            display: flex;
+        }
+
+        .item-head {
+            font-size: 36px;
+            text-align: center;
+            border-bottom: 3px solid red;
+        }
+
+        .item-1st-head {
+            font-size: 24px;
+        }
+
+        .cleaning-item {
+            border: 1px solid gray;
+            margin: 5px;
+            padding: 5px;
+        }
+
+        .cleaning-item-border {
+            border: 1px solid gray;
+            margin: 5px;
+            width: 24%;
+        }
+
+        .cleaning-item-img {
+            width: 80%;
+            height: 80%;
+            text-align: center;
+            margin: 0 auto;
+            display: block;
+        }
+
+        .cleaning-item div>h4 {
+            font-size: 20px;
+            margin: 20px 10px 30px 0px;
+        }
+
+        .cleaning-item input {
+            color: white;
+            background-color: red;
+            border: 0;
+            width: 180px;
+            height: 40px;
+            text-align: center;
+        }
+
+        .itemdivform {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .cleaning-item div h4 span {
+            font-weight: lighter;
+            color: gray;
+            text-decoration: line-through;
+            padding-left: 10px;
+        }
+
+        .cleaning-item-border .itemdivform form input {
+            transition: 1s;
+        }
+        .cleaning-item-border:hover .itemdivform form input {
+            background-color: #84C639;
+        }
+</style>
+<!-- ----------------------------------------------bottom---------------------------------------------------- -->
+<style>
+        .bottomBG {
+            background-color: red;
+            margin-top: 100px ;
+        }
+
+        .bottomTEXT {
+            width: 80%;
+            height: 150px;
+            margin: 0 auto;
+        }
+
+        .bottomdiv {
+            display: inline-block;
+            text-align: center;
+        }
+        .bottomcenter {
+            margin: auto;
+            font-size: 25px;
+            color: white;
+            
+            vertical-align: bottom;
+        }
+        .bottomemail {
+            width: 400px;
+            height: 40px;
+            border: 1px solid white;
+            background: transparent;
+            color: white;
+        }
+        .bottomsubmit {
+            font-size: 0;
+            height: 40px;
+            width: 200px;
+            padding: 0;
+            margin-top: 100px;
+            margin-left: -9px;
+            padding-left: -20px;
+            background-color: white;
+            border: 0;
+            color: red;
+            font-size: 20px;
+        }
+        .bottomform {
+            padding: 0 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- ----------------------------------------------top bar--------------------------------------------------- -->
+    <div class="clearfix">
+        <div class="topbar topbarbg1 topleft"> Today's special Offers!</div>
+        <div class="topbar topbarbg2 topcenter">
+            <div class="topbar topsearch">
+                <form action="">
+                    <input class="toptextbar" type="text"></input>
+                    <input class="topsubmit" type="submit" value=""></input>
+                </form>
+            </div>
+            <div class="topbar topcart">
+                <span class="topcart_text">View Your Cart</span>
+                <img class="topcart_img"
+                    src="https://p.w3layouts.com/demos/july-2016/07-07-2016/grocery_store/web/images/cart.png" alt="">
+            </div>
+            <div class="topbar toplogin">
+                <select name="" id="">
+                    <option value="">login</option>
+                    <option value="">sign up</option>
+                </select>
+            </div>
+        </div>
+        <div class="topbar topbarbg3 topright">Cotent Us</div>
+    </div>
+    <!-- ---------------------------------------------kategorie-------------------------------------------------- -->
+    <div>
+        <div class="kategorie titlediv">
+                <a class="title-A" href="">
+                    <span class="titlered">GROCERY</span> <br>
+                    STORE
+                </a>
+        </div>
+        <div class="kategorie kategorie-list1">
+            <ul>
+                <li>Events</li>
+                <li>/</li>
+                <li>About Us</li>
+                <li>/</li>
+                <li>Best Deals</li>
+                <li>/</li>
+                <li>Services</li>
+            </ul>
+        </div>
+        <div class="kategorie kategorie-list2">
+            <ul>
+                <li>
+                    <img style="width: 12px;"
+                        src="https://icons.iconarchive.com/icons/icons8/windows-8/512/Mobile-Phone-icon.png" alt="">
+                    (+0123) 234 567
+                </li>
+                <li>
+                    <img style="width: 14px;"
+                        src="https://icons.iconarchive.com/icons/iconsmind/outline/256/Mail-icon.png" alt="">
+                    store@grocery.com
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!-- ---------------------------------------------middle bar------------------------------------------------- -->
+    <div class="middlebar-color">
+        <div class="middlebar">
+            <ul>
+                <li>
+                    <a href="">
+                        <img style="width: 16px;"
+                            src="https://icons.iconarchive.com/icons/double-j-design/origami-colored-pencil/256/red-home-icon.png">
+                        Home</a>
+                </li>
+                <li>|</li>
+                <li> Households </li>
+            </ul>
+        </div>
+    </div>
+    <!-- ---------------------------------------------Sidelist------------------------------------------------- -->
+    <div class="Sidelist">
+        <nav class="Sidelist-nav">
+            <div class="Sidelist-list">
+                <ul>
+                    <li>Branded Foods</li>
+                    <li>Households</li>
+                    <li>Veggoes & Fruits</li>
+                    <li>Kitchen</li>
+                    <li>Short Codes</li>
+                    <li>Beverages</li>
+                    <li>Pet Food</li>
+                    <li>Frozen Foods</li>
+                    <li>Bread & Bakery</li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+    <!-- ---------------------------------------------backgorund------------------------------------------------- -->
+    <div class="backgorund">
+        <div class="backgorund-div">
+            <div>
+                <h1>Best Deals For New Products</h2>
+            </div>
+        </div>
+    </div>
+    <!-- ------------------------------------------------item---------------------------------------------------- -->
+    <DIV class="clearfix">
+        <div class="item">
+            <h3 class="item-head">Household Products</h3>
+            <div>
+                <h6 class="item-1st-head">CLEANING</h6>
+                <div class="item-flex">
+                    <div class="cleaning-item-border">
+                        <div class="cleaning-item">
+                            <div>
+                                <a href="">
+                                    <img class="cleaning-item-img"
+                                        src="https://p.w3layouts.com/demos/july-2016/07-07-2016/grocery_store/web/images/17.png"
+                                        alt="">
+                                </a>
+                                <p>Dishwash Gel, Lemon (1.5 Ltr)</p>
+                                <h4>$8.00 <span>$10.00</span></h4>
+                            </div>
+                            <div class="itemdivform">
+                                <form action="">
+                                    <input type="button" value="ADD TO CART">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cleaning-item-border">
+                        <div class="cleaning-item">
+                            <div>
+                                <a href="">
+                                    <img class="cleaning-item-img"
+                                        src="https://p.w3layouts.com/demos/july-2016/07-07-2016/grocery_store/web/images/18.png"
+                                        alt="">
+                                </a>
+                                <p>Dish Wash Bar (500 Gm)</p>
+                                <h4>$2.00 <span>$4.00</span></h4>
+                            </div>
+                            <div class="itemdivform">
+                                <form action="">
+                                    <input type="button" value="ADD TO CART">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cleaning-item-border">
+                        <div class="cleaning-item">
+                            <div>
+                                <a href="">
+                                    <img class="cleaning-item-img"
+                                        src="https://p.w3layouts.com/demos/july-2016/07-07-2016/grocery_store/web/images/19.png"
+                                        alt="">
+                                </a>
+                                <p>Air Freshener (50 Gm)</p>
+                                <h4>$3.00 <span>$3.00</span></h4>
+                            </div>
+                            <div class="itemdivform">
+                                <form action="">
+                                    <input type="button" value="ADD TO CART">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cleaning-item-border">
+                        <div class="cleaning-item">
+                            <div>
+                                <a href="">
+                                    <img class="cleaning-item-img"
+                                        src="https://p.w3layouts.com/demos/july-2016/07-07-2016/grocery_store/web/images/20.png"
+                                        alt="">
+                                </a>
+                                <p>Toilet Cleaner Expert (1 Ltr)</p>
+                                <h4>$6.00 <span>$7.00</span></h4>
+                            </div>
+                            <div class="itemdivform">
+                                <form action="">
+                                    <input type="button" value="ADD TO CART">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <h6 class="item-1st-head">UTENSILS</h6>
+                <div class="item-flex">
+                    <div class="cleaning-item-border">
+                        <div class="cleaning-item">
+                            <div>
+                                <a href="">
+                                    <img class="cleaning-item-img"
+                                        src="https://p.w3layouts.com/demos/july-2016/07-07-2016/grocery_store/web/images/21.png"
+                                        alt="">
+                                </a>
+                                <p>Princeware Packaging Container Pack (6 No's)</p>
+                                <h4>$8.00 <span>$10.00</span></h4>
+                            </div>
+                            <div class="itemdivform">
+                                <form action="">
+                                    <input type="button" value="ADD TO CART">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cleaning-item-border">
+                        <div class="cleaning-item">
+                            <div>
+                                <a href="">
+                                    <img class="cleaning-item-img"
+                                        src="https://p.w3layouts.com/demos/july-2016/07-07-2016/grocery_store/web/images/22.png"
+                                        alt="">
+                                </a>
+                                <p>Signoraware Container Center Press (900 Ml)</p>
+                                <h4>$5.00 <span>$8.00</span></h4>
+                            </div>
+                            <div class="itemdivform">
+                                <form action="">
+                                    <input type="button" value="ADD TO CART">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cleaning-item-border">
+                        <div class="cleaning-item">
+                            <div>
+                                <a href="">
+                                    <img class="cleaning-item-img"
+                                        src="https://p.w3layouts.com/demos/july-2016/07-07-2016/grocery_store/web/images/23.png"
+                                        alt="">
+                                </a>
+                                <p>Ship Stainless Steel Sauce Pan Single (1 Pc)</p>
+                                <h4>$6.00 <span>$8.00</span></h4>
+                            </div>
+                            <div class="itemdivform">
+                                <form action="">
+                                    <input type="button" value="ADD TO CART">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cleaning-item-border">
+                        <div class="cleaning-item">
+                            <div>
+                                <a href="">
+                                    <img class="cleaning-item-img"
+                                        src="https://p.w3layouts.com/demos/july-2016/07-07-2016/grocery_store/web/images/24.png"
+                                        alt="">
+                                </a>
+                                <p>Omega Stainless Steel Puri Dabba (1 Pc)</p>
+                                <h4>$6.00 <span>$8.00</span></h4>
+                            </div>
+                            <div class="itemdivform">
+                                <form action="">
+                                    <input type="button" value="ADD TO CART">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div>
+                <h6 class="item-1st-head">PET FOOD</h6>
+                <div class="item-flex">
+                    <div class="cleaning-item-border">
+                        <div class="cleaning-item">
+                            <div>
+                                <a href="">
+                                    <img class="cleaning-item-img"
+                                        src="https://p.w3layouts.com/demos/july-2016/07-07-2016/grocery_store/web/images/25.png"
+                                        alt="">
+                                </a>
+                                <p>Food For Adult Dogs (80 Gms)</p>
+                                <h4>$3.00 <span>$4.00</span></h4>
+                            </div>
+                            <div class="itemdivform">
+                                <form action="">
+                                    <input type="button" value="ADD TO CART">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cleaning-item-border">
+                        <div class="cleaning-item">
+                            <div>
+                                <a href="">
+                                    <img class="cleaning-item-img"
+                                        src="https://p.w3layouts.com/demos/july-2016/07-07-2016/grocery_store/web/images/26.png"
+                                        alt="">
+                                </a>
+                                <p>Young Adult Dogs (1.2 Kg)</p>
+                                <h4>$6.00 <span>$10.00</span></h4>
+                            </div>
+                            <div class="itemdivform">
+                                <form action="">
+                                    <input type="button" value="ADD TO CART">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cleaning-item-border">
+                        <div class="cleaning-item">
+                            <div>
+                                <a href="">
+                                    <img class="cleaning-item-img"
+                                        src="https://p.w3layouts.com/demos/july-2016/07-07-2016/grocery_store/web/images/27.png"
+                                        alt="">
+                                </a>
+                                <p>Cat Food Ocean Fish (1.4 Kg)</p>
+                                <h4>$6.00 <span>$7.00</span></h4>
+                            </div>
+                            <div class="itemdivform">
+                                <form action="">
+                                    <input type="button" value="ADD TO CART">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="cleaning-item-border">
+                        <div class="cleaning-item">
+                            <div>
+                                <a href="">
+                                    <img class="cleaning-item-img"
+                                        src="https://p.w3layouts.com/demos/july-2016/07-07-2016/grocery_store/web/images/28.png"
+                                        alt="">
+                                </a>
+                                <p>Chicken In Jelly Can (400 Gm)</p>
+                                <h4>$7.00 <span>$9.00</span></h4>
+                            </div>
+                            <div class="itemdivform">
+                                <form action="">
+                                    <input type="button" value="ADD TO CART">
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </DIV>
+    <!-- -----------------------------------------------bottom--------------------------------------------------- -->
+    <div class="bottomBG">
+        <div class="bottomTEXT">
+            <div class="bottomcenter">
+                <div class="bottomdiv bottomwh">Sign Up For Our Newsletter</div>
+                <div class="bottomdiv bottomform ">
+                    <form action="">
+                        <input class="bottomemail" type="text" placeholder="Email">
+                        <input class="bottomsubmit" type="submit" value="SUBSRIBE NOW">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
