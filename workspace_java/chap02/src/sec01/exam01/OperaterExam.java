@@ -103,6 +103,8 @@ public class OperaterExam {
 
 		System.out.println("right=" + right);
 		
+		모르겟씁니다
+		
 		
 		
 		
