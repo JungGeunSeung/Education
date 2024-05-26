@@ -93,30 +93,16 @@ public class OperaterExam {
 		
 		String left = "수박";
 		String right = "멜론";
-		System.out.println("left=" + left);
-		System.out.println("right=" + right);
+		System.out.println("left : " + left);
+		System.out.println("right : " + right);
 
 		System.out.println("왼쪽과 오른쪽의 결과값을 바꾸어라.");
-
+		
+		String temp = left;
 		left = right;
-		System.out.println("left=" + left);
-
-		System.out.println("right=" + right);
-		
-		모르겟씁니다
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+		right = temp;
+		System.out.println("left : " + left);
+		System.out.println("right : " + right);
 		
 	}
 
