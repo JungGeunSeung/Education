@@ -64,7 +64,10 @@ public class OperaterExam {
 		
 		System.out.println(shr+"원");
 		System.out.println(shr+slr+"원");
-	
+		
+		
+//		1. 예측과 결과가 같은지 확인 - 개발
+//		2. 숫자를 바꿔도 잘 나온느지 두어번 해보기 - 테스트
 		System.out.println("-----------------------------");
 		int me = 7234;
 		
@@ -96,13 +99,56 @@ public class OperaterExam {
 		System.out.println("left : " + left);
 		System.out.println("right : " + right);
 
-		System.out.println("왼쪽과 오른쪽의 결과값을 바꾸어라.");
+		System.out.println("left과 right의 결과값을 바꾸어라.");
 		
-		String temp = left;
+		String middle = left;
 		left = right;
-		right = temp;
+		right = middle;
 		System.out.println("left : " + left);
 		System.out.println("right : " + right);
+		
+		System.out.println("-----------------------------");
+		System.out.println(3 > 5);
+		boolean bool = 3 > 5;
+		System.out.println(bool);
+		
+		System.out.println(0.1 == 0.1f); //결과 false
+		// 같은 타입으로 변경해서 비교하자
+		
+		System.out.println(" 3 == 3 : " + (3 == 3));
+		System.out.println(" 3 != 3 : " + (3 != 3));
+		
+		String str1 = "정근승";
+		String str2 = "정근승";
+		System.out.println(str1 == str2);
+		// 글씨는 ==를 쓰지 말자.
+//		str1.equals(str2); String 변수나 ""에 .equals()로 변경하여 사용 ()안에 글씨와 비교해라.
+		System.out.println( str1.equals(str2) );
+		
+		
+		// bit 연산 방법 (실제로도 많이 쓰니까 연습해라)
+		System.out.println( 10 & 3);
+		System.out.println( 10 | 3);
+		
+		int i1 = 3;
+		int i2 = 5;
+		int i3 = 7;
+		
+		
+		System.out.println("i3이 가장 큰 값인가? " + ( i3 >= i1 && i3 >= i2));
+		
+		boolean result = i3 > i2;
+		System.out.println(result ? "i3이 크다" : "i3이 작거나 같다");
+		
+		int value = 356;
+		System.out.println(value/100*100);
+		
+		int va1 = 5;
+		int va2 = 2;
+		double va3 = (double) va1 / (double) va2 ;
+		int va4 = (int) (va3 *va2);
+		System.out.println(va4);
+		
 		
 	}
 
