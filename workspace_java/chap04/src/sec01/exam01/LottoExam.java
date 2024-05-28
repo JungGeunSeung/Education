@@ -22,6 +22,18 @@ public class LottoExam {
 		number = ((int)(rand *100)) % 45 + 1;
 		System.out.println(number);
 		
+		int v1 = 0;
+		if (true) {
+			int v2 = 0;
+			if (true) {
+				int v3 = 0;
+				v1 = 1;
+				v2 = 1;
+				v3 = 1;
+			}
+			v1 = v2;
+		}
+		System.out.println(v1);
 	}
 
 }
