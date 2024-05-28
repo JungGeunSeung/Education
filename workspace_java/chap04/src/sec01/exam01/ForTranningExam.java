@@ -134,6 +134,6 @@ public class ForTranningExam {
 				System.out.print(".");
 			}
 		}
-		
+//		여기서부터는 집에서 함
 	}
 }
