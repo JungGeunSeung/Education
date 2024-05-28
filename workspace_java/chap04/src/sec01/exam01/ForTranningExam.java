@@ -135,5 +135,20 @@ public class ForTranningExam {
 			}
 		}
 //		여기서부터는 집에서 함
+		System.out.println();
+		System.out.println("----------------------------------");
+		System.out.println();
+		
+		System.out.println("4단계");
+		int n3 = 5;
+		for (int a = 1; a<=n3; a++) {
+			System.out.println("");
+			for (int b = 0; b < n3-a ; b++) {
+				System.out.print(".");
+			}
+			for (int b = 0; b != a; b++) {
+				System.out.print("+");
+			}
+		}
 	}
 }
