@@ -187,17 +187,20 @@ public class ForTranningExam {
 		int bb=1;
 		int cc=1;
 		int dd=1;
-		int ff=2;
+		int ff=1;
 		for (dd =1; dd<=6; dd++) {
 			System.out.print("합이 "+(dd+1)+" 일 때 : ");
 			for (aa = 1; aa<=dd; aa++) {
-				//여기에 for문 하나 더 들어가야댐.
+				++ff;
+				for (cc=1;cc<=1;cc++) {
+					System.out.print(cc+ff);
+				}
 				for (bb=1; bb<=1;bb++) {
 					bb*=dd;
-					System.out.print("+" + bb);
+					System.out.print("+" + bb + ", ");
 				}
-		System.out.println();
 			}
+			System.out.println();
 		}
 		
 		

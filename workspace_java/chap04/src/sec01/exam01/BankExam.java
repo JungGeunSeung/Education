@@ -41,12 +41,12 @@ public class BankExam {
 			if (num == 2) {
 				System.out.println("출금하실 금액을 입력해주세요.");
 				withdraw =scan.nextInt();
-				if (withdraw >0 && withdraw<check) {
+				if (withdraw >0 && withdraw<=check) {
 					check = check - withdraw;
 					System.out.println(withdraw + "원을 출금 합니다.");
 					System.out.println("남은 잔액은 " + (check) + "원 입니다.");
 				} else {
-					System.out.println("금액을 다시 확인해주세요.");
+					System.out.println("잔고가 부족합니다.");
 				}
 			}
 			if (num == 3) {
