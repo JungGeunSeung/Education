@@ -143,8 +143,41 @@ public class ArrayExam {
 		System.out.println(list.size());
 		System.out.println(list);
 	
-	
-	
+		
+		
+		String[] study = {"박규태", "이제섭", "박경민", "김아영", "정근승",
+				"현준수", "남현우","김승환","조민정","이정은"};
+		System.out.println("총 "+study.length+"명");
+		
+		
+		int[] vote = new int[study.length];
+		
+//		System.out.println("스터디의 조장은? : " + study[index]);
+		for (int i=0; i<1000; i++) {
+			double rand = Math.random() * study.length;
+			int index = (int) rand;
+
+			vote[index] += 1;
+		}
+		
+		for (int i=0; i<vote.length ;i++) {
+			System.out.println("index :" + (i+1) + " 특표수 : " + vote[i]);
+		}
+		
+		// 6개의 lotto를 저장하는 배열
+		
+		int[] lotto = new int[6];
+		for(int i=0;i<lotto.length; i++) {
+			
+			lotto[i] = (int)(Math.random() * 45) +1;
+			
+		}
+		for(int i=0;i<lotto.length; i++) {
+			
+			System.out.println("번호 " + lotto[i]);
+			
+		}
+		
 	}
 
 }

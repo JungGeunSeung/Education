@@ -2,7 +2,7 @@ package sec01.exam01;
 
 import java.util.Scanner;
 
-public class ForTranningExam {
+public class ForTraningExam {
 
 	public static void main(String[] args) {
 		
