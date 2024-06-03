@@ -174,10 +174,12 @@ public class ArrayTraning2 {
 					if (reser[input] != 0) {
 				        System.out.println("이미 예약이 완료된 자리입니다.");
 				        System.out.println("다시 선택해 주세요.");
-				    } else {
+				    } else if (input >=1 && input <=10) {
 				        reser[input] = input;
 				        System.out.println("예약이 완료 되었습니다.");
 				        System.out.println("다음 자리를 선택하시거나 0를 입력하시면 종료 됩니다.");
+				    } else if (input <= -1 && input >=11) {
+				    	System.out.println("잘못된 입력입니다. 다시 입력해주세요.");
 				    }
 				}
 				if (input == 0) {
@@ -216,13 +218,59 @@ public class ArrayTraning2 {
 					System.out.println("원하시는 메뉴를 선택해 주세요.");
 					System.out.println("--------------------------------");
 					System.out.println("1. 예약하기 2.모든자리 예약확인하기 3. 예약가능한 자리만 출력 그외.종료하기");
-				} else {
+				} else if (input1 <= -1 && input1 >= 5) {
+					System.out.println("잘못된 입력입니다. 다시 입력해주세요.");
+				}
+				else {
 					System.out.println("소극장을 나가 시스템을 종료합니다.");
 					break;
 				}
 			
 			} // 제일 큰 while 종료 중괄호
 		
+		System.out.println();
+		System.out.println();
+		System.out.println("---------------------------------------");
+		System.out.println("[문제 10] 비밀번호 8자리 설정하기");
+		System.out.println();
+		
+		int[] pw = new int[8];
+		for ( int i=0; i<pw.length ; i++) {
+			int rand = (int)(Math.random()*9);
+			if (rand >=1 && rand<=9) {
+				pw[i] = rand;
+			}
+		}
+		System.out.print("임시 비밀번호 : ");
+		for (int i=0; i<pw.length ; i++) {
+			System.out.print(pw[i]);
+		}
+		System.out.println();
+		char[] pw2 = new char[8];
+		for (int i=0; i<pw2.length ; i++) {
+			char rand = 0;
+			rand = (char)(Math.random()*26+97);
+			pw2[i]=rand;
+		}
+		System.out.print("임시 비밀번호(소문자만) : ");
+		for (int i=0; i<pw2.length ; i++) {
+			System.out.print(pw2[i]);
+		}
+		System.out.println();
+		char[] pw3 = new char[8];
+		char num = 0;
+		char a=0;
+		char A=0;
+		
+		for (int i=0; i<pw3.length ; i++) {
+			num = (char)(Math.random()*10+48);
+			a = (char)(Math.random()*26+65);
+			A = (char)(Math.random()*26+97);
+		}
+		System.out.print("임시 비밀번호 : ");
+		for (int i=0; i<pw3.length ; i++) {
+			System.out.print(pw3[i]);
+		}
 		
 		
 		
