@@ -71,7 +71,7 @@ public class ArrayCopyExam {
 		int[][] a2=  {
 				{1,2},
 				{1,2,3}
-		}
+		};
 		
 		
 		
