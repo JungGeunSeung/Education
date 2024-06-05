@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>함수</title>
+    <script>
+        // x,y는 전달인자 라고 한다. argument / parameter
+        // function 키워드로 시작
+        // 함수이름 (키워드빼고 특수문자 제외) 선언
+        // () {}
+        // () 안에는 전달 받을 내용을 담는 변수들을 적는다.
+
+        // 함수를 쓰는 이유
+        // 1. 정해진 순으로 동작하는 코드의 묶음
+        // 2. 코드의 재사용
+        function add(x, y) { // () 전달받을 내용을 저장할 변수까지 선언
+            let z = x + y;
+            console.log(z);
+
+            return z; //return은 되돌려준다라는 의미로 함수를 쓴 곳에다가 z의 값으로 변한다고 생각하면 된다.
+        };
+
+
+        let a = 3;
+        let b = 7;
+
+        let arr3 = add(a, b); //함수 ()안에는 값을 넣을수 있지만, 변수를 넣어서 실행 할 수 도 있다.
+        console.log('arr3 :', arr3);
+
+        let k = 3;
+        let l = 7;
+        add(k, l);
+
+        //즉시 사용법 (고급기술)
+        (function(y){
+            console.log(123);
+        })();
+
+        // 전달인자가 하나인 함수
+        function sqr (a) { //hositing
+            let b = a * a;
+            return b;
+        };
+        let result = sqr(5);
+        console.log(result);
+
+        // 전달인자가 없는 함수
+        function printInfo() {
+            console.log("이름 : 정근승");
+            console.log("나이 : 25");
+        };
+
+        printInfo();
+
+        // 호이스팅 hositing (고급)
+        // 함수를 선언하면 소스들중에서도 맨위로 올라간다.
+        // 사람이 쓴 함수는 컴파일을 거쳐 브라우저에게 갈때는 함수는 전부 위로 간다.
+        // 아무것도 안붙히고(let X, var X) 선언된 변수는 호이스팅 되어 맨 위로 간다.
+
+        // 함수안에서 호출하는 함수
+
+        // add(x,y) spr(a)
+        function fnInfn (first, second) {
+            let result1 = add(first, second);
+            let result2 = sqr(result1);
+            return result2;
+        }
+
+        let result3 = fnInfn(1,2);
+        console.log(result3);
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
