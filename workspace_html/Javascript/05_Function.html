@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -33,12 +34,12 @@
         add(k, l);
 
         //즉시 사용법 (고급기술)
-        (function(y){
+        (function (y) {
             console.log(123);
-        })();
+        })(); // 실행괄호와 우선순위 괄호가 합쳐졌다.
 
         // 전달인자가 하나인 함수
-        function sqr (a) { //hositing
+        function sqr(a) { //hositing
             let b = a * a;
             return b;
         };
@@ -61,17 +62,182 @@
         // 함수안에서 호출하는 함수
 
         // add(x,y) spr(a)
-        function fnInfn (first, second) {
+        function fnInfn(first, second) {
             let result1 = add(first, second);
             let result2 = sqr(result1);
             return result2;
         }
 
-        let result3 = fnInfn(1,2);
+        let result3 = fnInfn(1, 2);
         console.log(result3);
+
+        // 전달인자는 순서대로 들어오기 때문에
+        // 하나만 오면 a에 들어감
+        // 그래서 b에만 전달 할 수 없음
+        function sum(a, b) {
+            console.log('a : ', a);
+            console.log('b : ', b);
+
+            let c;
+            if (b) { // false가 되는 조건 : false, undefined, Null, 0, ''
+                // true란? : false가 아닌것
+                c = a + a;
+            } else {
+                c = a + b;
+            }
+            console.log('c : ', c);
+            console.log('isNaN : ', isNaN(c)); //isNaN 괄호안에 있는 변수가 숫자인지 판단하는 논리함수
+            return c;
+        }
+
+        //자바 스크립트에만 해당하는 이야기
+        sum(1, 2);
+        sum('aaa', 3);
+        // 전달인자를 하나만 줌 /두번째 전달인자를 주지 않아서 undefined
+        sum(1);
+        sum('a');
+        // 아무것도 안줌 /둘다 undefined 이고, int로 생각하기 때문에 결과는 NaN
+        sum();
+        // 전달인자 3개 줌 /많이 줘봤자 두개만 사용됨
+        sum(1, 2, 5);
+
+        function sum2(a, b) {
+            console.log('a : ', a);
+            console.log('b : ', b);
+            if (a == undefined) { a = 0; };
+            if (b == undefined) { b = 0; };
+
+            return a + b;
+        };
+
+        // 전달인자가 없는 경우 초기값 지정
+        function sum3(a = 10, b = 20) {
+            return a + b;
+        };
+        let result2 = sum3();
+        console.log('sum3() 호출 :', result2); // 30
+        console.log('sum3(50) 호출 :', sum3(50)); // 70
+        console.log('sum3(50,60) 호출 :', sum3(50, 60)); // 110
+
+        //고급기술
+        function sum4() {
+            // arguments : 전달인자를 모두 배열로 받기
+            console.log(arguments);
+
+            // arguments가 받은 전달인자를 전부 출력
+            for (let i = 0; i < arguments.length; i++) {
+                console.log(i, arguments[i]);
+            };
+        };
+        sum4(1, 2, 3, 4);
+
+        // 고급기술
+        // splice (2, 4, 'a', 'b', 'c')
+        // ... : spread 연산자 / 지정하지 않은 arguments 을 배열로 만들어 준다.
+        // 마지막 전달인자에만 적용할수 있다.
+        function sum5(start, count, ...elem) {
+            console.log(start, count, elem);
+        };
+        sum5(1, 2, 3, 4, 5);
+
+        let aa = [1, 2, 3, 4];
+        console.log(aa);
+        console.log(...aa);
+
+        let a5 = "console.log(123)";
+        eval(a5); // 글씨를 javascript로 실행
+        eval("let a" + 6 + "= 60"); // 재선언이 안되는 a를 6이라는 변수명으로 60이라는 값을 저장함.
+
+        let sum55 = sum5; // js의 변수에는 아무거나 담을수 있다 함수도 가능
+        sum55(2, 3, 4, 5);
+
+        let clog = console.log;
+        clog(1234);
+
+        function sum5() { //함수로 선언된 sum5를 다른 함수로 덮어쓸수 있다.
+            console.log('올 뉴 sum5');
+        };
+        clog('before : ', typeof sum5);
+        sum5 = 1; // 함수명도 변수 취급하기 때문에 이런 경우 sum5는 그냥 1을 담은 변수가 된다.
+        // sum5(1,2); 따라서 sum5는 함수취급이 안되기 때문에 error가 발생한다.
+        clog('after : ', typeof sum5);
+
+        function minus(x, y) {
+            console.log('minus run')
+            return x - y;
+
+        };
+
+        // 전달인자로 함수를 전달할 수 있다 
+        // 전달된 함수를 (콜백함수callback function)
+        function study(cb) {
+            console.log('1~2시간 정도 공부함');
+
+            if (typeof cb == "function") {
+                let remain = cb(10, 2);
+                console.log('남은 공부 시간', remain);
+            }
+
+        }
+        study(minus);
+
+        // 익명 함수
+        // 이름이 없는 함수
+        let fn1 = function () {
+            console.log('fn1 실행');
+        };
+        fn1();
+
+        // 예를 들어
+        // 밑에 함수가 콜백으로 딱 한번밖에 안쓰이는 경우
+        function times(a, b) {
+            return a * b;
+        };
+        study(times);   // 이런식으로 실행이 가능 한데
+
+        //위에 함수를 times2에 담아서 콜백함수 실행
+        let times2 = times;
+        study(times2);
+        // times3 에 function으로 바로 함수로 만들어서 변수에 담는 방법
+        let time3 = function (a, b) {
+            return a * b;
+        }
+        // 함수 전달인자에 바로 함수를 만들어서 전달하는 방법
+        study(function (a, b) {
+            return a * b;
+        });
+
+        // setTimeout : 첫번째 전달인자로 실행할 함수
+        //              두번째 전달인자로 1ms 의 시간을 전달
+        // 두번째 전달인자 시간 이후에 callback 실행
+        // 실행하면 예약 번호를 return
+
+        // setTimeout(fn1, 3*1000);
+        let idx = setTimeout(function () {
+            console.log('fn1 실행');
+        }, 3 * 1000);
+        console.log('idx : ', idx);
+        console.log('idx : ', typeof idx);
+        // 설정한 Timeout 취소
+        clearTimeout(idx);
+
+        // 지정된 ms 이후마다 반복해서 callback 함수 실행
+        let idx2 = setInterval(function () {
+            console.log('setInterval 실행');
+        }, 1 * 1000);
+
+        // setTimeout을 이용하여 지정된 ms 이후 clearInterval을 실행하여 setInterval을 종료 시킨다
+        setTimeout(function () {
+            console.log('setInterval 종료');
+            clearInterval(idx2);
+        }, 2.5 * 1000);
+
+
     </script>
 </head>
+
 <body>
-    
+
 </body>
+
 </html>
