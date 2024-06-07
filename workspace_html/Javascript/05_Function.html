@@ -232,7 +232,30 @@
             clearInterval(idx2);
         }, 2.5 * 1000);
 
+        // 화살 함수 arrow function
+        let test = function (a,b) {
+            console.log(a, b);
+            return a;
+        }
 
+        // 익명함수를 변수에 담을때 function을 생략하고 =>로 쓸수 있다.
+        let test2 = (a,b) => {
+            console.log(a, b);
+        }
+
+        // 전달인자가 하나인 경우 ()를 생략하고 쓸 수 있다.
+        let test3 = a => {
+            console.log(a);
+            return a;
+        }
+        // 실행문에 return만 있는 경우
+        let test4 = a => {
+            return a;
+        }
+        // 이렇게 {} 와 return 단어를 생략해서 쓸수 있다.
+        let test5 = (a,b) => a + b;
+        // 최종적으로 전달인자 하나와 return실행문 하나일경우 생략해서 사용이 가능하다.
+        let test6 = a => a * 3;
     </script>
 </head>
 

@@ -37,7 +37,7 @@
         arr['참2'] = true;
         console.log(arr);
 
-        // 인덱스index가 있는 것만 출력 됨
+        // index의 값만 있는 것만 출력 됨
         // '참'도 출력됨
         for (let i in arr) {
             console.log(i);
@@ -83,14 +83,16 @@
         arr.sort();
         console.log("sort arr",arr);
 
+        //내림차순은 지원하지 않기 때문에, sort 사용후 reverse를 사용한다.
+
         // 현재 arr의 배열 상태 [1, 2, 3, 4, 5, 5]
 
-        //시작 index, count 인덱스숫자 부터 몇개까지 배열을 지운다.
+        //시작 index, count 인덱스숫자 부터 count의 값까지 배열을 지운다.
         let arr3 = arr.splice(2, 3);
         console.log("arr3 :",arr3);
         console.log("arr :",arr);
-
         // arr : [1, 2, 5]
+
         // 시작 index만 있는 경우 거기서부터 끝까지 지운다
         arr3= arr.splice(1);
         console.log("arr3 :",arr3);
@@ -101,21 +103,22 @@
         arr3 = arr.splice(-4, 2);
         console.log("arr3 :",arr3);
         console.log("arr :",arr);
-
         //arr : [10, 30, 40, 50]
+
         // 3번째 부터(count 뒤 부터) 값을 추가 할수 있다. 지운 갯수와 추가할 갯수가 맞지 않아도 된다.
         arr3 = arr.splice(1, 2, '3', '4', '5');
         console.log("arr3 :",arr3);
         console.log("arr :",arr);
-
         //arr : [10, '3', '4', '5', 50]
+
 
         arr3 = arr.splice(1, 0, '일'); // 1번 index에다가 0개를 지우고 '일'을 추가한다. ★★★경쟁력★★★
         console.log("arr3 :",arr3);
         console.log("arr :",arr);
-        //arr : [10, '일', '3', '4', '5', 50]
-        //하지만 3뒤에 '일'을 넣고 싶었지만, 0개를 지우는 경우는 1번 index도 포함되기 때문에 1번 index 앞에 추가 되어
-        //결론적으로 count 0을 사용하면 앞에 index는 추가할 위치가 된다고 생각 하면 된다.
+        // arr : [10, '일', '3', '4', '5', 50]
+        // 하지만 1번 index인 3뒤에 '일'을 넣고 싶었지만, 
+        // 0개를 지우는 경우는 1번 index도 포함되기 때문에 1번 index 앞에 추가 되어
+        // 결론적으로 count 0을 사용하면 앞에 index의 값은 추가할 위치가 된다고 생각 하면 된다.
 
         let arr4 = [0,1,2,3,4];
         
@@ -135,9 +138,10 @@
         console.log("arr :",arr); //[10, '일', '3', '4', '5', 50]
 
         str2 = arr.join("-"); // 배열 사이사이에 특정한 문자를 넣어 줄수 있다. 기본값은 ,이다.
-        console.log("str2 :",str2);
+        console.log("str2 :",str2); // str2 : 10-일-3-4-5-50
 
         // str2는 현재 10-일-3-4-5-50 라고 하는 String형태의 변수이다.
+
         // split : 특수문자로 구분되는 문자열을 잘라서 배열로 만들어줌 join에 넣은걸 똑같이 넣으면 다시 배열로 만들어준다
         arr3 = str2.split('-');
         console.log('arr3 :', arr3);
@@ -174,7 +178,50 @@
         console.log(arr.indexOf('3')); //겹치는 값이 있어도, 맨 앞에서부터 찾기때문에 처음 같은 값이 나온 index를 출력한다.
         // lastIndexOf : 맨 뒤에서부터 처음 나온 값을 찾는 메소드
 
+        let array = [2,5,4,6,8,5,2,6,7,];
+
+
+        // forEach : 배열의 모든 요소를 순회하면서 전달인자로 받은 함수를 실행해줌.
+        // forEach : 배열변수이름.forEach(function(value, index, array) {실행문})
+        array.forEach(function (a,b,c,d) {
+            console.log('------------------');
+            console.log ('a : ', a); // 배열의 값
+            console.log ('b : ', b); // 배열의 인덱스 번호
+            console.log ('c : ', c); // 원본 배열 전체
+            console.log ('d : ', d); // forEach에는 3개까지만 지원하기 때문에 d는 없다. undefined
+        });
+
+        // map : forEach 와 동일한 실행을 해주지만, return이 가능하다.
+        // 변수에 담으면 배열이 생성 되지만, 아무것도 적지 않으면 undefined로 이루어진 배열이 된다.
+
+        result = array.map(function (a,b,c) {
+            console.log('------------------');
+            console.log ('a : ', a); // 배열의 값
+            console.log ('b : ', b); // 배열의 인덱스 번호
+            console.log ('c : ', c); // 원본 배열 전체
+
+            return a + "!";
+        });
+
+        console.log(result); // (9) ['2!', '5!', '4!', '6!', '8!', '5!', '2!', '6!', '7!']
+        // 위 출력물은 map의 return값을 배열들의 값으로 돌려주고 그 뒤에 '!'를 추가함으로 써 result는 2! 와같이 배열이 생성 되었다.
+
+        // filter : 조건에 따라 true가 되는 값만 return 해주는 함수이다.
+        // 아래의 코딩은 array의 배열의 값들을 data로 인자를 전달 받아 조건문인 5보다 크면 true가 되는 is5를 되돌려주어 result의 그 data값을 넣어 콘솔로 출력한 모습이다.
         
+        array = [6,3,4,2,7,8,7,9,];
+
+        result = array.filter(data => {
+            let is5 = false;
+            if (data > 5) {
+                is5 = true;
+            }
+            return is5;
+            });
+            console.log(result);
+            
+
+
     </script>
 </head>
 
