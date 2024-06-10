@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document Object Model</title>
+    <style>
+        .red {
+            color: red;
+        }
+    </style>
+
+
+
+    <script class="필기용">
+        // DOM : document object model.
+        // html의 일부를 제외하고 모든걸 조작 할 수 있다.
+
+        // node : tag라고 불리기 전에 노드라고 불렸다. html은 xml에서 파생되어 만들어졌고, xml은 원하는 tag를 만들수 있
+        // 었지만, 그걸 브라우저가 해석할수 없으니 그걸 정해놓고 만든게 html이다.
+
+        // dom을 통해 조작하기 위한 조건
+        // 조작하고자 하는 요소를 선택
+        // 선택된 요소의 콘텐츠 또는 어트리뷰트 조작
+
+        // js에서도 css 선택자를 써서 선택할수 있다.
+
+        // document.getElementByld(id) id로 통해 돔을 조작할 수 있는 함수
+
+        // 무조건 알아야됨.
+        // 브라우저는 위에서 아래로 읽는다.
+        // 따라서 script를 위에다 쓰면 읽다가 DOM을 찾는 함수가 나오게 되면 에러가 난다.
+        // html을 읽기 전 스크립트와 읽은 후 스크립트를 구분해야한다.
+    </script>
+</head>
+
+<body>
+    <h1 id="title"> DOM 연습 </h1>
+
+    <div id="view">첫번째 view</div>
+    <div id="view">두번째 view</div>
+
+    <div id="wrap">
+        <div class="div2">안쪽 div2</div>
+        <div class="div3">안쪽 div3</div>
+    </div>
+
+    <div id="two" class="div2 div3">div2</div>
+
+
+    <script>
+        // html의 id를 이용하여 해당 tag를 가져오기
+
+        let title = document.getElementById('title');
+        console.log(title);
+        console.log("title : " + title); //[object HTMLHeadingElement] 사용자가 표시하고 싶은건 이 안에 있다
+        // alert(title); // [object HTMLHeadingElement]
+
+        // 선택되는게 없는 경우 null로 출력
+        console.log(document.getElementById('test')); // null
+
+        // id 속성이 동일한 경우라도 처음 나오는 DOM 하나만 가져온다.
+        let view = document.getElementById('view');
+        console.log(view);
+
+
+
+        // tag를 이용하여 DOM 찾기
+
+        // div의 갯수를 배열로 표시한다.
+        let divs = document.getElementsByTagName('div');
+        console.log(divs);
+
+        // 찾는 tag가 한개일 경우에도 배열로 표시된다.
+        let h1s = document.getElementsByTagName('h1');
+        console.log(h1s);
+
+        // tag가 없는 경우
+        // 비어있는 배열이 된다. null이 아니라 주의 해야 한다.
+        console.log(document.getElementsByTagName('human'));
+
+
+
+        // class를 이용하여 DOM 찾기
+
+        let div2s = document.getElementsByClassName('div2');
+        console.log(div2s);
+
+
+
+        // id나 class를 불러오고 그걸 변수에 담아 document가 아닌 변수이름을 넣고 원하는 선택자를 골라서 가져 올 수 있다
+        let wrap = document.getElementById('wrap');
+        console.log(wrap);
+
+        let child_div2 = wrap.getElementsByClassName('div2');
+        console.log(child_div2);
+
+
+        // css 선택자를 이용하여 DOM 가져오기
+        // querySelector 도 getElmentById처럼 처음 DOM 하나만 가져온다.
+
+        let qs = document.querySelector("#wrap .div2");
+        console.log(qs);
+
+        let css_title = document.querySelector("#title");
+        console.log(css_title);
+
+        // 없는 경우 null이 나온다
+        console.log(document.querySelector("#asdf"));
+
+        // querySelectorAll 해당 요소를 배열로 돌려줌
+        let qsa = document.querySelectorAll(".div2");
+        console.log(qsa);
+
+
+        // 없는 경우 아무것도 없는 배열이 나온다.
+        console.log(document.querySelectorAll(".asdf"));
+
+
+        // 형제 요소 찾기
+        // 알고 있는 요소의 부모로 가서 자식중에서 찾는 법
+        let div2 = document.querySelector("#wrap .div2");
+
+        // 부모선택 parentNode
+        let parent2 = div2.parentNode;
+        console.log(parent2);
+
+        let div3 = parent2.querySelector(".div3");
+        console.log(div3);
+
+
+        // 클래스 리스트
+        let two = document.querySelector('#two');
+        // DOM의 클래스를 배열형식으로 돌려준다.
+        console.log(two.classList);
+        // add로 class를 추가 할 수 있다.
+        two.classList.add('div4');
+        // remove로 class를 삭제 할 수 있다.
+        two.classList.remove('div3');
+
+        // toggle 은 없으면 추가하고, 있으면 삭제해준다.
+        two.classList.toggle("div5");
+        two.classList.toggle("div5");
+
+
+        // contains 해당 class가 있는지 없는지 true/false 으로 확인.
+        let isDiv4 = two.classList.contains("div4");
+        console.log(isDiv4);
+
+        let isRed = two.classList.contains("red");
+        console.log(isRed);
+
+
+        // toggle 구현
+        if (isRed == false) {
+            two.classList.add("red");
+        } else {
+            two.classList.remove("red");
+        }
+        console.log(two.classList);
+
+        console.log(two.className);
+
+        two.className = 'blue'; // two가 가지고 있는 모든 클래스를 지우고 blue 하나로 바꾼다.
+
+
+
+        // 어트리뷰트로 DOM 찾기
+        // 해당 DOM이 Attribute를 가지고 있는가로 찾는다.
+        let isClass = two.hasAttribute('class');
+        console.log(isClass);
+
+        // 해당 어트리뷰트의 값을 찾기
+        let id = two.getAttribute('id');
+        console.log(id);
+
+        // 없으면 null
+        console.log( two.getAttribute('href') );
+
+
+        // 속성과 속성값을 추가한다.
+        // 만약 속성이 원래 있었다면, 덮어쓰기
+        two.setAttribute("data-human", "Class-1");
+        two.setAttribute("data-human", "Class-11");
+
+        two.removeAttribute('data-human');
+
+        console.log(document);
+    </script>
+</body>
+
+</html>

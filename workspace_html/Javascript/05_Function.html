@@ -233,7 +233,7 @@
         }, 2.5 * 1000);
 
         // 화살 함수 arrow function
-        let test = function (a,b) {
+        let test0 = function (a,b) {
             console.log(a, b);
             return a;
         }
@@ -256,6 +256,30 @@
         let test5 = (a,b) => a + b;
         // 최종적으로 전달인자 하나와 return실행문 하나일경우 생략해서 사용이 가능하다.
         let test6 = a => a * 3;
+    </script>
+
+    <script>
+        // settimeout 시간을 재고 그 후 재현
+
+
+        let before = new Date().getTime();
+        console.log('before : ', before); //before :  1717981625218
+
+        let interval = 3 * 1000;
+
+        function doit() {
+            console.log('이제 실행');
+        };
+        
+        let diff = -1;
+        // while이 끝날때 까지 다음 줄이 실행되지 않는다.(동기)
+        // settimeout은 실행되고 다음줄이 실행된다. (비동기)
+        while (diff < interval) { //settimeout을 구현. 하지만 while은 3초동안 다른 동작은 할수 없다.
+            let now = new Date().getTime();
+            diff = now - before;
+            // console.log('diff : ', diff);
+        };
+        doit();
     </script>
 </head>
 
