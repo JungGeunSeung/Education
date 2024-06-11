@@ -44,6 +44,7 @@
     <div id="wrap">
         <div class="div2">안쪽 div2</div>
         <div class="div3">안쪽 div3</div>
+        <input type="text" name="addr"> 주소라신다
     </div>
 
     <div id="two" class="div2 div3">div2</div>
@@ -96,6 +97,9 @@
         let child_div2 = wrap.getElementsByClassName('div2');
         console.log(child_div2);
 
+        // 이제 사라졌음
+        // let names = wrap.getElementsByName('addr');
+        // console.log(names);
 
         // css 선택자를 이용하여 DOM 가져오기
         // querySelector 도 getElmentById처럼 처음 DOM 하나만 가져온다.

@@ -4,12 +4,39 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DOM Content</title>
-    sty
+    <style>
+        #view {
+            color: red;
+            background-color: blue;
+        }
+        [name=rad]:checked {
+            transform: scale(2);
+            
+        }
+    </style>
 </head>
 <body>
     <div id="captain">
         <span> 당선을 </span>        <span>축하드립니다. </span>
     </div>
+    <div id="view">
+        <span>원래 있던 글씨</span>
+    </div>
+
+    <div id="view2">
+        view2
+    </div>
+
+    id : <input type="password" id="id" value="미리적기"> <br>
+    <select name="" id="select">
+        <option value="1">첫번째</option>
+        <option value="2">두번째</option>
+    </select>
+    <br>
+
+    <input type="radio" name="rad" value="1" checked="checked"> 라디오1
+    <input type="radio" name="rad" value="2"> 라디오2
+    <input type="radio" name="rad" value="3"> 라디오3
 
     <script>
         let cap = document.getElementById('captain');
@@ -31,8 +58,82 @@
         // 둘 다 글씨를 바꿔주지만, tag는 그냥 string타입의 글씨로 인식 한다.
         cap.textContent = "<h1>a</h1>  b   c";
         cap.innerText = "<h1>a1</h1>  b1   c1";
+        // String 형태로 tag가 들어가 있어도, html로 인식되 사용된다.
+        cap.innerHTML = "<h1>a1</h1>  b1   c1 ";
 
-        cap.innerHTML = "<h1>a1</h1>  b1   c1";
+        cap.innerHTML += "<h2>h2</h2>"; // 추가하고 싶은 태그
+
+
+        // tag를 생성 하는 법
+        let h3 = document.createElement("h3");
+        h3.setAttribute('id','subtitle'); 
+        h3.setAttribute('style','color : red;');
+        h3.innerText = "JS로 추가한 태그와 글씨"
+        
+        let view = document.querySelector('#view');
+        view.append(h3);
+
+        // 만들어진 DOM과 글씨를 넣을 수 있다.
+        // 자식요소로 마지막에 추가 된다
+
+        // 글씨를 추가할수 있지만, innerHTML처럼 태그까지는 되지 않는다.
+        view.append("<strong>글씨</strong>");
+        // DOM 만 넣을 수 있다
+        view.append(h3);
+
+        // 자식요소로 처음에 넣기
+        view.prepend(h3);
+
+        // 다음 형제로 추가
+        view.after(h3);
+
+        // 이전 형제로 추가
+        view.before(h3);
+
+        // String을 DOM으로 만들기
+        let html = '<div>div안쪽<span>html</span></div>'
+
+        // innerHTML 써도 되고(덮어쓰기)
+
+        // #Document 객체를 생성해서 <html>부터 싹 만들어줌
+        // DOMParser 쓰는법.
+        let dom = new DOMParser().parseFromString(html, "text/html");
+
+
+        let view2 = document.querySelector('#view2');
+        view2.appendChild(dom.documentElement);
+
+        // style이 원래 css값을 저장하고 있지 않다
+        console.log(view.style.color); //출력 되지 않음
+        // 하지만 js를 통해서 지정하는 경우 반영도 되고 그 값을 저장하고 있다.
+        view.style.color = '#fff';
+        console.log(view.style.color); // 색상을 지정하고 출력하면 출력 됨. rgb(255, 255, 255)
+
+        view.style.cssText = 'font-size: 20px; border: 1px solid red;';
+    </script> 
+
+    <script class="input을 활용한 수업">
+        // form 요소들 input, select, textarea의 값은 .value로 가져온다.
+        let input = document.querySelector('#id');
+        console.log(input.value);
+
+        // select된 option의 value를 가져온다.
+        let select = document.querySelector('#select');
+        console.log(select.value);
+
+        let radio1 = document.querySelector('[name=rad]:checked');
+        console.log(radio1.value);
+
+        let radios = document.querySelectorAll('[name=rad]');
+
+        // js의 프로퍼티 checked를 통해서 알 수도 있다.
+        for (let i =0; i < radios.length; i++) {
+            console.log(radios[i].checked)
+            if(radios[i].checked) {
+                console.log('선택',radios[i].value);
+            }
+        }
+
     </script>
 </body>
 </html>
