@@ -7,7 +7,7 @@
     <title>event</title>
     <script>
 
-        const owner_id = admin;
+        // const owner_id = admin;
 
 
         function btn2Click() {
@@ -63,45 +63,178 @@
             let id = document.querySelector('#id');
             let pw = document.querySelector('#pw');
             let login = document.querySelector('#login');
-            id.addEventListener('keyup', function(event){
+            id.addEventListener('keyup', function (event) {
                 console.log('keyup', event.keyCode)
                 // 엔터키를 눌렀을때
                 if (event.keyCode == 13) {
                     pw.focus();
                 };
             });
-            pw.addEventListener('keyup', function(event){
+            pw.addEventListener('keyup', function (event) {
                 if (event.keyCode == 13) {
                     login.click();
                 };
             });
-
-            login.addEventListener('click',function(){
+            function reset_id_pw() {
+                id.value = '';
+                pw.value = '';
+            };
+            login.addEventListener('click', function () {
                 console.log('로그인 버튼 클릭');
                 // 사이트들의 자동 로그인 기능을 이용한 value에 값넣기
                 // document.querySelector('#id').value = 'admin';
                 if (id.value == 'admin' && pw.value == '1234') {
                     console.log(id.value, pw.value);
                     alert('로그인 되었습니다.');
+                    reset_id_pw();
                 } else if (id.value != 'admin' && pw.value != '1234') {
                     console.log(id.value, pw.value);
                     alert('아이디 또는 비밀번호를 다시 확인해주세요');
-                } else if (id.value == 'admin' && pw.value == '') {
+                    reset_id_pw();
+                } else if (pw.value == '') {
+                    console.log(id.value, pw.value);
                     alert('비밀번호를 입력해주세요.');
-                } else if (id.value == '' && pw.value == '1234') {
+                    reset_id_pw();
+                } else if (id.value == '') {
+                    console.log(id.value, pw.value);
                     alert('아이디를 입력해주세요.');
+                    reset_id_pw();
                 }
             });
 
             let text = document.querySelector('#id').value;
             console.log('아이디 :', text);
 
+
+
             // trim() : 앞뒤 공백을 지워주는 함수(중간은 x)
 
+
+
+            // 버튼3의 마우스를 올렸을때 20px로 커지고 마우스가 벗어났을때, 14px로 다시 변경
+
+            let newbtn3 = document.querySelector('#btn3');
+
+            newbtn3.addEventListener('mouseover', function () {
+                newbtn3.setAttribute('style', 'font-size : 20px');
+            });
+
+            newbtn3.addEventListener('mouseout', function () {
+                newbtn3.setAttribute('style', 'font-size : 14px');
+            });
+
+            // 앞에 아무것도 안쓰면 브라우저 전체에 적용되는 이벤트
+            // addEventListener(){}
+
+
+            // Event의 마우스 커서의 좌표 종류
+            // offset X,Y : 이벤트가 적용된 좌상단부터 (div의 최소점)
+            // page X,Y : 스크롤과 상관없이 전체 브라우저의 기준
+            // client X,Y : 스크롤과 상관없이, 브라우저 크기 기준
+            // screen X,Y : 사용자의 모니터 기준
+
+
+            let moveArea = document.querySelector('#moveArea');
+            moveArea.addEventListener('mousemove', function (event) {
+                // console.log('마우스 움직임');
+                let x = event.pageX + 10;
+                let y = event.pageY + 20;
+
+                let cursor = document.querySelector('#cursor');
+                cursor.style.left = x + 'px';
+                cursor.style.top = y + 'px';
+                cursor.style.display = 'block';
+            });
+
+            // 이벤트명 : focus, blur
+            // #id에 적용해서
+            // 아이디에 포커스 맞춰짐
+
+            let newid = document.querySelector('#id');
+            let newpw = document.querySelector('#pw');
+
+            newid.addEventListener('focus', function () {
+
+                document.querySelector('#console').innerHTML += '아이디에 포커스 맞춰짐<br>';
+            });
+            newid.addEventListener('blur', function () {
+                document.querySelector('#console').innerHTML += '아이디에 포커스 사라짐<br>';
+            });
+
+            newpw.addEventListener('focus', function () {
+                document.querySelector('#console').innerHTML += '비밀번호에 포커스 맞춰짐<br>';
+            });
+            newpw.addEventListener('blur', function () {
+                document.querySelector('#console').innerHTML += '비밀번호에 포커스 사라짐<br>';
+            });
+
+            // this : 그냥 쓰일때는 window 객체를 가지고 있다.
+            document.querySelector('#parent').addEventListener('click', function(event){
+                // event.target : 이벤트가 발생된 DOM
+                console.log('event.target : ', event.target);
+
+                // event.currentTarget : 이벤트가 적용된 DOM
+                console.log('event.currentTarget : ', event.currentTarget);
+
+                // this === event.currentTarget 와 동일하다고 생각하면 된다.
+                console.log('this :', this);
+            });
+
+            document.querySelector('#child1').addEventListener('click',function(event){
+
+                // 부모로 전달되는 이벤트를 중지한다
+                event.stopPropagation();
+                console.log('자식1 클릭');
+            })
+
+            function reset_input() {
+                document.querySelector('#keyword').value = '';
+            };
+
+            document.querySelector('#form').addEventListener('submit', function(event) {
+                event.preventDefault();
+                console.log('제출');
+                let value = document.querySelector('#keyword').value;
+                console.log(value, value.length);
+                if(value.length < 2) {
+                    console.log('2글자 이상 입력해주세요');
+                } else {
+                    console.log('naver 검색');
+                    document.querySelector('#form').submit();
+                };
+                reset_input();
+            });
+                
+            
+            
         }
 
 
+
+
     </script>
+
+    <!-- <script> // 50번 클릭
+
+        // window.alert = function () { };
+
+
+        let loop = 0;
+        let interval = setInterval(function () {
+            if (loop < 10) {
+                let element = document.querySelector('.txt_vote_1');
+                if (element) {
+                    element.click();
+                    loop++;
+                } else {
+                    console.error("요소 '.txt_vote_1'를 찾을 수 없습니다.");
+                    clearInterval(interval);
+                }
+            } else {
+                clearInterval(interval);
+            }
+        }, 200);
+    </script> -->
 </head>
 
 <body style="height: 2000px;">
@@ -124,9 +257,38 @@
     </div>
 
     <div id="console"></div>
+
+    <img id="cursor"
+        src="https://previews.123rf.com/images/naiklon/naiklon2304/naiklon230405256/202200347-%EA%B2%A9%EB%A6%AC%EB%90%9C-%ED%88%AC%EB%AA%85-%EB%B0%B0%EA%B2%BD-png%EC%97%90-%EC%B9%B4%EC%98%A4%EB%A7%88%EB%8B%88-%EA%B3%A0%EC%96%91%EC%9D%B4.jpg"
+        alt="">
+    <div id="moveArea"></div>
+
+    <div id="parent">
+        부모
+        <div id="child1">자식1</div>
+        <div id="child2">자식2</div>
+    </div>
+    <!-- <a href="http://naver.com" id="naver">네이버</a> -->
+    <form id="form" action="http://search.naver.com/search.naver">
+        <input id="keyword" type="text" name="query">
+        <input type="submit" value="네이버 검색">
+    </form>
 </body>
 <style>
+    #cursor {
+        width: 80px;
+        position: absolute;
+        top: 0;
+        left: 0;
+        display: none;
+    }
 
+    #moveArea {
+        width: 1000px;
+        height: 1000px;
+        border: 1px solid red;
+        margin: 50px;
+    }
 </style>
 
 </html>
