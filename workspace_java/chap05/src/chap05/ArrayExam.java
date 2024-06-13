@@ -141,7 +141,7 @@ public class ArrayExam {
 		
 		//배열의 length
 		System.out.println(list.size());
-		System.out.println(list);
+		System.out.println("배열리스트" + list);
 	
 		
 		
