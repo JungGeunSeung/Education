@@ -205,7 +205,46 @@
                 reset_input();
             });
                 
-            
+
+            // id='btn4'에 이벤트 click을 주고 click 했을때, class='chk'를 가진, input을 for문으로
+            // checked 된 value를 출력하는 방법
+            document.querySelector('#btn4').addEventListener('click',function(){
+                console.log('버튼 누름');
+                let chklist = document.querySelectorAll('.chk');
+
+                // 반복문 쓰는 이유 querySelectorAll 은 배열로 가져 오기때문에, value나 checked 변수가 써지지 않는다.
+                // for(iet i=0; i<배열.length; i++)
+                // for(let index in 배열)
+                // for(let item of 배열)
+                // 배열.forEach( function(item){} )
+
+                
+                for(let dom of chklist){
+
+                    // 모든 요소의 (프로퍼티 property) 체크 상태 점검
+                    if(dom.checked){
+                    console.log(dom.value, dom.checked)}
+                };
+
+                // for문을 쓰지않고, css 선택자 :checked를 이용해서 출력하는 방법
+                let chks2 = document.querySelectorAll('.chk:checked');
+                console.log(chks2.length);
+
+
+            });
+
+            //모든 삭제 버튼에 click 이벤트 적용
+            // Apply click button to all delete button
+            let dels = document.querySelectorAll('.del')
+            for(let i =0; i<dels.length; i++) {
+                dels[i].addEventListener('click', function(event){
+                    console.log(event.target);
+
+                    //event가 적용된 target으로 누구인지 잡고, parentNode로 부모가 누구인지 판단하여,
+                    // 함수 remove()를 이용하여 지우기
+                    event.target.parentNode.remove();
+                })
+            }
             
         }
 
@@ -214,17 +253,21 @@
 
     </script>
 
-    <!-- <script> // 50번 클릭
+    <!-- <script> // 200ms 동안 50번 클릭
 
         // window.alert = function () { };
 
 
         let loop = 0;
         let interval = setInterval(function () {
-            if (loop < 10) {
+            if (loop < 50) {
                 let element = document.querySelector('.txt_vote_1');
+                let element2 = document.querySelector('.txt_vote_2');
+                let element3 = document.querySelector('.txt_vote_3');
                 if (element) {
                     element.click();
+                    element2.click();
+                    element3.click();
                     loop++;
                 } else {
                     console.error("요소 '.txt_vote_1'를 찾을 수 없습니다.");
@@ -273,6 +316,31 @@
         <input id="keyword" type="text" name="query">
         <input type="submit" value="네이버 검색">
     </form>
+
+    <input type="button" id="btn4" value="토핑확인"><br>
+    <input type="checkbox" class="chk" value="udon">우동사리 <br>
+    <input type="checkbox" class="chk" value="cake">떡 <br>
+
+    <!-- label : checkbox의 연동되어 글씨를 클릭해도 checkbox가 활성화 되는 태그 -->
+     <!-- label의 for는 id값만 지정 할 수 있고, html의 어디에 있어도 할당된 checkbox가 활성화 된다 -->
+    <label><input type="checkbox" class="chk" value="china">중국당면</label><br>
+
+    <input type="checkbox" class="chk" value="cake" id="bun">
+    <label for="bun">분모자</label>
+
+    <!-- button을 눌렀을때 부모인 div를 지우는 방법 -->
+    <div>
+        <span>우동사리</span> <button type="button" class="del">삭제1</button>
+    </div>
+    <div>
+        <span>떡</span> <button type="button" class="del">삭제2</button>
+    </div>
+    <div>
+        <span>중국당면</span> <button type="button" class="del">삭제3</button>
+    </div>
+
+
+
 </body>
 <style>
     #cursor {
