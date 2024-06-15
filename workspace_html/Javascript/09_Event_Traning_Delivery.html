@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delivery</title>
+    <script>
+        window.onload = function(){
+            let buy_name = document.querySelector('#buy_name');
+            let buy_plc = document.querySelector('#buy_plc');
+            let buy_adress = document.querySelector('#buy_adress');
+
+            let check_input = document.querySelector('#check_input');
+
+            let deli_name = document.querySelector('#deli_name');
+            let deli_pic = document.querySelector('#deli_pic');
+            let deli_adress = document.querySelector('#deli_adress');
+
+            check_input.addEventListener('click', function(){
+                
+
+                if (check_input.checked == false) {
+                deli_name.value = "";
+                deli_pic.value = "";
+                deli_adress.value = "";
+            } else {
+                deli_name.value = buy_name.value;
+                deli_pic.value = buy_plc.value;
+                deli_adress.value = buy_adress.value;
+            }
+            });
+
+            // 연락처 input값에 숫자가 아닐때 이벤트
+            buy_adress.addEventListener('keyup', function(){
+                if (Number.isNaN(Number(buy_adress.value))) {
+                    let NaN_adress_buy = document.querySelector(".NaN_adress_buy")
+                    NaN_adress_buy.style.display = 'block';
+                } else {
+                    // NaN_adress_buy.style.display = 'none';
+                }
+            });
+
+            // 연락처 input값에 숫자가 아닐때 이벤트
+            deli_adress.addEventListener('input', function(){
+                if (Number.isNaN(Number(deli_adress.value))) {
+                    let NaN_adress_deli = document.querySelector(".NaN_adress_deli")
+                    NaN_adress_deli.style.display = 'block';
+                }
+
+                // 한번생기면 다시 지워지는건 구현 못함.
+            });
+
+            let select = document.querySelector('#select');
+            select.addEventListener('click', function(){
+                if (select.value == 4) {
+                    let request = document.querySelector('.request');
+                    request.style.display = 'block';
+                }
+                // 한번 생기면 다시 지워지는건 구현 못함.
+            });
+        }
+        
+    </script>
+    <style>
+        /* div {
+            border: 1px solid black;
+        } */
+
+        .box {
+            width: 500px;
+        }
+
+        .in_box {
+            display: inline-block;
+            padding-left: 20px;
+            padding-bottom: 20px;
+        }
+
+        .out_box {
+            width: 500px;
+            margin: auto;
+            border: 1px solid black;
+        
+        }
+
+        .text {
+            width: 350px;
+            height: 2em;
+            font-size: 16px;
+        }
+
+        span h3 {
+            padding: 20px;
+        }
+
+        .request {
+            display: none;
+        }
+
+        .NaN_adress_buy  {
+            color: red;
+            display: none;
+        }
+
+        .NaN_adress_deli  {
+            color: red;
+            display: none;
+        }
+
+        .request {
+            margin-top: 10px;
+            width: 350px;
+            height: 1.7em;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .coupang {
+            margin: auto;
+            position: relative;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+    </style>
+</head>
+<body>
+    <img src="https://image7.coupangcdn.com/image/coupang/common/logo_coupang_w350.png" alt="coupang" class="coupang">
+
+    <div class="out_box">
+        <div class="box in_box">
+            <H3>구매자 정보</H3>
+            <span>이름</span><br>
+            <input type="text" id="buy_name" class="text" placeholder="이름"></input>
+        </div>
+        <div class="box in_box">
+            <span>주소</span><br>
+            <input type="text" id="buy_plc" class="text" placeholder="주소"></input>
+        </div>
+        <div class="box in_box">
+            <span>연락처</span><br>
+            <input type="text" id="buy_adress" class="text" placeholder="연락처"></input> <br>
+            <span class="NaN_adress_buy">숫자만 입력해주세요.</span>
+        </div>
+    </div>
+    <br>
+    <div class="out_box ">
+        <div class="box in_box">
+            <h3>받는 사람 정보</h3>
+            <input type="checkbox" id="check_input"> 구매자와 동일합니다. <br>
+            <span>이름</span><br>
+            <input type="text" id="deli_name" class="text" placeholder="이름"></input>
+        </div>
+        <div class="box in_box">
+            <span>배송 주소</span><br>
+            <input type="text" id="deli_pic" class="text" placeholder="주소"></input>
+        </div>
+        <div class="box in_box">
+            <span>연락처</span><br>
+            <input type="text" id="deli_adress" class="text" placeholder="연락처"></input> <br>
+            <span class="NaN_adress_deli">숫자만 입력해주세요.</span>
+        </div>
+        <div class="box in_box">
+            <form action="">
+                <span>배송 요청사항</span> <br>
+                <select name="" id="select">
+                    <option value="1">문 앞에 놓고 가주세요.</option>
+                    <option value="2">경비실에 맡겨 주세요.</option>
+                    <option value="3">택배함에 보관해 주세요.</option>
+                    <option value="4">직접입력</option>
+                </select>
+                <input type="text" class="request">
+            </form>
+        </div>
+    </div>
+</body>
+</html>
