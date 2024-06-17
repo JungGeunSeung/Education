@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        window.onload = function () {
+
+
+            setInterval(function () {
+                let time = document.querySelector('#time');
+                let now = new Date();
+                let h = now.getHours();
+                let m = now.getMinutes();
+                let s = now.getSeconds();
+
+                let h1;
+                let m1;
+                let s1;
+
+                if (h < 10) {
+                    h1 = '0' + h
+                } else {
+                    h1 = h;
+                };
+                if (m < 10) {
+                    m1 = '0' + m
+                } else {
+                    m1 = m;
+                };
+                if (s < 10) {
+                    s1 = '0' + s
+                } else {
+                    s1 = s;
+                };
+
+
+
+                let hms = h1 + '시 ' + m1 + '분 ' + s1 + '초';
+                time.innerText = hms;
+
+            }, 200)
+
+            let age = document.querySelector('#age');
+
+            document.querySelector('#btn').addEventListener('click', function (event) {
+                console.log(new date().get - age.value + 1);
+            })
+
+
+            let left = 0;
+            let top = 0;
+            document.querySelector('body').addEventListener('keyup', function(event){
+                // console.log(event.keyCode);
+                // u38 r39 b40 l37
+                if (event.keyCode == 39) {
+                    left += 50;
+                    document.querySelector('#char').style.left = left+'px';
+                } else if (event.keyCode == 37) {
+                    left -= 50;
+                    document.querySelector('#char').style.left = left+'px';
+                } else if (event.keyCode == 40) {
+                    top += 50;
+                    document.querySelector('#char').style.top = top+'px';
+                } else if (event.keyCode == 38) {
+                    top -= 50;
+                    document.querySelector('#char').style.top = top+'px';
+                }
+            })
+
+            let lotto = [];
+            let isDup;
+            let tmp = parseInt(Math.random() * 45) +1;
+            console.log(tmp);
+            lotto.push(tmp);
+            while (lotto.length != 6) {
+            do {
+                isDup=false;
+                // console.log(lotto);
+                tmp = parseInt(Math.random() * 45) +1;
+                console.log(tmp);
+                for(let i = 0; i<lotto.length; i++) {
+                    if (lotto[i] == tmp) {
+                        isDup = true;
+                        break;
+                    }
+                }
+                if (!isDup) {
+                    lotto.push(tmp);
+                }
+            } while (isDup)
+        }
+        console.log(lotto);
+        }
+    </script>
+
+    <style>
+        #game {
+            border: 1px solid red;
+            width: 500px;
+            height: 500px;
+
+            position: relative;
+        }
+
+        #game #char {
+            width: 100px;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="time">
+
+    </div>
+    <div>
+        출생년도를 적어주세요 : <input type="text" id="age">년생
+        <br>
+        <button id="btn">제출</button>
+    </div>
+    <div id="game">
+        <img id="char" src="https://i.giphy.com/MGqYLloqVU93ndrFmT.webp">
+    </div>
+</body>
+
+</html>

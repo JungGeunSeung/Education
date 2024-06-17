@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>pizza order</title>
+    <style>
+
+    </style>
+    <script>
+        window.addEventListener('load', function () {
+            let select = document.querySelector("#select");
+            let size = document.querySelectorAll('[type="radio"]');
+            let topping = document.querySelectorAll('[type="checkbox"]');
+
+            let a_select;
+            let a_size;
+            let a_topping;
+
+            document.querySelector('[type="submit"]').addEventListener('click', function () {
+                console.log('주문하기');
+                // console.log(select.value);
+                if (select.value == 1) {
+                    // console.log('불고기 피자');
+                    a_select = '불고기 피자';
+                } else if (select.value == 2) {
+                    // console.log('페퍼로니 피자');
+                    a_select = '페퍼로니 피자';
+                } else if (select.value == 3) {
+                    // console.log('하와이안 피자');
+                    a_select = '하와이안 피자';
+                } else if (select.value == 4) {
+                    // console.log('고구마 피자');
+                    a_select = '고구마 피자';
+                }
+                for (let i = 0; i < size.length; i++) {
+                    if (size[i].checked) {
+                        // console.log(size[i].value);
+                        if (size[i].value == 1) {
+                            console.log('Regular');
+                            a_size = 'Regular';
+                        } else if (size[i].value == 2) {
+                            // console.log('Medium');
+                            a_size = 'Medium';
+                        } else if (size[i].value == 3) {
+                            // console.log('Large');
+                            a_size = 'Large';
+                        } else if (size[i].value == 4) {
+                            // console.log('King');
+                            a_size = 'King';
+                        }
+                    }
+                }
+                for (let i = 0; i < topping.length; i++) {
+                    if (topping[i].checked) {
+                        console.log(topping[i].value);
+                        if (topping[i].value == 1) {
+                            // console.log('페퍼로니');
+                            a_topping = '페퍼로니';
+                        } else if (topping[i].value == 2) {
+                            // console.log('치즈');
+                            a_topping = '치즈';
+                        } else if (topping[i].value == 3) {
+                            // console.log('올리브');
+                            a_topping = '올리브';
+                        }
+                    }
+                }
+
+                console.log('피자 :' + a_select + ' 사이즈 : ' + a_size + ' 토핑 추가 : ' + a_topping);
+            })
+
+            //선택된 select의 option 가져오기
+            let type = document.querySelector('#select option:checked').innerText
+            console.log(type);
+
+            // 이제부턴 value에 가격적기
+            // queryselector 로 css선택자를 고를때, checkbox,radio등 은 :checked로 가져 올 수있다.
+            // size.prentNode.querySelector 선택자로 고른 변수를 다시 부모로 올라가서 다시 선택하는 방식
+            // label을 이용하여, 같은 속성 값을 가진다는 아이디어로 가져오기
+            // 속성값을 넣어서 가져오기 (data-name 등)
+
+
+        });
+    </script>
+</head>
+
+<body>
+    <div>
+        <h1>피자 주문 시스템</h1>
+        <form action="submit" method="get" id="">
+            <span>피자 종류</span>
+            <select name="" id="select">
+                <option value="1">불고기 피자</option>
+                <option value="2">페퍼로니 피자</option>
+                <option value="3">하와이안 피자</option>
+                <option value="4">고구마 피자</option>
+            </select>
+        </form>
+        <br>
+        <form action="" id="size">
+            <span>사이즈 : </span>
+            <input type="radio" name="size" value="1">Regular</input>
+            <input type="radio" name="size" value="2">Medium</input>
+            <input type="radio" name="size" value="3" checked="checked">Large</input>
+            <input type="radio" name="size" value="4">King</input>
+        </form>
+        <br>
+        <form action="" id="topping">
+            <span>토핑 추가 : </span>
+            <input type="checkbox" value="1"> 페퍼로니</input>
+            <input type="checkbox" value="2"> 치즈</input>
+            <input type="checkbox" value="3"> 올리브</input>
+        </form>
+        <input type="submit" value="주문하기">
+        <div>
+            요청사항 :
+            <input type="text">
+        </div>
+    </div>
+</body>
+
+</html>

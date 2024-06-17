@@ -96,11 +96,6 @@
                 }
             });
 
-            document.querySelector('.check').addEventListener('click', function(event){
-                if(!event.target.checked){
-                    all.cehcked = false;
-                }
-            });
 
 
             /////////////////////
@@ -109,10 +104,31 @@
             all.addEventListener('click', function () {
                 for (let i = 0; i < check.length; i++) {
                     check[i].checked = all.checked;
-                    
+
                 }
             });
-            
+
+            // check.addEventListener('click',function(){
+            //     if(check.checked.length == check.length){
+            //         all.cehcked = true;
+            //     } else {
+            //         all.cehcked = false;
+            //     }
+            // })
+
+            document.addEventListener('click', function (event) {
+                for (let i = 0; i < check.length; i++) {
+                    check[i].addEventListener('click', function (event) {
+                        if (!check[i].checked) {
+                            all.checked = false;
+                            console.log(event.target)
+                        } else if (check.checked.length == check.length) {
+                            all.checked = true;
+                        }
+                    })
+                }
+            });
+
             /////////////////////
             // 선택 삭제 이벤트 //
             /////////////////////

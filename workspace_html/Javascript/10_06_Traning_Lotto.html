@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>lotto</title>
+    <style>
+        div {
+            text-align: center;
+        }
+
+        #count {
+            width: 40px;
+        }
+
+        table {
+            text-align: center;
+            display: inline-block;
+        }
+
+        .sewid {
+            width: 200px;
+        }
+
+        td [type="text"] {
+            width: 35px;
+            padding: 10px;
+            height: 1.5em;
+        }
+
+        .raffle {
+            width: 35px;
+            padding: 20px 10px;
+            height: 1.5em;
+        }
+
+        .all {
+            width: 600px;
+        }
+
+        .수동입력 {
+            border: 1px solid black;
+            width: 100%;
+        }
+    </style>
+    <script>
+        let count = 1;
+        window.addEventListener('load', function () {
+            
+
+            let raffle = document.querySelector('#raffle');
+            let auto = document.querySelector('#auto');
+            let semiauto = document.querySelector('#semiauto');
+            let table = document.querySelector('#table');
+            console.log();
+            raffle.addEventListener('click', function (event) {
+                let lotto = [];
+            let isDup;
+            let tmp = parseInt(Math.random() * 45) + 1;
+            // console.log(tmp);
+            lotto.push(tmp);
+            while (lotto.length != 6) {
+                do {
+                    isDup = false;
+                    // console.log(lotto);
+                    tmp = parseInt(Math.random() * 45) + 1;
+                    // console.log(tmp);
+                    for (let i = 0; i < lotto.length; i++) {
+                        if (lotto[i] == tmp) {
+                            isDup = true;
+                            break;
+                        }
+                    }
+                    if (!isDup) {
+                        lotto.push(tmp);
+                    }
+                } while (isDup)
+            }
+            let sudong = document.querySelectorAll('.sudong');
+            console.log(sudong);
+            console.log(sudong[0].value); //개별 인덱스 출력은 됨.
+            console.log(sudong[1].value);
+            console.log(sudong[2].value);
+            console.log(sudong[3].value);
+            console.log(sudong[4].value);
+            console.log(sudong[5].value);
+            let sudong2 = [];
+            for(let i =0; i<sudong.length; i++){
+                sudong2[i] = sudong[i].value;
+            }
+            
+                if (auto.checked) {
+                    table.innerHTML +=
+                        `<tr id="del">
+                    <td>${count}</td>
+                    <td>${lotto.join()}</td>
+                    <td>자동</td>
+                    <td><button>삭제</button></td>
+                </tr>`;
+                } else if (semiauto.checked) {
+
+                    // console.log(sudong.join());
+                    table.innerHTML +=
+                        `<tr id="del">
+                    <td>${count}</td>
+                    <td>${sudong2.join()}</td>
+                    <td>자동</td>
+                    <td><button>삭제</button></td>
+                </tr>`;
+                }
+                count++;
+            });
+        })
+    </script>
+</head>
+
+<body>
+    <div class="all">
+        <h1>로또 번호 추첨</h1>
+        <div class="수동입력">
+            <p>번호 입력하기</p>
+            <div>
+                <input type="radio" name="check" id="auto">자동
+                <input type="radio" name="check" id="semiauto">반자동
+                추첨 갯수<input type="number" value="1" id="count">
+            </div>
+            <table>
+                <tr>
+                    <td><input class="sudong" type="text" value=""></td>
+                    <td><input class="sudong" type="text" value=""></td>
+                    <td><input class="sudong" type="text" value=""></td>
+                    <td><input class="sudong" type="text" value=""></td>
+                    <td><input class="sudong" type="text" value=""></td>
+                    <td><input class="sudong" type="text" value=""></td>
+                    <td><button id="raffle">추첨</button></td>
+                </tr>
+            </table>
+        </div>
+        <div>
+            <table id="table">
+                <tr>
+                    <td>번호</td>
+                    <td class="sewid">추첨 번호</td>
+                    <td>형식</td>
+                    <td></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</body>
+
+</html>

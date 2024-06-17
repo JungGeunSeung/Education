@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>image enlargement</title>
+    <script>
+        window.addEventListener('load',function(){
+
+        let img1 = document.querySelector('#img1');
+        let img2 = document.querySelector('#img2');
+        let img3 = document.querySelector('#img3');
+        let imgdiv = document.querySelector('#imgdiv');
+        let bigimg = document.querySelector('#bigimg');
+
+        // img1.addEventListener('click', function(){
+        //     let img11 = img1.getAttribute('src');
+        //     bigimg.setAttribute('src', img11);
+        // });
+
+        // let firstimg = img1.getAttribute('src');
+        // bigimg.setAttribute('src', firstimg);
+
+        // 이벤트 타켓을 활용한 클릭이벤트 하나로 이미지 키우기 완료
+        imgdiv.addEventListener('click', function(event){
+            // console.log(event.target);
+            let imgresult = event.target.getAttribute('src');
+            bigimg.setAttribute('src', imgresult);
+        });
+
+        bigimg = document.querySelector('#bigimg');
+        let divcolor = document.querySelectorAll('#divcolor button');
+        console.log(divcolor);
+
+        document.addEventListener('click',function(event){
+            console.log(event.target);
+            let color = event.target.getAttribute('class');
+            bigimg.setAttribute('class', color);
+        });
+    });
+
+    </script>
+
+    <style>
+        .imgc {
+            height: 100px;
+        }
+
+        #bigimg {
+            width: 500px;
+            height: 500px;
+        }
+
+        .red { background-color: red; }
+        .green { background-color: green; }
+        .blue { background-color: blue; }
+        .pink { background-color: pink; }
+
+        #divcolor button {
+            border: 0;
+            padding: 5px;
+            width: 100px;
+        }
+    </style>
+</head>
+<body>
+    <div id="imgdiv">
+        <img class="imgc" id="img1" src="https://cafe24.poxo.com/ec01/ittanstore/HOvhRhvOk+Cp2KY4JuusAo6ppQWEWDHdJjmMLeWhocAhQmG/JyhBOlWkfHbeqwEwmvNHVXW5Mf9uvAogH5XuIQ==/_/web/product/big/201907/397536bdf39d6dd5328a57f610fc92f7.jpg" alt="">
+        <img class="imgc" id="img2" src="https://i.namu.wiki/i/LcCrzld0SUci3KGinDCnAqBQys9JbNEVpskC3nYFlVwO18jjAbwtAkJz9km5dBHccfrNr9JWJSSKnXC7liT4TQ.webp" alt="">
+        <img class="imgc" id="img3" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmAx8A3XDlmc87Bko_iDTBg7NgkwOVrdEZTQ&s" alt="">
+    </div>
+    <div id="divcolor">
+        <button class="red">빨강</button>
+        <button class="green">초록</button>
+        <button class="blue">파랑</button>
+        <button class="pink">핑크</button>
+    </div>
+    <div>
+        <img id="bigimg" src="" alt="" class="red">
+    </div>
+</body>
+</html>
