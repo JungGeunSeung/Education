@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>공공 데이터 활용</title>
+    <script>
+        window.addEventListener('load',function(){
+            document.querySelector("#btn").addEventListener("click", function(){
+
+                forecast();
+            })
+        })
+        function forecast(){
+            // 띄어쓰기 금지 url 형식으로 들어가기 때문
+            let url = 'http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtFcst';
+            url += '?';
+            url += "serviceKey=3Fy90CIaNf3Pn9KZvM1aRJ40hk0mr1yTRt24QV%2BilHo78Fy%2FQMI7yK7b0LRlRe6crku16wNt7Mc4%2BPg7KhG0rg%3D%3D"
+            url += '&';
+            url += "numOfRows=1000";
+            url += '&';
+            url += "pageNo=1";
+            url += '&';
+            url += "dataType=JSON";
+            url += '&';
+            url += "base_date=20240618";
+            url += '&';
+            url += "base_time=0630";
+            url += '&';
+            url += "nx=63";
+            url += '&';
+            url += "ny=110";
+
+            let xhr = new XMLHttpRequest();
+            xhr.open('GET', url);
+            xhr.send();
+            xhr.onload = function () {
+                console.log("다녀옴");
+                let text = xhr.responseText;
+
+                let data = JSON.parse(text);
+                
+                console.log(data);
+                console.log(data.response.body.items.item[29].fcstValue)
+                console.log()
+        }
+    }
+    </script>
+</head>
+<body>
+    <button id="btn">초단기 예보 조회</button>
+</body>
+</html>

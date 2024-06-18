@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajax</title>
+    <script>
+        window.addEventListener('load', function () {
+            document.querySelector('#btn').addEventListener('click', function () {
+                doAjax();
+            })
+            document.querySelector('#btn2').addEventListener('click', function () {
+                doAjaxpoiema();
+            })
+        })
+
+        function doAjax() {
+            // ajax 객체 생성
+            let xhr = new XMLHttpRequest();
+
+            // 보낼준비
+            xhr.open('GET', 'https://jsonplaceholder.typicode.com/users');
+
+            // 보내기(단, 언제 끝날지 모름)
+            xhr.send();
+
+            // 그래서 onload를 써서 응답 이후 함수를 실행한다.
+            xhr.onload = function () {
+                console.log("다녀옴");
+
+                // 가서 받아온 내용이 저장되는 변수 responseText
+                let text = xhr.responseText;
+                console.log(text);
+
+                // 받아온 글씨를 json 객체로 변경
+                let data = JSON.parse(text);
+                console.log(data);
+                
+                console.log(data[0].username)
+            }
+
+        }
+        // Ajax를 이용해서 페이지에 원하는 정보를 가져오는 함수를 한번에 만들어서 전달인자 3개로 쉽게 사용이 가능하다
+        function doAjaxpoiema() {
+            // ajax 객체 생성
+            let xhr = new XMLHttpRequest();
+
+            // 보낼준비
+            xhr.open('GET', 'https://poiemaweb.com/js-ajax');
+
+            // 보내기(단, 언제 끝날지 모름)
+            xhr.send();
+
+            // 그래서 onload를 써서 응답 이후 함수를 실행한다.
+            xhr.onload = function () {
+                console.log("다녀옴");
+
+                // 가서 받아온 내용이 저장되는 변수 responseText
+                let text = xhr.responseText;
+                console.log(text);
+
+                // 받아온 글씨를 json 객체로 변경
+                // let data = JSON.parse(text);
+                // console.log(data);
+                
+                // console.log(data[0].username)
+
+                // html로 된 글씨로 받아온 경우
+                // dom으로 바꿔서 필요한 정보를 얻어보자
+                // html로도 가져와서 원하는 정보를 얻을수 있다.
+                let doc = new DOMParser().parseFromString(text, 'text/html');
+
+                let html = doc.getElementById('32-ajax-response').innerHTML;
+                console.log(html);
+                
+            }
+
+        }
+        
+    </script>
+</head>
+
+<body>
+    <button id="btn">ajax 실행</button><br>
+    <button id="btn2">poiema</button>
+</body>
+
+</html>

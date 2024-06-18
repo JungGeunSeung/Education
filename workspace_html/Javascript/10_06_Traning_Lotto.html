@@ -43,75 +43,87 @@
             border: 1px solid black;
             width: 100%;
         }
+
+        #chu {
+            color: white;
+        }
+
+        #chuchum {
+            margin-left: 20px;
+            margin-right: 10px;
+        }
     </style>
     <script>
         let count = 1;
         window.addEventListener('load', function () {
-            
 
+            let count2 = document.querySelector('#count');
             let raffle = document.querySelector('#raffle');
             let auto = document.querySelector('#auto');
             let semiauto = document.querySelector('#semiauto');
             let table = document.querySelector('#table');
-            console.log();
             raffle.addEventListener('click', function (event) {
-                let lotto = [];
-            let isDup;
-            let tmp = parseInt(Math.random() * 45) + 1;
-            // console.log(tmp);
-            lotto.push(tmp);
-            while (lotto.length != 6) {
-                do {
-                    isDup = false;
-                    // console.log(lotto);
-                    tmp = parseInt(Math.random() * 45) + 1;
-                    // console.log(tmp);
-                    for (let i = 0; i < lotto.length; i++) {
-                        if (lotto[i] == tmp) {
-                            isDup = true;
-                            break;
-                        }
+                for (let i = 0; i < count2.value; i++) {
+                    let lotto = [];
+                    let isDup;
+                    let tmp = parseInt(Math.random() * 45) + 1;
+                    lotto.push(tmp);
+                    while (lotto.length != 6) {
+                        do {
+                            isDup = false;
+                            tmp = parseInt(Math.random() * 45) + 1;
+                            for (let i = 0; i < lotto.length; i++) {
+                                if (lotto[i] == tmp) {
+                                    isDup = true;
+                                    break;
+                                }
+                            }
+                            if (!isDup) {
+                                lotto.push(tmp);
+                            }
+                        } while (isDup)
                     }
-                    if (!isDup) {
-                        lotto.push(tmp);
-                    }
-                } while (isDup)
-            }
-            let sudong = document.querySelectorAll('.sudong');
-            console.log(sudong);
-            console.log(sudong[0].value); //개별 인덱스 출력은 됨.
-            console.log(sudong[1].value);
-            console.log(sudong[2].value);
-            console.log(sudong[3].value);
-            console.log(sudong[4].value);
-            console.log(sudong[5].value);
-            let sudong2 = [];
-            for(let i =0; i<sudong.length; i++){
-                sudong2[i] = sudong[i].value;
-            }
-            
-                if (auto.checked) {
-                    table.innerHTML +=
-                        `<tr id="del">
-                    <td>${count}</td>
-                    <td>${lotto.join()}</td>
-                    <td>자동</td>
-                    <td><button>삭제</button></td>
-                </tr>`;
-                } else if (semiauto.checked) {
+                    let sudong = document.querySelectorAll('.sudong');
 
-                    // console.log(sudong.join());
-                    table.innerHTML +=
-                        `<tr id="del">
+                    let sudong2 = [];
+                    for (let i = 0; i < sudong.length; i++) {
+                        sudong2[i] = sudong[i].value;
+                    }
+
+                    lotto.sort();
+                    sudong2.sort();
+                    
+                    if (auto.checked) {
+                        document.querySelector('#chu').setAttribute('style', 'color : white');
+                        table.innerHTML +=
+                            `<tr id="del">
                     <td>${count}</td>
-                    <td>${sudong2.join()}</td>
+                    <td>${lotto.join(' , ')}</td>
                     <td>자동</td>
                     <td><button>삭제</button></td>
                 </tr>`;
-                }
-                count++;
-            });
-        })
+                    } else if (semiauto.checked) {
+
+                        document.querySelector('#chu').setAttribute('style', 'color : white');
+                        for (let i = 0; i < sudong2.length; i++) {
+                            if (sudong2[i] == "") {
+                                sudong2[i] = lotto[i]
+                            }
+                        }
+                        table.innerHTML +=
+                            `<tr id="del">
+                    <td>${count}</td>
+                    <td>${sudong2.join(' , ')}</td>
+                    <td>반자동</td>
+                    <td><button>삭제</button></td>
+                </tr>`;
+                    } else {
+                        document.querySelector('#chu').setAttribute('style', 'color : red');
+                    }
+                    count++;
+                } // for 문 종료 괄호
+            }); // click 이벤트 종료 괄호
+        }) // window 이벤트 종료 괄호
     </script>
 </head>
 
@@ -120,10 +132,11 @@
         <h1>로또 번호 추첨</h1>
         <div class="수동입력">
             <p>번호 입력하기</p>
+            <span id="chu">자동 또는 반자동을 선택해 주세요.</span>
             <div>
                 <input type="radio" name="check" id="auto">자동
                 <input type="radio" name="check" id="semiauto">반자동
-                추첨 갯수<input type="number" value="1" id="count">
+                <span id="chuchum">추첨 갯수 :</span><input type="number" value="1" id="count">
             </div>
             <table>
                 <tr>

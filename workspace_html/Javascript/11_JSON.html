@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>json</title>
+    <script>
+        // 배열 선언
+        let array = [];
+
+        // json 선언만 하는 방법
+        let json = {};
+
+        // 값을 미리 알고 있는 경우 json 사용법
+        json = {
+            "key" : "value",
+            "k" : "v",
+            "num" : 123,
+            "child" : {
+                "child_1" : "value_1"
+            },
+            "a1" : array,
+            "fn" : function(){
+                console.log('익명함수 실행');
+            }
+        }
+        console.log(json);
+        console.log(""+json);
+        // 배열과 비슷하게 들어가지만, [키 : 값] 으로 들어가고, 출력 되는 순간 순서는 상관이 없지만, 알파벳 순서로 출력된다.
+        // 따라서 값을 가지고 올땐, 몇번째로 가지고 오는건 불가능 하고 키를 찾아서 가져와야 한다.
+        // 값에는 변수, 함수, 또다른 json, 배열 이 다 들어갈수 있다.
+        // 키에는 무조건 ""(큰따옴표)로 감싸줘야 한다.
+
+        // json의 값을 꺼내는 방법
+        console.log(json.k); // json.키 를 적으면 바로 출력 된다.
+        console.log(json["k"]); // 배열의 인덱스 값을 적듯, "키" 를 적으면 출력 된다.
+
+        let 숫자 = "num";
+        console.log(json[숫자]); // 키는 "" 감싸줘야 하기 때문에, 위에 숫자라는 변수에 "num" 문자열을 선언했듯이
+                                 // []안에 변수를 넣어 선언한 값이 같으면 json이 가지고 있는 키의 값을 가지고 올수도 있다.
+
+        console.log(json.child.child_1); // json 안에 json 이 있을때 찾는법
+        json['child']['child_1'] // json 안에 json 이 있을때 찾는법 2
+
+        json.a1.push(123) //a1은 배열이기때문에, push도 가능하다
+        json.a1.push(123)
+        console.log(json.a1);
+
+        
+        json.fn(); //json에 들어있는 함수를 실행
+
+
+        // json에 추가하는 방법 (없는걸 쓰면 생성, 있는걸 쓰면 덮어쓰기) **오타주위**
+        json.a = "b"; // 첫번째
+        json["c"] = "d"; // 두번째
+        console.log(json);
+
+        // json의 키는 set형태로 가지고 있다 set: 중복되지 않게 관리하는 것 (그래서 덮어쓰게 된다.)
+
+        delete json.key; // json의 키와 값을 지우는 방법
+
+        console.log(json.human); // 키가 없으면 undefined
+
+
+        // json의 모든 키를 가져오는 방법
+        // Object.keys(json) 를 쓰면 json의 키를 배열 형태로 돌려준다.
+        let keys = Object.keys(json);
+        console.log(keys);
+
+
+        // json을 키와 값을 for문을 이용해서 출력하는 방법
+        // 그래서 keys의 배열의 값들은 json의 키를 의미하기 때문에 for문을 사용하면 전부 출력 할 수 있다.
+        for(let i =0; i<keys.length; i++) {
+            console.log("키 : ", keys[i], "값 : ", json[keys[i]]);
+        }
+
+        // json을 데이터로 보낼땐 글씨만 가기 때문에 문자열로 변환해야한다.
+        // json을 문자열로 변환하는 방법
+        let strJson = JSON.stringify(json);
+        console.log(strJson); // {"k":"v","num":123,"child":{"child_1":"value_1"},"a1":[123,123],"a":"b","c":"d"}
+
+        // json 문법으로 적힌 문자열을 json 객체로 변환하는방법
+        // json으로 이루어진 배열도 변환 가능
+        let json2 = JSON.parse(strJson); //parse는 [],{}로 묶여있으면 json과 배열로도 변환가능하다.
+        console.log(json2);
+
+        let ajson = []; // 배열 선언
+        let json3 = { "k1" : "v1"}; // json 선언
+        let json4 = { "k2" : "v2"}; // json 선언
+        ajson.push(json3); // 배열에 json 추가
+        ajson.push(json4); // 배열에 json 추가
+        console.log(ajson);
+
+        strJson = JSON.stringify(ajson); // 배열을 문자열로 변환
+        console.log(strJson);
+
+        json2 = JSON.parse(strJson); // 문자열로 변환한 배열을 다시 json으로 변환
+        console.log(json2);
+
+
+        // json이나 json으로만 이루어진 배열이 아닌 경우
+        // {}이거나 [{}]의 형식이 아닌 경우
+        // parse에서 오류남
+        JSON.parse('abc');
+
+
+
+
+
+
+
+
+
+
+
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
