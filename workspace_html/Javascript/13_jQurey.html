@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script>
+        // 또는 jQuery();
+        // 페이지 로딩이 끝나면 실행됨 window.onload 와 같다.
+        $(function(){
+            bind();
+            init();
+        });
+        
+        function init(){
+            // $() 함수에 전달인자로 문자열을 주게되면, css 선택자로 인식한다
+            // 만약 문자열안에 문자가 tag라면 createElement 해준다
+            //////////////////////////////////////////////////////////////////
+            let list_h1 = $('h1');
+            console.log(list_h1); // jQuery 배열 객체 / 아직은 jQuery용 배열이기 때문에 jQuery만에 방식이 필요하다
+            console.log(list_h1[0]); // pure javascript / 여기에는 inner 나 다른변수를 사용할수 있다./ DOM 형태이다
+
+            $('h1').text("hello"); // jQuery가 선택한 tag h1 을 text에 "hello"로 전부 바꾼다.
+
+            $('h1').html("<a href='javascript:void(0)'>hello</a>"); // innerHTML 도 가능하다
+
+            //////////////////////////////////////////////////////////////////
+            $("#parent").append("<div>자식2</div>");
+            $("#parent").prepend("<div>자식3</div>");
+            $("#parent").append($('h1')[0]);
+            // $("#parent").empty(); // #parent에 해당하는 자식을 전부 지우기 대신 #parent 태그는 남아 있음.
+            // $("#parent").remove(); // #parent를 가진 DOM 까지 지우기
+
+            $("#parent").find('.c'); // 해당 선택자의 find를 써서 자식 요소를 찾는다
+
+            $("#parent").parent(); // 해당 선택자의 parent를 써서 부모 요소를 찾는다
+
+            $("#parent").parents("body"); // 해당 선택자의 조상중 가장 가까운 것 찾기
+
+            //////////////////////////////////////////////////////////////////
+            $('#chk').addClass('c1'); // js의 classlist.add 와 동일
+            $('#chk').addClass('c1');
+            $('#chk').addClass('c2');
+            $('#chk').removeClass('c2');
+            $('#chk').toggleClass('c2');
+
+            // 위 toggleClass 을 구현한 if문
+            if ($('#chk').hasClass('c1')) { //classlist.contains 와 동일
+                console.log('c1 있음');
+                $('#chk').removeClass('c1');
+            } else {
+                console.log('c1 없음');
+                $('#chk').addClass('c1');
+            }
+
+            //////////////////////////////////////////////////////////////////
+            //  css 속성 조작 관련 jQuery
+            console.log($('#chk').attr('data-human')); // getAttribute
+            $('#chk').attr('data-human2', '값2'); // setAttribute
+            $('#chk').removeAttr('data-human'); // 해당 속성과 값 지우기
+
+            console.log($('#chk').data('human2'));
+            $('#chk').data('human3', '숨긴데이터'); // data 함수를 사용하면, 개발자도구 소스에는 나오지 않는다. 하지만 값을 가져 올 수는 있다.
+            console.log($('#chk').data('human3'));
+
+            // .hide -> display : none; 숨기기
+            // .show -> display 보이기
+
+            console.log($('#chk').prop('checked')); // checked 확인 prop의 두번째 전달인자로 true/false 도 가능하다
+            ///////////////////////////////////////////////////////////////////
+            // form 요소의 값을 바꾸는 방법
+            console.log($('#input').val())
+            $('input').val('바꾼값'); // val 안에 전달인자를 넣으면 value값을 바꿀수 있다.
+
+            ///////////////////////////////////////////////////////////////////
+            // css를 바꾸는 방법
+            $("#input").css("border","1px solid red"); // css 함수에 1번재 전달인자는 stlye 태그 , 2번째 전달인자는 태그의 값
+
+            $('#btn1').trigger('click'); // 브라우저를 실행할때 클릭 한번 되게 하는 trigger 함수
+
+        };
+
+        /////////////////////////////////////////////////////////////////////
+        // addEventListenner 와 같은 jQuery 형식
+        // 전달인자 1번째에 이벤트종류를 적게 되는데, 이벤트.abc로 소제목을 지워서 off의 효과를 빗겨나가게 할 수 있다.
+        function bind() {
+            $(".btn").on('click', function(event){
+                // console.log(event.target);
+                console.log(this); //위와 같음.
+            });
+
+            // .off를 쓰고 전달인자에 이벤트 종류를 넣으면 해당 이벤트를 전부 지워준다.
+            // (그 뒤에 .on으로 다시한번 클릭 이벤트를 준것이다)
+            $(".btn").off('click').on('click', function(event){
+                console.log(this);
+            });
+        }
+    </script>
+</head>
+
+<body>
+    <h1>안녕하세요</h1>
+    <h1>반가워요</h1>
+    <h1>잘있어요</h1>
+    <h1>다시 만나요</h1>
+    <div id="parent">
+        부모
+        <div class="c">자식</div>
+    </div>
+
+    <input type="checkbox" id="chk" value="val1" data-human="값" checked="checked"><br>
+    <input type="text" id="input" value="미리완성"> <br>
+    <button type="button" class="btn" id="btn1" value="버튼1">버튼1</button>
+    <button type="button" class="btn" value="버튼2">버튼2</button>
+</body>
+
+</html>

@@ -5,15 +5,59 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ajax</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
     <script>
         window.addEventListener('load', function () {
             document.querySelector('#btn').addEventListener('click', function () {
                 doAjax();
-            })
+            });
             document.querySelector('#btn2').addEventListener('click', function () {
                 doAjaxpoiema();
-            })
-        })
+            });
+
+            //---------------------------------------------------------------------------
+            // jQuery를 이용하여 Ajax 활용하기
+            $("#btn3").off('click').on('click', function (){
+                console.log('jQuery Ajax Run 클릭됨');
+                let option = {
+                    "url": 'https://jsonplaceholder.typicode.com/users',
+                    "type" : 'get',
+                    // success == onload 함수와 같다.
+                    "success" : function(data){ // 성공 했을때
+                        console.log(data);
+                    },
+                    "error" : function(data){ // 실패 했을때
+                        console.error('error');
+                        console.log(data);
+                    },
+                    "complete" : function(data){ // 성공여부와 관계없이 작업이 완료 되었을때
+                        console.log('작업이 완료됨');
+                        console.log(data);
+                    }
+                };
+                $.ajax(option);
+            });
+
+            // jQuery를 이용하여 Ajax 활용하기 2
+            $("#btn4").off('click').on('click', function (){
+                let option = {
+                    "url": 'https://jsonplaceholder.typicode.com/users',
+                    "type" : 'get',
+                }
+
+                //현재 밑 함수는 전부 .으로 연결 되어 있다.
+                $.ajax(option)
+                    .done(function(data){ // .done == success 와 동일
+                        console.log(data);
+                    }).fail(function(data){ // .fail == error 와 동일
+                        console.error('error');
+                        console.log(data);
+                    }).always(function(data){ 
+                        console.log('작업이 완료됨');
+                        console.log(data)
+                    })
+            });
+        });
 
         function doAjax() {
             // ajax 객체 생성
@@ -78,12 +122,15 @@
 
         }
         
+      
     </script>
 </head>
 
 <body>
     <button id="btn">ajax 실행</button><br>
-    <button id="btn2">poiema</button>
+    <button id="btn2">poiema</button> <br>
+    <button id="btn3">jQuery Ajax Run</button> <br>
+    <button id="btn4">jQuery Ajax Run2</button>
 </body>
 
 </html>

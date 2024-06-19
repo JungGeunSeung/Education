@@ -1,17 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>공공 데이터 활용</title>
+    <style>
+        td {
+            border: 1px solid black;
+            width: 100px;
+            text-align: center;
+        }
+        
+        tr {
+            border: 1px solid black;
+        }
+
+        </style>
     <script>
-        window.addEventListener('load',function(){
-            document.querySelector("#btn").addEventListener("click", function(){
+        window.addEventListener('load', function () {
+            document.querySelector("#btn").addEventListener("click", function () {
 
                 forecast();
             })
         })
-        function forecast(){
+        function forecast() {
             // 띄어쓰기 금지 url 형식으로 들어가기 때문
             let url = 'http://apis.data.go.kr/1360000/VilageFcstInfoService_2.0/getUltraSrtFcst';
             url += '?';
@@ -23,9 +36,9 @@
             url += '&';
             url += "dataType=JSON";
             url += '&';
-            url += "base_date=20240618";
+            url += "base_date=20240619";
             url += '&';
-            url += "base_time=0630";
+            url += "base_time=1130";
             url += '&';
             url += "nx=63";
             url += '&';
@@ -39,14 +52,94 @@
                 let text = xhr.responseText;
 
                 let data = JSON.parse(text);
-                
+
                 console.log(data);
                 console.log(data.response.body.items.item[29].fcstValue); // 대괄호로 진행할땐, 배열이 있을땐 ['item'][123] 이런식으로 빼줘야 한다.
+
+                let t1h = [];
+                let reh = [];
+                let time = [];
+
+                ///////////////////////////////////////////
+                let item = data.response.body.items.item;
+
+                for(let i=0; i<item.length; i++) {
+                    if(item[i].category == "T1H"){
+                        console.log(item[i]);
+
+                        let html = ` <tr>
+                                        <td>${item[i].category}</td>
+                                        <td>${item[i].fcstDate}</td>
+                                        <td>${item[i].fcstTime}</td>
+                                        <td>${item[i].fcstValue}</td>
+                                     </tr>
+                        `;
+                       table.innerHTML += html;              
+
+                    } else if (item[i].category == "REH") {
+                        console.log(item[i]);
+
+                        let html = ` <tr>
+                                        <td>${item[i].category}</td>
+                                        <td>${item[i].fcstDate}</td>
+                                        <td>${item[i].fcstTime}</td>
+                                        <td>${item[i].fcstValue}</td>
+                                     </tr>
+                        `;
+                       table.innerHTML += html;   
+                    }
+                }
+
+                // let filtered = item.filter(function(info){
+
+                //     let result = false;
+                //     if (info.category == "RN1") {
+                //         result = true;
+                //     } else if (info.category == "REH") {
+                //         result = true;
+                //     }
+
+                //     return result;
+
+                // })
+                // console.log(filtered);
+                ///////////////////////////////////////////
+                // for (let i = 0; i < 6; i++) {
+                //     t1h[i] = item[i + 24].fcstValue;
+                //     reh[i] = item[i + 30].fcstValue;
+                //     time[i] = item[i + 30].fcstTime;
+                // }
+
+                // let table = document.querySelector('#table');
+
+                // for (let i = 0; i < 6; i++) {
+                //     table.innerHTML += `<tr>
+                //                             <td>${time[i]}</td>
+                //                             <td>${t1h[i]}</td>
+                //                             <td>${reh[i]}</td>
+                //                         </tr>`;
+                // }
+            }
         }
-    }
     </script>
 </head>
+
 <body>
     <button id="btn">초단기 예보 조회</button>
+    <div>
+        <p>날짜 : 2024-06-19</p>
+        <table >
+            <!-- <tr>
+                <td>시간</td>
+                <td>날짜</td>
+                <td>온도</td>
+                <td>습도</td>
+            </tr> -->
+            <tbody id="table">
+
+            </tbody>
+        </table>
+    </div>
 </body>
+
 </html>
