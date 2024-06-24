@@ -306,9 +306,213 @@ select ename,
     rpad(rpad(substr(ename,1,length(ename)/2),length(substr(ename,1,length(ename)/2+1)),'*')
     ,length(ename)
     ,substr(ename,length(rpad(substr(ename,1,length(ename)/2),length(substr(ename,1,length(ename)/2+2)),'*')))
-    )
+    ) as 실습5
+from emp;
+---------------------------------------------------------------------------
+-- 6월 24일 수업
+
+-- trunc 숫자의 소수점을 표시하는 함수
+-- 첫번째 전달인자 : 숫자 또는 테이블 데이터
+-- 두번째 전달인자(생략가능) : 표시할 소수점의 위치 (-값으로 하면 정수 자리가 올라간다)
+select 
+trunc(1234.5678), 
+trunc(1234.5678, 2),
+trunc(1234.5678, -2),
+trunc(-12.34)
+from dual;
+
+-- 지정한 숫자와 가까운 정수를 찾는 함수
+-- ceil : 입력된 숫자의 가까운 큰정수
+-- floor : 입력된 숫자의 가까운 작은 정수
+select
+    ceil(3.14),
+    floor(3.14),
+    ceil(-3.14),
+    floor(-3.14)
+from dual;
+
+------------------------------------------------------------------------------
+
+-- stsdate : 현재 오라클의 시간이 나온다
+-- 선생님 서버에 접속중이므로, 서버시간은 9시간차이난다 (영국 표준 기준 + 9시)
+-- 날짜 정보중 일부만 select로 표시됨
+select sysdate as now,
+    sysdate-1 as yesterday,
+    sysdate+1 as tomorrow
+    from dual;
+    
+-- 몇 개월 이후 날짜를 구하는 add_months 함수
+-- 첫번째 전달인자 : 날짜데이터
+-- 두번째 전달인자 : 더할 개월 수
+select sysdate, add_months(sysdate, 3) from dual;
+
+
+-- 두 날짜 간의 개울 수 차이를 구하는 months_between 함수
+-- 첫번째 전달인자 : 날짜 데이터 1
+-- 두번째 전달인자 : 날짜 데이터 2
+
+
+-- 돌아오는 요일, 달의 마지막 날짜를 구하는  next-day, last_day 함수
+-- 첫번째 전달인자 : 날짜 데이터
+-- 두번째 전달인자 : 요일 문자
+
+-- ★★★ column에 +를 쓰면, 모두 "숫자"로 변경해서 적용한다. ★★★
+-- ★★★ column에 \\를 쓰면, 모두 "문자"로 변경해서 적용한다.★★★
+
+
+-- 날짜, 숫자데이터를 문자 데이터로 변환하는 to_char 함수
+-- 첫번째 전달인자 : 날짜데이터
+-- 두번째 전달인자 : 출력되길 원하는 문자 형태를 '' 로 감싼다
+select to_char(sysdate, 'yyyy/mm/dd hh24:mi:ss'),
+       to_char(sysdate, 'yyyy"년"mm"월"dd"일" hh24"시"mi"분"ss"초"')
+from dual;
+
+-- 문자데이터를 날짜 데이터로 변환하는 to_date 함수
+-- 첫번째 전달인자 : 문자열 데이터
+-- 두번째 전달인자 : 인식될 날짜 형태
+select sysdate - to_date('2024-05-07', 'yyyy-mm-dd') from dual;
+
+------------------------------------------------------------------------------
+
+-- NULL 처리 함수 ★★★
+-- 첫번째 전달인자 : null인지 검사할 데이터 또는 열
+-- 두번째 전달인자 : true 일 경우, 반환할 데이터
+select sal, comm, nvl(comm, -1) as "null is -1",
+       sal+comm ,
+       sal+nvl(comm, 0) as "null is 0"
 from emp;
 
+-- nvl 활용
+select * from emp
+where nvl(comm, 0) = 0;
 
 
+-- NVL2 함수 (오라클에만 있음)
+-- 데이터가 null이 아닐때 반환할 데이터를 추가로 지정하는 함수
+-- 첫번째 전달인자 : 데이터 또는 열
+-- 두번째 전달인자 : null이 아닐때 변환할 값
+-- 세번째 전달인자 : null 일때 변환할 값
 
+------------------------------------------------------------------------------
+
+-- 상황에 따라 다른 데이터를 반환하는 decode 함수와 case문
+-- decode 첫번째 전달인자 : 대상이 될 데이터 또는 열
+--        두번째 전달인자 : 조건
+--        세번째 전달인자 : 조건과 일치할때 반환할 결과
+--        네번째 이후 전달인자 : 두번째와 세번째의 반복
+
+-- case는 함수가 아니라 문이기 때문에 ()나 ,가 들어가지 않는다
+-- case [대상이 될 데이터 또는 열] (선택)
+--      when 조건 then 조건과 일치할때 실행문
+--      else 위 조건들과 일치하는 경우가 없을때 실행문
+--      end
+-- case 옆에 대상이 될 데이터를 적지 않으면 when에 비교 연산자로 조건을 줄 수 있다.
+
+select
+    case
+        when comm is null
+        then 'N/A'
+        else to_char(comm)
+        end as new_comm
+from emp;
+
+select comm,
+    case
+        when comm is null then 0
+        when comm = 0 then 0
+        when comm > 0 then comm
+        end as "new_comm"
+from emp;
+
+-- 교재 174p Q2
+select empno, ename, sal,
+    trunc(sal/21.5, 2) as day_pay,
+    round(sal/21.5/8, 1) as time_pay
+    from emp;
+    
+    
+-- 교재 175p Q3
+select empno, ename, to_char(hiredate, 'yyyy-mm-dd') as hiredate,
+    to_char(add_months(hiredate, 3), 'yyyy-mm-dd') as R_date
+    from emp;
+    
+-- 교재 176p Q4
+select empno, ename, mgr,
+    case
+        when mgr like '75%' then 5555
+        when mgr like '76%' then 6666
+        when mgr like '77%' then 7777
+        when mgr like '78%' then 8888
+        when mgr like '7_%' then mgr
+        when mgr is null then 0000
+        end as chg_mgr
+from emp;
+--------------------------------------------------------------------------- 
+--하나의 열에 출력 결과를 담는 다중행 함수
+-- 열의 값이 같지 않다면 한번에 표시 할 수 없다.
+-- count는 많이 쓴다 *로 사용할시 모든것들의 합을 알려준다.
+-- count는 null은 세어주지 않는다
+select sum(sal), count(sal), count(*), count(comm) from emp;
+
+-- select 에서 count 를 넣고, where로 필터링 할 수 있다.
+select count(*) from emp where ename like '%A%';
+
+select max(sal), max(ename), min(hiredate), min(comm), avg(sal) from emp;
+
+-- 부서번호별 sal 합한값 구하기
+
+select * from emp;
+
+select sum(sal), avg(sal) from emp
+where deptno = 10
+union all
+select sum(sal), avg(sal) from emp
+where deptno = 20
+union all
+select sum(sal), avg(sal) from emp
+where deptno = 30;
+----------------------------------------------------------------------------
+-- 결과값을 원하는 열로 묶어 출력하는 group by 절
+
+-- distinct 처럼 중복을 제거 해줌
+-- select 에는 group by된 함수(집계함수)만 들어 갈 수있다.
+select deptno, avg(sal), sum(sal), count(*) from emp
+group by deptno;
+
+select deptno, empno from emp
+group by deptno, empno;
+
+select deptno, job, count(*)
+from emp
+group by deptno, job
+order by deptno, job; -- group by 에 있는 column 만 사용할수 있다.
+
+----------------------------------------------------------------------------
+--group by 절에 조건을 줄때 사용하는 having 절
+-- 집계함수(다중함수)를 조건으로 걸고 싶은 경우에 사용
+select deptno, job, avg(sal)
+from emp
+group by deptno, job
+    having avg(sal) > 2000;
+    
+-- 교재 212p Q1
+select deptno,
+    trunc(avg(sal)) as avg_sal,
+    max(sal) as max_sal,
+    min(sal) as min_sal,
+    count(deptno) as cnt
+    from emp
+group by deptno;
+
+-- 교재 212p Q2
+    
+select job, count(job) from emp
+group by job
+having count(job) >= 3;
+    
+-- 교재 212p Q3
+select to_char(hiredate, 'yyyy') as hire_date, deptno,
+count(deptno)
+from emp
+group by deptno, to_char(hiredate, 'yyyy');
+    
