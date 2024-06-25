@@ -500,7 +500,7 @@ select deptno,
     trunc(avg(sal)) as avg_sal,
     max(sal) as max_sal,
     min(sal) as min_sal,
-    count(deptno) as cnt
+    count(*) as cnt
     from emp
 group by deptno;
 
@@ -516,3 +516,209 @@ count(deptno)
 from emp
 group by deptno, to_char(hiredate, 'yyyy');
     
+    
+---------------------------------------------------------------------------
+-- 6월 25일 수업
+
+/* SQL의 동작 순서 */
+/* 5 */select job, count(*) cnt
+/* 1 */from emp
+/* 2 */where sal > 1000
+/* 3 */group by job
+/* 4 */having count(*) >=3
+/* 6 */order by cnt desc;
+
+-- emp는 14줄, dept는 4줄이라 조건없이 출력하면, 테이블들의 모든 조합이 합쳐져서 출력 된다.
+-- 즉 이번에는 emp와 dept의 조합이 총 56개이고, 테이블이 늘어나면 늘어 날 수록, 기하급수적으로
+-- 조합이 늘어나기 때문에, 조심해야 한다.
+select * from emp, dept
+order by empno;
+
+-- 등가조인
+-- 테이블 두개 이상 조회할때 관계를 꼭 알려줘야 원하는 정보를 출력할수 있다
+-- 전체 테이블 수 -1개의 조건이 최저조건이다
+select * from emp, dept
+where emp.deptno = dept.deptno
+order by empno;
+
+-- 테이블의 명을 다쓰기에는 귀찮고 오래 걸리기 때문에, 별칭을 만들어준다.
+-- 대부분 테이블의 명 앞글자를 따고, 중복된다면 2글자까지 별칭으로 만들어 사용할 수 있다
+-- 한번 별칭을 설정하면, 이름 자체가 바뀌는것과 동일하기 때문에, 원래 명칭을 사용 할 수 없다.
+-- 테이블는 컬럼과는 다르게 as나 '',"" 를 사용 할 수 없다.
+select *
+from emp e, dept d
+where e.deptno = d.deptno;
+
+-- select에서 *와 다른 컬럼명이 혼재할때는 테이블을 지정(테이블명.*) 해야된다.
+select *
+from emp e, dept d
+where e.deptno = d.deptno;
+
+-- 실무에서는 *를 잘 쓰지않는다, 그래서 모든 컬럼명을 늘여쓴다.
+
+-- 급여 등급 테이블
+select * from salgrade;
+
+-- 비등가조인
+-- 테이블이 3개이기 때문에 조건을 2개 이상 만들어 줬다.
+select * from emp, dept, salgrade
+where emp.deptno = dept.deptno
+    and emp.sal >= salgrade.losal
+    and emp.sal <= salgrade.hisal;
+
+-- 자체조인
+-- 테이블 안에 일치하는 데이터가 있으면 from절에 같은 테이블을 두번 이상 조인하여 조건을 걸어주는 조인방법
+
+select e1.empno, e1.ename, e1.mgr, e2.empno as mgr_empno, e2.ename as mgr_ename
+from emp e1, emp e2
+where e1.mgr = e2.empno;
+
+-- natural join 실무에서 잘 쓰이진 않는다
+
+-- join using
+-- 기존 등가조인을 대신하는 조인방법
+-- using에는 여러 테이블에 같은 컬럼명이 있는 경우만 쓸 수 있다.
+select * from emp join dept using (deptno);
+
+-- join on
+-- 가장 범용성 있는 where절에 있는 조건식을 on 뒤에 적을 수있다.
+select * from emp join dept on (emp.deptno = dept.deptno);
+
+select * from emp e1 join emp e2 on (e1.mgr = e2.empno); -- = 라는 등가조건이 들어가 있기 때문에 null 은 빠진다
+
+-- 외부조인
+-- 테이블에 null 값이 있을때는 조인했을때, 최종으로 출력되지 않는다 따라서 강제적으로 출력하게 하는 방법
+-- 이 있는데, 그걸 외부조인이라고 한다.
+-- 출력해야 하는 값이 들어있는 테이블에 반대에 주는것이 일방적이다.
+-- 외부조인은 좌우로 나누어 지정하는데 where절에 조인 기준 열중 한쪽에 (+) 기호를 붙여 줍니다.
+
+select e1.empno, e1.ename, e1.mgr, e2.empno as mgr_empno, e2.ename as mgr_ename
+from emp e1, emp e2
+where e1.mgr = e2.empno(+);
+
+-- outer join
+-- 외부조인에 사용하고 where절이 아닌 from 절에 선언한다.
+select e1.empno, e1.ename, e1.mgr, e2.empno as mgr_empno, e2.ename as mgr_ename
+from emp e1 left outer join  emp e2 on ( e1.mgr = e2.empno);
+
+select e1.empno, e1.ename, e1.mgr, e2.empno as mgr_empno, e2.ename as mgr_ename
+from emp e1 right outer join  emp e2 on ( e1.mgr = e2.empno);
+
+select e1.empno, e1.ename, e1.mgr, e2.empno as mgr_empno, e2.ename as mgr_ename
+from emp e1 full outer join  emp e2 on ( e1.mgr = e2.empno);
+
+-- 선생님이 내주신 문제 quiz1
+-- empno, ename, dname, loc 출력 : 14줄
+
+--where 절사용
+select emp.empno, ename, dname, loc
+from emp, dept
+where emp.deptno = dept.deptno;
+-- join 사용
+select emp.empno, ename, dname, loc
+from emp join dept using (deptno);
+
+
+-- 선생님이 내주신 문제 quiz2
+-- 사번, 이름, 부서명, 급여등급을 출력 : 14줄
+
+--where 절사용
+select empno, ename, dname, grade
+from emp, dept, salgrade
+where emp.deptno = dept.deptno
+    and emp.sal >= salgrade.losal
+    and emp.sal <= salgrade.hisal;
+-- join 사용
+select empno, ename, dname, grade
+from emp join dept using (deptno)
+         join salgrade on (emp.sal >= salgrade.losal and emp.sal <= salgrade.hisal);
+
+-- 선생님이 내주신 문제 quiz3
+-- 매니저 보다 월급이 높은 사원의 이름, 급여, 매니저이름, 매니저급여 를 출력
+--e1.ename, e1.sal, e2.ename, e2.sal
+select e1.ename, e1.sal, e1.mgr, e2.empno, e2.ename as mgr_name, e2.sal as mgr_sal
+from emp e1 join emp e2 on (e1.mgr = e2.empno and e1.sal > e2.sal);
+
+-- 교재 239p Q1
+select emp.deptno, dname, empno, ename, sal
+from emp, dept
+where emp.sal > 2000
+    and emp.deptno = dept.deptno
+order by emp.deptno;
+
+-- join 사용
+select deptno, dname, empno, ename, sal
+from emp join dept using (deptno)
+where emp.sal > 2000
+order by deptno;
+
+-- 교재 239p Q2
+select emp.deptno, dname, trunc(avg(emp.sal)) avg_sal, max(emp.sal) max_sal, min(emp.sal) min_sal, count(emp.deptno) cnt
+from  emp, dept
+where emp.deptno = dept.deptno
+group by emp.deptno, dname
+order by deptno;
+
+-- join 사용
+
+select deptno, dname, trunc(avg(emp.sal)) avg_sal, max(emp.sal) max_sal, min(emp.sal) min_sal, count(deptno) cnt
+from  emp join dept using (deptno)
+group by deptno, dname
+order by deptno;
+
+
+
+-- 교재 239p Q3
+select dept.deptno, dname, empno, ename, job, sal
+from  emp full outer join dept on (emp.deptno = dept.deptno)
+order by deptno, ename;
+
+select * from dept;
+
+-- 교재 239p Q4
+select d.deptno, d.dname, e1.empno, e1.ename, e1.mgr, e1.sal, d.deptno mgr_deptno, s.losal, s.hisal, s.grade, e2.empno mgr_empno, e2.ename mgr_ename 
+from emp e1 join emp e2 on(e1.mgr = e2.empno) 
+            right outer join dept d on (e1.deptno = d.deptno) 
+            left outer join salgrade s on (e1.sal >= losal and e1.sal <= hisal)
+order by d.deptno, e1.empno;
+
+---------------------------------------------------------------------------
+-- 서브 쿼리
+
+-- jones 보다 높은 연봉을 받는 사람들
+select * 
+    from emp
+    where sal > ( select sal
+                    from emp 
+                    where ename = 'JONES');
+
+-- blake 보다 높은 연봉을 받는 사람들
+select * 
+    from emp
+    where sal > ( select sal
+                    from emp 
+                    where ename = 'BLAKE');
+
+-- 회사의 평균 연봉보다 많이 받는 사람들
+select *
+    from emp
+    where sal > ( select avg(sal) from emp);
+
+
+-- jone 와 같은 job을 가지고 있는 사원들
+select * 
+from emp
+where job = ( select job
+                from emp 
+                where ename = 'JONES');
+                
+-- 실행 결과가 여러개인 다중행 서브 쿼리
+-- in : 메인 쿼리의 데이터가 서브쿼리의 결과중 하나라도 일치하면 true
+-- any, some : 메인 쿼리의 조건식을 만족하는 서브 쿼리의 결과가 하나 이상이면 true
+-- all : 메인쿼리의 조건식을 모두 만족하면 true
+-- exists : 서브 쿼리의 결과가 존재하면 (true boolean 같은 느낌)
+
+
+select * from emp
+where sal in (
+select max(sal) from emp group by deptno);
