@@ -722,3 +722,199 @@ where job = ( select job
 select * from emp
 where sal in (
 select max(sal) from emp group by deptno);
+
+----------------------------------------------------------------------
+-- 6월 26일 수업
+-- from절에 사용하는 서브쿼리와 with절
+-- from절에 사용하는 서브쿼리는 인라인뷰(inline view)라고도 불린다
+
+select * from emp where deptno =10;
+
+select * from (select * from emp where deptno =10);
+
+-- 테이블 column에는 존재 하진 않지만, 조회된 순서대로 번호를 부여해주는 rownum
+select rownum, emp.* from emp
+-- where는 테이블 정보를 하나하나 조회하기 때문에, 매번 rownum의 번호는 1번으로 고정되기 때문에,
+-- where의 rownum의 조건을 걸수 없다.
+--where rownum = 4;
+
+-- order by는 제일 마지막에 동작하기때문에 rownum의 숫자가 뒤죽박죽된다.
+order by ename;
+
+-- 만약 order by한 결과물에 rownum를 적용하고 싶으면, order by한 임시테이블을 from 서브 쿼리로 넣어서 출력한다 
+select rownum, e.* 
+from (
+    select *from emp order by ename
+) e ;
+
+
+select * from(
+select job, count(*) cnt from emp
+group by job)
+where cnt >= 3; -- where에서는 count(*)가 되지 않기 때문에, 별칭을 넣어주고 써야된다.
+
+-- with 절 사용하기
+-- select 보다 먼저 적혀야 하며, 별칭과 as를 먼저 적고 ()가로 안에 select절을 적어준다
+-- 어렵게 쓰이는데, with는 재기호출이 가능하다
+
+with e10 as (select * from emp where deptno = 10)
+select * from e10;
+
+
+
+-- select절에 사용하는 서브쿼리
+-- 스칼라 서브쿼리라고 부르고 select절에 "하나의 열 영역"으로서 결과를 출력할 수 있다
+-- 스칼라 : 양(질량) 반댓말- 백터
+
+
+
+-- 교재 262p Q1
+select job, empno, ename, sal, emp.deptno, dname from emp, dept
+where job =
+ (select job from emp where ename = 'ALLEN')
+ and emp.deptno = dept.deptno;
+
+-- 교재 262p Q2
+select empno, ename, dname, hiredate, loc, sal, grade from emp, dept, salgrade
+where sal > (select avg(sal) from emp)
+and emp.deptno = dept.deptno
+and (sal >= losal and sal <= hisal)
+order by sal desc, ename;
+
+-- 교재 263p Q3
+select empno, ename, job, deptno, dname, loc
+from emp join dept using (deptno)
+where deptno = 10 and job not in(select job from emp where deptno = 30);
+
+
+-- 교재 263p Q4
+select empno, ename, sal, grade from emp, salgrade
+where sal > (select max(sal) from emp where job='SALESMAN') 
+and (sal >= losal and sal <= hisal)
+order by empno;
+-------------------------------------------------------------------------------
+-- DDL(data definition language ) : 데이터 정의어 - 데이터베이스를 보관하고 관리하기
+-- 위해 제공되는 여러 객체의 생성,변경,삭제 관련 기능을 수행.
+
+-- 테이블을 생성하는 create
+-- 생성 방법 : create table 소유 계정.테이블이름 (
+-- 열이름, 열 자료형)
+create table emp_ddl (
+    empno number(4),     --4까지가 아니라 4자리수를 의미
+    ename varchar2(10),     --10Byte를 의미한다
+    job varchar2(9),    -- 9Byte를 의미하고, 제한보다 적은 글씨가 적히면 글자수만큼의 용량만 차지한다.
+    mgr number(4),
+    hiredate date,
+    sal number(7,2), -- 두번째 전달인자는 소수점을 의미
+    comm number(7,2),
+    deptno number(2)
+);
+
+select * from emp_ddl;
+
+create table dept_ddl
+as select * from dept;
+
+select * from dept_ddl;
+
+create table emp_ddl_30
+as select empno, ename, sal from emp where deptno =30;
+
+select * from emp_ddl_30;
+-----------------------------------------------------------------------
+-- alter 테이블을 변경하는 법
+
+create table emp_alter
+as select * from emp;
+
+select * from emp_alter;
+
+-- alter table 테이블 이름 add 열이름 열타입
+alter table emp_alter
+add hp varchar2(20);
+
+select * from emp_alter;
+
+-- rename column 으로 기존 열이름을 변경할수 있다
+alter table emp_alter
+rename column hp to tel;
+
+select * from emp_alter;
+
+-- modify 열이름 타입 : 열의 타입을 변경 할수 있다.
+alter table emp_alter
+modify empno number(5);
+
+-- 타입의 길이(Byte)는 커지는건 가능하지만, 다시 줄이는 건 불가능하다
+-- 따라서 위에 empno를 number(5)로 늘렸기 때문에, 밑에 number(4)로 줄이는건 불가능하다
+-- ★TIP!! - 컬럼을 하나 만들고, as select로 옮긴다음 기존 컬럼을 지우고, 새 컬럼을 다시 사이즈 조절 한다음 다시 옮긴다
+alter table emp_alter
+modify empno number(4);
+
+
+-- 열을 삭제하는 drop
+alter table emp_alter
+drop column tel;
+
+alter table emp_alter
+drop column comm;
+
+select * from emp_alter;
+
+-- 테이블 이름을 변경하는 rename
+-- rename 테이블명 to 바꿀 테이블명
+-- 실무 : 중요 하지 않다 (오타 조차 잘 안바꾼다고 한다)
+rename emp_alter to emp_rename;
+
+select * from emp_rename;
+
+-- 테이블의 데이터를 삭제하는 truncate ( column은 남아있다 )
+-- rollback이 되지 않는다
+
+truncate table emp_rename;
+
+-- 테이블 자체를 삭제하는 drop
+-- rollback이 되지 않는다
+drop table emp_rename;
+
+-------------------------------------------------------------------------
+-- 데이터를 추가, 수정, 삭제하는 데이터 조작어
+create table dept_temp
+as select * from dept;
+
+select * from dept_temp;
+
+-- 테이블에 테이터를 추가하는 insert
+-- insert into 테이블명 [(열이름1, 열이름2, ...)] values (열1의 들어갈 데이터, 열2의 들어갈 데이터 ...)
+insert into dept_temp (deptno, dname, loc)
+values (50, 'DATEBASE', 'SEOUL');
+
+
+-- 테이블명 뒤에 ()는 생략 가능하다 생략하면 테이블 전체 열에 values로 전부 넣어줘야 한다
+insert into dept_temp
+values (60, 'NETWORK', 'BUSAN');
+
+-- ''감싸지 않고 null로 입력하면, (null)로 된다.
+insert into dept_temp
+values (70, 'WEB', null);
+
+-- 아무것도 쓰지않고 ''로만 감싸주면 null로 표시가 가능하지만, 자바에서는 지원하지 않기 때문에 null를 적어주는게 좋다.
+insert into dept_temp
+values (80, 'MOILE', '');
+
+-- null의 암시적 입력
+-- 열 데이터를 넣지 않는 방식으로 null 데이터입력하기
+-- 테이블 뒤에 열이름을 넣고, 들어가지 않은 열을 추가할대 null로 표시되게 한다.
+insert into dept_temp (deptno, loc)
+values (90, 'INCHEON');
+
+select * from dept_temp;
+
+
+
+
+
+
+
+
+
