@@ -795,6 +795,7 @@ order by empno;
 -------------------------------------------------------------------------------
 -- DDL(data definition language ) : 데이터 정의어 - 데이터베이스를 보관하고 관리하기
 -- 위해 제공되는 여러 객체의 생성,변경,삭제 관련 기능을 수행.
+-- 테이블의 구조를 관리하고 변경하는 create, alter, drop이 있다 (자동으로 commit 된다)
 
 -- 테이블을 생성하는 create
 -- 생성 방법 : create table 소유 계정.테이블이름 (
@@ -823,7 +824,10 @@ as select empno, ename, sal from emp where deptno =30;
 select * from emp_ddl_30;
 -----------------------------------------------------------------------
 -- alter 테이블을 변경하는 법
-
+-- 속성 : add 컬럼+타입추가
+-- rename : 컬럼명 수정
+-- modify : 컬럼 타입 수정
+-- drop : 컬럼 삭제
 create table emp_alter
 as select * from emp;
 
@@ -910,11 +914,172 @@ values (90, 'INCHEON');
 
 select * from dept_temp;
 
+------------------------------------------------------------------------------
+-- 6월 27일 목요일
+-- 테이블에 날짜 데이터 입력하기
+-- yyyy/mm/dd 형태로 입력이 가능하지만, yyyy-mm-dd 형태의 입력도 가능하다
+create table emp_temp
+as select * from emp;
+
+select * from emp_temp;
+
+insert into emp_temp
+values (9999, '홍길동', 'PRESIDENT', null, '2001/01/01', 5000, 1000, 10);
+
+-- 날짜만 지정해서 입력할 경우 시간은 자정이 된다.
+insert into emp_temp
+values (1111, '성춘향', 'MANAGER', 9999, '2001-01-05', 4000, null, 20);
+
+-- 날짜 데이터를 입력할 때 유의점
+-- 년/월/일 순서와 반대로 일/월/년 순서로 데이터를 입력하면 오류가 발생하고 데이터가 입력되지 않는다.
+-- 이유는 오라클이 설치되어있는 우녕ㅇ체제의 종류나 기본 언어군에 따라 날짜 표기방식이 다르기 때문이다.
+
+-- 이럴땐 to_date를 사용하는것이 일반적이다
+insert into emp_temp
+values (2111, '이순신', 'MANAGER', 9999, to_date('07/01/2001', 'dd/mm/yyyy'), 4000, null, 20);
+
+-- sysdate로도 입력이 가능하다
+insert into emp_temp
+values (3111, '심청이', 'MANAGER', 9999, sysdate, 4000, null, 30);
+
+-- 서브쿼리를 이용해서 테이블에 추가 할 수 있다.
+-- 들어갈 열 이름과 데이터값이 생략 되어 있다
+insert into emp_temp
+select * from emp where deptno=10;
+
+select * from emp_temp
+order by empno;
+
+---------------------------------------------------------------------------
+-- 테이블에 있는 데이터 수정하기
+-- update [변경할 테이블]
+-- set [변경할 열1]=[데이터], [변경할 열2]=[데이터] ...
+-- where 데이터를 변경할 대상 행을 선별하기 위한 조건
+
+create table dept_temp2
+as select * from dept;
+
+select * from dept_temp2;
+
+-- 조건을 넣지 않으면, LOC 컬럼의 모든 데이터가 바뀐다
+update dept_temp2
+set loc = 'SEOUL';
+
+-- 수정할 내용을 되돌리고 싶을때
+rollback;
+
+update dept_temp2
+set dname = 'DATABASE',
+    loc = 'SEOUL'
+where deptno = 40;
+
+-- 실무 팁 : update의 순서 1.수정하고자 하는 테이블을 select한다.
+--                       2. where 조건을 정교하게 만든다.
+--                       3. 그다음 update 한다.
+
+---------------------------------------------------------------------------
+-- 테이블에 있는 데이터 삭제하기
+-- delete [from] 테이블 이름
+-- where [삭제할 대상을 선별하는 조건식]
+
+create table emp_temp2
+as select * from emp;
+
+select * from emp_temp2;
+
+select * from emp_temp2
+where job = 'MANAGER';
+
+delete emp_temp2
+where job = 'MANAGER';
+
+-- 선생님이 내주신 문제 emp_temp2에서 급여가 1000이하인 급여를 3% 인상하여 출력하라
+select * from emp_temp2
+where sal <= 1000;
+
+update emp_temp2
+set sal = sal * 1.03
+where sal <= 1000;
+
+-- 아사 메가 사메루토, 나제카 나이테 이루. 소이유 코토가 토키토키 아루. 미테이타 하즈노 유메와 이츠모 오모이 다세나이.
+-- 타다.. 타다.. 나니카가 키에테 시마우 간카쿠 다케가 메자메테 카라모 나가쿠 노코루
+-- 소이유 기모찌니 토리츠카레테노와 타분 아노히카라.. 아노히 소라가 후타 히 소레와 마루데 마루데 유메노 케시키노 요니
+-- 타다 이타츠라니 우츠쿠시이 나가메 닷다..
+
+----------------------------------------------------------------------
+-- 하나의 단위로 데이터를 처리하는 트랜잭션(transaction)
+-- 트랜잭션(transaction) : 더이상 분할할 수 없는 최소 수행 단위를 뜻한다
+-- ALL or NOTING
+-- 트랜잭션을 제어하기 위해 사용하는 명령어 TCL(transaction control language)
+-- ☆ DBver : commit이 자동으로 바로 된다 (설정에서 끌수 있다)
+----------------------------------------------------------------------
+-- 데이터베이스를 위한 데이터 사전
+-- 데이터 사전(Data dictionary)
 
 
+select * from dict;
+select * from user_tables; -- 내가 만든 테이블을 또 하나의 테이블로 만들어 출력한다
 
+-- 인덱스 index 색인 데이터 검색 성능의 향상을 위해 테이블 열에 사용하는 객체를 뜻한다
+-- 오름차순, 내림차순이 따로 관리 된다
+create index idx_emp_sal
+on emp( sal );
+select * from user_indexes;
 
+drop index idx_emp_sal;
+-- 아래 주석은 강제힌트
+select /*+ index(idx_emp_sal) */ 
+* from emp order by sal;
 
+-- plan
+-- sql developer 에서는 상단 세번째 아이콘(F10) "계획설명"
+-- 오라클이 조회할 보고서를 보는것
+-- 실행하기 전에 실제와는 시간이 다를수 있지만, 미리 계획을 짜는 것
+-- cost : 비용 - 조회하는데에 있어서 들어가는 시간적 비용 50이하는 빠르다
 
+-- view : 가상 테이블(view)로 부르는 뷰는 하나이상의 테이블을 조회하는 select를 저장한 객체
+-- 사용 목적 : 편리성-select문의 복잡도를 완하하기 위해, 보안성 - 테이블의 특정 열을 노출하고 싶지 않을 경우
 
+-- 시퀀스 (sequence)
+-- 오라클 데이터베이스에서 특정 규칙에 맞는 연속 숫자를 생성하는 객체
 
+select (max(empno)+1) from emp_temp2;
+
+insert into emp_temp2 (
+    empno, ename
+    )
+    values (
+        (select (max(empno)+1) from emp_temp2)
+        ,'김경력'
+    );
+
+select * from emp_temp2;
+
+create table tb_user ( 
+    user_id number,
+    user_name varchar2(30)
+);
+
+select * from tb_user;
+
+create sequence seq_user; --시퀀스 이름
+--    increment by 10 -- 증가할 값
+--    start with 10 -- 시작 값
+--    maxvalue 90 -- 생성할 최댓값
+--    minvalue 0 -- 생성할 최솟값
+--    nocycle -- 최댓값에 도달했을때 cycle이면 다시 최소값에서 시작, nocycle이면 중단
+--    cache 2; -- 생성할 번호를 메모리에 미리 할당해 놓은 수를 지정
+
+-- 생성한 시퀀스를 조회할때마다 올라가는 nextval
+select seq_user.nextval from dual;
+
+-- 생성한 시퀀스의 현재 값을 보는 currval
+select seq_user.currval from dual;
+
+-- insert로 번호를 알아서 증가하게 한다
+-- 한번 올라간 숫자는 내릴 수없다.
+insert into tb_user
+values (seq_user.nextval, '유저명1');
+insert into tb_user
+values (seq_user.nextval, '유저명2');
+select * from tb_user;
