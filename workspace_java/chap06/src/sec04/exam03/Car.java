@@ -42,4 +42,52 @@ public class Car {
 			System.out.println("이름은 필수 입니다.");
 		}
 	}
+	
+	// 생성자는 new연산자로 클래스로부터 객체를 생성할 때 호출 되어 객체의 초기화를 담당한다.
+	// 객체 초기화란 필드를 초기화 하거나 메소드를 호출해서 객체를 사용할 준비를 말한다.
+	
+	// 생성자 작성방법
+	// [클래스이름] (전달인자) {}
+	
+	// 모든 클래스에는 무조건 생성자가 존재하며 하나이상에 생성자를 가질수 있다.
+	// 생성자 선언을 생략했다면, 비어있는 기본 생성자가 생성된다.
+	// 클래스에 public 으로 선언되면 생성자에도 public이 생성지만, 없을 경우 생성자도 없다.
+	
+	
+	Car () {
+		// this("회색","2500"); 다른 오버로딩된 생성자를 호출하는 방법 (무조건 첫줄에 써야한다)
+		System.out.println("생성자 실행");
+		name = "자동차";
+		System.out.println(name);
+		test();
+	}
+	
+	
+	void test () {
+		System.out.println("테스트");
+	}
+	
+	Car (String color, int cc) {
+		System.out.println("생성자 실행");
+		name = "자동차";
+		System.out.println(name);
+		test();
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
