@@ -27,18 +27,23 @@ public class Calc {
 	}
 	
 	int calc (int x, String y, int z) {
-		if(y == "+") {
-			return plus(x,z);
-		} else if(y == "-") {
-			return minus(x,z);
-		} else if(y == "*") {
-			return multi(x,z);
-		} else if(y == "/") {
-			return (int)divide(x,z);
+		if(y != null) {
+			if(y.equals("+")) {
+				return plus(x,z);
+			} else if(y.equals("-")) {
+				return minus(x,z);
+			} else if(y.equals("*")) {
+				return multi(x,z);
+			} else if(y.equals("/")) {
+				return (int)divide(x,z);
+			} else {
+				System.out.println("문자를 인식하지 못했습니다. 다시 시도해주세요.");
+				return x;
+			}
 		} else {
-			System.out.println("문자를 인식하지 못했습니다. 다시 시도해주세요.");
-			return x;
+			System.out.println("null 을 제외한 문자 연산을 입력해주세요.");
 		}
+		return x;
 	}
 	
 	

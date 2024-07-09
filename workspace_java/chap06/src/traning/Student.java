@@ -1,4 +1,4 @@
-package sec04.exam04;
+package traning;
 
 public class Student {
 

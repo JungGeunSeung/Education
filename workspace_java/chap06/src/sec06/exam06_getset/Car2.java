@@ -18,5 +18,6 @@ public class Car2 {
 	}
 
 	// getter, setter 자동완성 하는법
-	// 마우스 우클릭 -> Sourse -> Generate Getters And Setters -> 원하는 필드의 체크
+	// 마우스 우클릭 -> Source -> Generate Getters And Setters -> 원하는 필드의 체크
+	
 }

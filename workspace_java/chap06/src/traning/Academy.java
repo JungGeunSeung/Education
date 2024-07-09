@@ -1,4 +1,4 @@
-package sec04.exam04;
+package traning;
 
 public class Academy {
 
@@ -15,17 +15,26 @@ public class Academy {
 
 	String name;
 	Student[] student = new Student[10];
+	int idx = 0;
 
 	Academy(String academyName) {
-		name = academyName;
+		this.name = academyName;
 	}
 
 	void join(Student aList) {
 		for (int i = 0; i < student.length; i++) {
 			if (student[i] == null) {
 				student[i] = aList;
+				System.out.println(aList.name + "을 " + this.name + "에 추가합니다.");
 				break;
 			}
+		}
+		
+		// 배열의 길이를 넘지 않도록
+		if (idx < this.student.length) {
+			this.student[idx++] = aList;
+		} else {
+			System.out.println(this.name + "의 등록 가능한 학생수를 넘었습니다.");
 		}
 	}
 
@@ -34,10 +43,12 @@ public class Academy {
 		System.out.println("============================");
 		for (int i = 0; i < student.length; i++) {
 			if (student[i] != null) {
-				System.out.println(student[i]);
+				System.out.println(i+ ". " + student[i]);
 			}
 		}
 	}
 
-
+	Student student(int idx) {
+		return this.student[idx];
+	}
 }

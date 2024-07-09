@@ -18,6 +18,8 @@ public class CalcExecute {
 		int divide = calc.calc(13, "/", 4);
 		System.out.println("divide : "+ divide);
 		
+		int result = calc.calc(1, null, 1);
+		
 		int error = calc.calc(13, "더하기", 4);
 	}
 
