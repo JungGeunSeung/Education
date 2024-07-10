@@ -1,6 +1,6 @@
 package sec01.exam01;
 
-public class Exam {
+public class ExtendsExam {
 
 	public static void main(String[] args) {
 

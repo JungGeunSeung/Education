@@ -7,6 +7,7 @@ public class Child extends Parent {
 	Child () {
 		// 부모 생성자를 호출하는 super()
 		// 맨 첫출에 있어야 한다.
+		// this와 같이 사용 불가
 		super();
 	}
 	
