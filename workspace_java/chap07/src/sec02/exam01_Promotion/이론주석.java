@@ -1,4 +1,4 @@
-package sec02.exam01;
+package sec02.exam01_Promotion;
 
 public class 이론주석 {
 
@@ -14,4 +14,5 @@ public class 이론주석 {
 	// 한 메소드들을 가지고 변화되어 새로운 클래스가 되는식이 될 수 도 있다.
 	
 	// 부모의 일부만 타입변환을 이르켜 그 부분만 사용 할 수 있게 하는 것?
+	
 }

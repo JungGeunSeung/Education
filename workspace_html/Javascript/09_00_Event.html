@@ -247,8 +247,13 @@
             }
             
         }
+        document.addEventListener('keyup', function(event){
+            if (event.keycode == 13) {
+                document.querySelector('#send_txt').click();
 
+            }
 
+        })
 
 
     </script>
@@ -277,6 +282,8 @@
                 clearInterval(interval);
             }
         }, 200);
+
+        
     </script> -->
 </head>
 
