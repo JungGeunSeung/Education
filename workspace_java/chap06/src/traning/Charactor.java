@@ -1,5 +1,4 @@
 package traning;
-
 public class Charactor {
 
 	int hp;
