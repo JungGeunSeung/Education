@@ -1,5 +1,9 @@
 package sec01.exam01;
 
+import java.lang.String; // 생략가능
+
+
+
 public class TryExam {
 
 	public static void main(String[] args) {
