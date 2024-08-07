@@ -24,4 +24,40 @@ http 는 80이 기본 포트이다.
 
 url에서 ?앞은 어떤 언어에 있는 함수를 실행시키는 주소이다. ?뒤는 전달인자이다
 
-6/20 목요일 9:33 수업
+오전 11:16 2024-08-06
+D:\workspace\workspace_java\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\work\Catalina\localhost\proj1_hello\org\apache\jsp
+에 보면 .jsp 로만든 파일에 같은 이름의 .java가 있는데, 이건 자동으로 html영역을 java로 out.write 로 써준다.
+jsp는 서블릿이다.
+
+
+오전 11:16 2024-08-07
+jsp 주석 단축키 ctrl + alt + /
+
+글을 post로 보내 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

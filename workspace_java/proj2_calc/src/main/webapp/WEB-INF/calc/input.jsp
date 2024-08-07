@@ -60,5 +60,7 @@
 		
 		<button type="submit">SEND-post</button>
 	</form>
+	
+	전달받은 값 : ${param.text}
 </body>
 </html>
