@@ -1,0 +1,136 @@
+select * from RESTAURANT;
+
+INSERT INTO RESTAURANT
+VALUES (
+    1234,
+    '달식당',
+    '충남 천안시 동남구 대흥로 215 백자빌딩 1층 102호 달식당',
+    '041-557-2266',
+    'http://dalrestaurant.img',
+    '일식 돈가스와 모밀을 파는 가게입니다.',
+    '일식',
+    4.47,
+    1204,
+    '9:00~20:20',
+    11000,
+    '영업중',
+    systimestamp,
+    systimestamp
+);
+
+select * from menu;
+
+insert into menu
+values (
+    1,
+    (select restaurant_id from restaurant where restaurant.name = '달식당'),
+    '달돈가스',
+    'http://dalprok.img',
+    7500,
+    11000,
+    '판매가능',
+    systimestamp,
+    systimestamp
+);
+
+select * from app_user;
+
+insert into app_user
+values (
+    '000302',
+    '정근승',
+    01067872394,
+    '세종시 전의면',
+    5,
+    systimestamp,
+    systimestamp
+);
+
+select * from app_order;
+
+insert into app_order
+values(
+    229394928,
+    '000302',
+    1,
+    1234,
+    2,
+    '카카오페이',
+    '일회용 수저 필요',
+    22000,
+    '조리중',
+    systimestamp,
+    systimestamp
+);
+
+select * from cart;
+
+insert into cart
+values (
+    000001,
+    1234,
+    1,
+    229394928,
+    '000302',
+    '달돈까스',
+    'http://dalprok.img',
+    11000,
+    2
+);
+
+select * from reviews;
+
+insert into reviews
+values (
+    12390481,
+    '000302',
+    1234,
+    1,
+    5,
+    '너무 맛있어요.',
+    'reviews.img',
+    systimestamp,
+    systimestamp
+);
+
+select 
+    o.order_id,
+    u.user_id,
+    u.name,
+    u.phone_number,
+    u.address,
+    r.restaurant_id,
+    r.name,
+    r.address,
+    r.phone_number,
+    m.food_id,
+    m.name,
+    m.price,
+    o.quantity,
+    o.pay,
+    o.requests,
+    o.total,
+    o.status,
+    o.created_date,
+    o.updated_date,
+    rev.review_id,
+    rev.rating,
+    rev.content,
+    rev.review_img
+from 
+    app_order o
+join 
+    app_user u on o.user_id = u.user_id
+join 
+    restaurant r on o.restaurant_id = r.restaurant_id
+join 
+    menu m on o.food_id = m.food_id
+left join 
+    reviews rev on o.user_id = rev.user_id 
+    and o.food_id = rev.food_id 
+    and o.restaurant_id = rev.restaurant_id
+where 
+    u.name = '정근승';
+
+
+
