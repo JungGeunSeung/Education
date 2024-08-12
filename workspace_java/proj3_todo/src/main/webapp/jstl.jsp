@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>jstl</title>
 </head>
 <body>
 
@@ -132,5 +132,30 @@ end가 items의 개수보다 크면 items 끝까지만 돌고 에러 없음<br>
 	${dinner }<br>
 </c:forEach>
 
+<hr>
+<a href="https://search.naver.com/search.naver?where=nexearch&sm=top_hty&fbm=0&ie=utf8&query=검색" target="_blank">네이버</a>
+<!-- target="_blank" : 새탭으로 열기 -->
+<br>
+<a href="/proj3_todo/jstl.jsp">jstl 페이지로 이동</a>
+<br>
+<h3>c: url 사용하는 이유</h3>
+1. 영어나 숫자 외 한글이나 특수 문자를 encode 해줌<br>
+2. context path 자동 추가 (/proj3_todo) <br>
+3. 쿠키 금지 일때 ;JSESSIONID=를 자동으로 붙여줌<br>
+
+<c:url var="url1" value="/jstl.jsp">
+	<c:param name="a" value="한글" />
+</c:url>
+<a href="${ url1 }">jstl로 이동</a>
+<br>
+param.name = ${ param.name } <br>
+c:out - <c:out value="${ param.name }"/><br>
+c:out은 특수문자를 치환해서 문자 그 자체로 출력 되게 해줌
+<!-- 
+< : &lt;
+> : &gt;
+& : &amp;
+" " 공백 : &nbsp; 
+-->
 </body>
 </html>

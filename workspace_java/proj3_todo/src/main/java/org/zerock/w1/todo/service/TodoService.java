@@ -7,6 +7,11 @@ import java.util.List;
 import org.zerock.w1.todo.dto.TodoDTO;
 
 public class TodoService {
+	
+	
+	
+
+	public static final String INSTANCE = null;
 
 	public void register(TodoDTO tododto) {
 		// 원래는 DB에 insert 하는게 있어야 한다.
@@ -28,5 +33,15 @@ public class TodoService {
 		}
 		
 		return list;
+	}
+	
+	public TodoDTO get(int tno) {
+		TodoDTO dto = new TodoDTO();
+		dto.setTno(tno);
+		dto.setTitle("sample");
+		dto.setDueDate(LocalDate.now());
+		dto.setFinished(true);
+		
+		return dto;
 	}
 }
