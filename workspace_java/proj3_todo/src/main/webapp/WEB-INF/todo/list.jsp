@@ -23,6 +23,7 @@
 	border: 1px solid red;
 	height: 30px;
 	margin: 5px;
+	padding-left: 5px;
 	}
 </style>
 	<c:forEach var="todoDTO" items="${list1}">
@@ -30,8 +31,8 @@
 			<c:url var="url1" value="/todo/read">
 			<c:param name="tno" value="${ todoDTO.tno }" />
 			</c:url>
-			<a href="${ url1 }">${ todoDTO.tno }.제목</a>
-			 : ${ todoDTO.title}, 시간 : ${ todoDTO.dueDate }
+			<a href="${ url1 }">상세보기</a>
+			 순번 : ${todoDTO.tno }, 제목 : ${ todoDTO.title}, 시간 : ${ todoDTO.dueDate }
 		</div>
 	</c:forEach>
 	

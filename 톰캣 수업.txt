@@ -1,0 +1,11 @@
+D:\workspace\workspace_java\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\work\Catalina\localhost\proj1_hello\org\apache\jsp
+에 보면 .jsp 로만든 파일에 같은 이름의 .java가 있는데, 이건 자동으로 html영역을 java로 out.write 로 써준다.
+jsp는 서블릿이다.
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+
+서블릿 한글 깨짐 방지
+request.setCharacterEncoding("utf-8");
+response.setContentType("text/html; charset=utf-8;");
