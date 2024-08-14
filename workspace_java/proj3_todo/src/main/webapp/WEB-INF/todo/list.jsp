@@ -25,7 +25,15 @@
 	margin: 5px;
 	padding-left: 5px;
 	}
+	
+	a {
+	text-decoration: none;
+	color: black;
+	}
 </style>
+	<div>
+		<a href="/proj3_todo/todo/register">새 할일 작성</a>
+	</div>
 	<c:forEach var="todoDTO" items="${list1}">
 		<div>
 			<c:url var="url1" value="/todo/read">
@@ -35,6 +43,5 @@
 			 순번 : ${todoDTO.tno }, 제목 : ${ todoDTO.title}, 시간 : ${ todoDTO.dueDate }
 		</div>
 	</c:forEach>
-	
 </body>
 </html>

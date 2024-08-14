@@ -13,9 +13,12 @@ public class TodoService {
 
 	public static final String INSTANCE = null;
 
-	public void register(TodoDTO tododto) {
+	public int register(TodoDTO todoDTO) {
 		// 원래는 DB에 insert 하는게 있어야 한다.
-		System.out.println("등록중... " + tododto.toString());
+		System.out.println("등록중... " + todoDTO.toString());
+		
+		TodoDAO todoDAO = new TodoDAO();
+		return todoDAO.insert(todoDTO);
 		
 	}
 	
@@ -50,4 +53,15 @@ public class TodoService {
 		
 		return dto1;
 	}
+
+	public int update(TodoDTO todoDTO) {
+		TodoDAO todoDAO = new TodoDAO();
+		return todoDAO.update(todoDTO);
+	}
+	
+	public int delete(int tno) {
+		TodoDAO todoDAO = new TodoDAO();
+		return todoDAO.delete(tno);
+	}
+
 }
