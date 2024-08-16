@@ -27,3 +27,7 @@ values (
 select * from tbl_todo;
 
 commit;
+
+create table emp2 as select * from emp;
+
+select * from emp2 where empno = 7369;

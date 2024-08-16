@@ -23,8 +23,8 @@
 		finished : 
 			<input type="radio" name="finished" value="N" checked="checked"> 미완료
 			<input type="radio" name="finished" value="Y"> 완료 <br>
-	</form>
 	<input type="submit" value="작성하기">
+	</form>
 
 	
 </body>

@@ -9,3 +9,16 @@ jsp는 서블릿이다.
 서블릿 한글 깨짐 방지
 request.setCharacterEncoding("utf-8");
 response.setContentType("text/html; charset=utf-8;");
+
+서버 > 톰캣 > context.xml 
+<Resource
+        name="jdbc/oracle"
+        auth="container"
+        type="javax.sql.DataSource"
+        driverClassName="oracle.jdbc.driver.OracleDriver"
+        url="jdbc:oracle:thin:@125.181.132.133:51521:xe"
+        username="scott2_5"
+        password="tiger"
+        maxTotal="50"
+         maxWaitMillis="-1"
+    />
