@@ -12,6 +12,9 @@
 <title>empList</title>
 </head>
 <body>
+<form method="get" action="join">
+	<input type="submit" value="사원 추가하기">
+</form>
 <form method="get" action="emp2">
 사원번호를 입력하여 조회 : <input type="number" name="empno" value="null">
 사원이름를 입력하여 조회 : <input type="text" name="ename">
@@ -22,7 +25,11 @@
 		<th>사원번호(empno)</th>
 		<th>사원이름(ename)</th>
 		<th>직책(job)</th>
+		<th>사수(mgr)</th>
 		<th>입사일(hireDate)</th>
+		<th>급여(sal)</th>
+		<th>성과금(comm)</th>
+		<th>부서(deptno)</th>
 	</tr>
 	<c:if test="${ list.size() <= 0 }">
 		<tr>
@@ -33,22 +40,22 @@
 	<c:forEach var="emp" items="${ list }">
 		<tr>
 			<td>${emp.empno }</td>
-			<td>${emp.ename }</td>
+			<c:url var="url1" value="read">
+			<c:param name="empno" value="${ emp.empno }" />
+			</c:url>
+			<td><a href=${ url1 }>${emp.ename }</a></td>
 			<td>${emp.job }</td>
+			<td>${emp.mgr}</td>
 			<td>${emp.hireDate}</td>
+			<td>${emp.sal}</td>
+			<td>${emp.comm}</td>
+			<td>${emp.deptno}</td>
 		</tr>
 	</c:forEach>
 	</c:if>
 </table>
 	<hr>
 <table border="1">
-	<tr>
-		<th>empno</th>
-		<th>ename</th>
-		<th>job</th>
-		<th>hireDate</th>
-	</tr>
-
 	
 	<%
 		List<EmpDTO> list = (List)request.getAttribute("list");

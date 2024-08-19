@@ -30,4 +30,4 @@ commit;
 
 create table emp2 as select * from emp;
 
-select * from emp2 where empno = 7369;
+select * from emp2;
