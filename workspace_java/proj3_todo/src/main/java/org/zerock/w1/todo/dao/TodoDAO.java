@@ -51,7 +51,7 @@ public class TodoDAO {
 	        	
 	        	Connection con = DriverManager.getConnection(url, user, password);
 	        	
-	        	String query = "select * from tbl_todo";
+	        	String query = "select * from tbl_todo order by tno asc";
 	        	PreparedStatement ps = con.prepareStatement(query);
 	        	
 	        	ResultSet rs = ps.executeQuery();

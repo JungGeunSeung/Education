@@ -8,10 +8,10 @@
 <title>할일 관리 > 할일 상세</title>
 </head>
 <body>
-	<div>${ dto.tno }</div>
-	<div>${ dto.title }</div>
-	<div>${ dto.dueDate }</div>
-	<div>${ dto.finished }</div>
+	<div>번호 : ${ dto.tno }</div>
+	<div>제목 : ${ dto.title }</div>
+	<div>날짜 : ${ dto.dueDate }</div>
+	<div>완료여부 : ${ dto.finished }</div>
 	<c:url var="list1" value="/todo/list">
 	</c:url>
 	<a href="${ list1 }">목록으로 돌아가기</a>

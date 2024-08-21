@@ -78,9 +78,6 @@ public class CheckFilter implements Filter {
 		System.out.println("소요시간(ms) : " + (after - before));
 	}
 
-	
-	
-	
 	public void init(FilterConfig fConfig) throws ServletException {
 		System.out.println("필터 init 실행");
 	}
@@ -92,7 +89,7 @@ public class CheckFilter implements Filter {
 		{
 			return true;
 		} else {
-			return true;
+			return false;
 		}
 	}
 
