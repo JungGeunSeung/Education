@@ -12,9 +12,15 @@ public class EmpDTO {
     private int sal;
     private Integer comm;
     private int deptno;
+    private int rnum;
 
-
-    public Integer getEmpno() {
+    public int getRnum() {
+		return rnum;
+	}
+	public void setRnum(int rnum) {
+		this.rnum = rnum;
+	}
+	public Integer getEmpno() {
         return this.empno;
     }
     public void setEmpno(Integer empno) {

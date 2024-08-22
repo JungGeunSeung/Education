@@ -1078,3 +1078,60 @@ values (seq_user.nextval, '유저명1');
 insert into tb_user
 values (seq_user.nextval, '유저명2');
 select * from tb_user;
+
+-------------------------------------------------------------------
+-- 8/22 목요일
+
+-- 오라클 문법을 사용한 대댓글 조회
+select level, empno, lpad(' ',2*level)||ename, mgr from emp
+start with mgr is null -- 시작점
+connect by prior empno = mgr
+order siblings by empno desc;
+
+-- 보편적인 DB에서 사용하는 문법을 사용한 대댓글 조회
+with emp_recu ( lv, empno, ename, mgr) as (
+    -- 원글을 조회하는 select
+    select
+        1 as lv,
+        empno, ename, mgr
+    from emp            -- 대상 테이블
+    where mgr is null   -- 원글
+    
+    -- 원글을 제외한 댓글들을 가져 오는 방법
+    union all
+    select er.lv + 1 lv, e.empno, lpad(' ',2*er.lv)||e.ename, e.mgr
+    from emp_recu er
+    left outer join emp e on er.empno = e.mgr
+    where e.mgr is not null -- 원글을 제외하는 조건
+    )
+search depth first by empno desc set sort_empno_desc -- 정렬에 대한 정의 및 대칭
+select * from emp_recu
+order by sort_empno_desc;
+
+-- 페이징 관련
+-- rownum : 정렬된 테이블의 번호를 차례대로 부여하는 메소드
+-- 운좋게 rownum이 조건으로 들어갔기 때문에 이 sql문은 맞지 않다.
+select 
+    rownum, empno, ename 
+from emp
+where rownum < 5
+order by empno desc;
+
+-- 따라서, order by가 적용되고 rownum을 부여하기 위해 서브쿼리로 감싸주고, where가
+-- rownum으로 적용되려면 sql 작동 순서 때문에 서브 쿼리로 또 한번 감싸줘야 된다.
+select
+*
+from (select
+      rownum rnum, empno, ename
+      from
+        (select empno, ename
+         from emp
+         order by ename))
+where rnum >= 4 and rnum <=6;
+
+
+insert into emp2 select * from emp;
+
+select * from emp2;
+
+commit;
