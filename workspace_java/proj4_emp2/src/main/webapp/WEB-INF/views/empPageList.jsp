@@ -23,13 +23,15 @@
 <input type="submit" value="조회">
 </form>
 
+
+
 <form method="get" action="">
 <select name="countPerPage">
-	<option value="10">10개씩</option>
-	<option value="20">20개씩</option>
-	<option value="30">30개씩</option>
-	<option value="40">40개씩</option>
-	<option value="50">50개씩</option>
+		<option value="10">10개씩</option>
+		<option value="20">20개씩</option>
+		<option value="30">30개씩</option>
+		<option value="40">40개씩</option>
+		<option value="50">50개씩</option>
 </select>
 <input type="submit" value="조회">
 </form>
@@ -83,22 +85,56 @@
 	
 	int lastPage = (int)Math.ceil( (double)totalCount / (double)countPerPage );
 	
-	
+	int countPerSection = 3;
+	int position = (int)Math.ceil((double)pageNo / (double)countPerSection);
+	int sec_first = ( ( position - 1 ) * countPerSection ) + 1;
+	int sec_last = position * countPerSection;
+	if(sec_last > lastPage) {
+		sec_last = lastPage;
+	}
 %>
 <c:set var="lastPage" value="<%= lastPage %>" scope="page"/>
+<c:set var="countPerSection" value="<%= countPerSection %>" scope="page"/>
 <div>
 	<a href="page?page=${ page - 1 }">이전</a>
 	
 	
 		<c:forEach var="i" begin="1" end="${ lastPage }">
 			<c:if test="${ i eq page }">
-				<a href="page?page=${i}"><strong>[${i}]</strong></a>
+				<a href="page?page=${i}&countPerPage=${countPerPage}"><strong>[${i}]</strong></a>
 			</c:if>
 			<c:if test="${ !(i eq page) }">
-				<a href="page?page=${i}">[${i}]</a>
+				<a href="page?page=${i}&countPerPage=${countPerPage}">[${i}]</a>
 			</c:if>
 		</c:forEach>
 	<a href="page?page=${ page + 1 }">다음</a>
+</div>
+<!-- 페이징의 개수를 3개로 제한하고,
+	 이전이나 다음을 누르면 다음페이지가 넘어가는 동시에 페이징의 번호가 바뀌는
+	 실습
+ -->
+<div>
+	<c:if test="<%= sec_first == 1 %>">
+	<a>[이전]</a>
+	</c:if>
+	<c:if test="<%= sec_first != 1 %>">
+	<a href="page?page=<%= sec_first - 1 %>&countPerPage=${countPerPage}">[이전]</a>
+	</c:if>
+	
+		<c:forEach var="i" begin="<%= sec_first%>" end="<%= sec_last%>">
+			<c:if test="${ i eq page }">
+				<a href="page?page=${i}&countPerPage=${countPerPage}"><strong>[${i}]</strong></a>
+			</c:if>
+			<c:if test="${ !(i eq page) }">
+				<a href="page?page=${i}&countPerPage=${countPerPage}">[${i}]</a>
+			</c:if>
+		</c:forEach>
+	<c:if test="<%= sec_last == lastPage %>">
+	<a>[다음]</a>
+	</c:if>
+	<c:if test="<%= sec_last != lastPage %>">
+	<a href="page?page=<%= sec_last + 1 %>&countPerPage=${countPerPage}">[다음]</a>
+	</c:if>
 </div>
 </body>
 </html>
