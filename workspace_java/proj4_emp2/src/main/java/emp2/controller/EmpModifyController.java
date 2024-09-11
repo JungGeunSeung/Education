@@ -52,7 +52,7 @@ public class EmpModifyController extends HttpServlet {
 
 		    // Date 객체를 java.sql.Date로 변환합니다.
 		    java.sql.Date sqlDate = new java.sql.Date(date.getTime());
-
+		    
 		    // 변환된 날짜를 DTO에 설정합니다.
 		    empDTO.setHireDate(sqlDate);
 		} catch (ParseException e) {

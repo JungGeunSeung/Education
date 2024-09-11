@@ -122,12 +122,6 @@ public class TodoDAO {
 		}
 		
 		return todoDTO;
-		
-		
-		
-		
-		
-		
 	}
 
 	public int insert(TodoDTO dto) {

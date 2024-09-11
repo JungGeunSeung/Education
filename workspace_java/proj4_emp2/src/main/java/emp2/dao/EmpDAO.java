@@ -208,4 +208,42 @@ public int update(EmpDTO dto) {
 		
 		return result;
 	}
+	
+	public EmpDTO selectLogin(EmpDTO dto) {
+			
+			EmpDTO result = null;
+		try {
+            Context ctx= new InitialContext();
+            DataSource dataSource =(DataSource) ctx.lookup("java:/comp/env/jdbc/oracle");
+
+            Connection con = dataSource.getConnection();
+            
+            String query = "select * from emp3 "
+            		+ "where ename = ? and empno = ?";
+            
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setString(1, dto.getEname());
+            ps.setInt(2, dto.getEmpno());
+
+            ResultSet rs = ps.executeQuery();
+            
+            while(rs.next()) {
+            	result = new EmpDTO();
+            	result.setEmpno(rs.getInt("empno"));
+            	result.setEname(rs.getString("ename"));
+            	result.setSal(rs.getInt("sal"));
+            }
+            
+            
+            
+            rs.close();
+            ps.close();
+            con.close();
+			}
+		catch (Exception e) {
+				e.printStackTrace();
+			}
+		
+		return result;
+	}
 }

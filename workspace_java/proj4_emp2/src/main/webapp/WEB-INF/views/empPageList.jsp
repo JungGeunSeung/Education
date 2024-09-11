@@ -26,7 +26,7 @@
 
 
 <form method="get" action="">
-<select name="countPerPage">
+<select name="countPerPage" onchange="this.form.submit()">
 		<option value="10">10개씩</option>
 		<option value="20">20개씩</option>
 		<option value="30">30개씩</option>

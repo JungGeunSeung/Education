@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import emp2.service.EmpPageService;
 
-@WebServlet("/emp/page")
+@WebServlet("/emp/list")
 public class EmpPageController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
