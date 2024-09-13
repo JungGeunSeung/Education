@@ -72,8 +72,7 @@ public class EmpDTO {
     public String toString() {
         return "EmpDTO [empno=" + empno + ", ename=" + ename + ", job=" + job + ", mgr=" + mgr + ", hiedDate="
                 + hireDate + ", sal=" + sal + ", comm=" + comm + ", deptno=" + deptno + "]";
-    }
-    근승아 누나랑 토요일날 같이 프젝 하자 밥 사줄게 ㅜㅜ 
+    } 
     
 
 }
