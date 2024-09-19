@@ -44,6 +44,7 @@ public class EmpDAO {
     	
     	// emp.xml에 있는 mapper의 주소를 namespace.id(select의 id) 로 적어준다.
     	// selectList 는 알아서 list로 돌려주기 때문에 while 이나 for문이 필요 없다.
+    	// DB 컬럼명과 필드명, getter, setter의 이름이 같아야 한다.
     	list = sqlSession.selectList("mapper.emp.selectAllEmp");
     	System.out.println("list.size : " + list.size());
     	} else {
@@ -79,6 +80,7 @@ public class EmpDAO {
         	SqlSession sqlSession = sqlMapper.openSession();
         	
         	try {
+        		// 두줄 이상이 나오면 에러가 난다
         		dto = (EmpDTO) sqlSession.selectOne("mapper.emp.selectOneEmp");
         		
         	}catch (Exception e) {

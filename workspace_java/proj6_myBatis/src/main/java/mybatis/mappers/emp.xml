@@ -20,7 +20,7 @@
 	<select id="selectAllEmpMap" resultType="map">
 		select * from emp
 	</select>
-	
+	<!-- resultType : Type은 클래스를 뜻한다. -->
 	<select id="selectOneEmp" resultType="emp.EmpDTO">
 		select empno, ename, sal from emp where empno = 7788
 	</select>
@@ -34,6 +34,7 @@
 	</select>
 
 	<!-- #{} 이렇게 쓰면 DTO 안에 있는 getter가 자동으로 채워진다. -->
+	<!-- map으로 쓰면 dto에 있는 get() 메소드를 실행한다. -->
 	<update id="updateEmp" parameterType="emp.EmpDTO">
 		update emp0 set ename=#{ename}, sal = #{sal} where empno = #{empno}
 	</update>
