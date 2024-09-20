@@ -13,8 +13,9 @@
     </settings>
 
 	<!-- mapper에서 사용할 타입이 길어서 짧게 별칭 지정 -->
-<!-- 	<typeAliases> -->
-<!-- 	</typeAliases> -->
+	<typeAliases>
+		<typeAlias type="emp.crud.EmpDTO" alias="empDTO2" />
+	</typeAliases>
 
 	<!-- 우리는 DB접속하는법을 3개 배웠다. 1.자바에 직접쓰는법, 2.톰캣서버 안 context.xml resource에 적어 불러오는법.
 		 3. 지금 밑에처럼 xml에 적는법.
@@ -35,6 +36,7 @@
 	<mappers>
 		<mapper resource="mybatis/mappers/emp.xml" />
 		<mapper resource="mybatis/mappers/emp_param.xml" />
+		<mapper resource="mybatis/mappers/emp_dynamic.xml" />
 	</mappers>
 	
 </configuration>

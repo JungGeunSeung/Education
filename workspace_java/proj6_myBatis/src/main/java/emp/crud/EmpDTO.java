@@ -1,6 +1,7 @@
 package emp.crud;
 
 import java.sql.Date;
+import java.util.Arrays;
 
 public class EmpDTO {
 
@@ -13,8 +14,37 @@ public class EmpDTO {
     private Integer comm;
     private int deptno;
     private int rnum;
+    private String keyword;
+    private String type;
+    private String[] checks;
+    private String orderType;
+    private String orderName;
 
-    public int getRnum() {
+    public String getOrderName() {
+		return orderName;
+	}
+	public void setOrderName(String orderName) {
+		this.orderName = orderName;
+	}
+	public String getOrderType() {
+		return orderType;
+	}
+	public void setOrderType(String orderType) {
+		this.orderType = orderType;
+	}
+	public String[] getChecks() {
+		return checks;
+	}
+	public void setChecks(String[] checks) {
+		this.checks = checks;
+	}
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
+	}
+	public int getRnum() {
 		return rnum;
 	}
 	public void setRnum(int rnum) {
@@ -68,11 +98,23 @@ public class EmpDTO {
     public void setDeptno(int deptno) {
         this.deptno = deptno;
     }
-    @Override
-    public String toString() {
-        return "EmpDTO [empno=" + empno + ", ename=" + ename + ", job=" + job + ", mgr=" + mgr + ", hiedDate="
-                + hireDate + ", sal=" + sal + ", comm=" + comm + ", deptno=" + deptno + "]";
-    } 
     
+    public String getKeyword() {
+		return keyword;
+	}
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
+	}
+	
+	@Override
+	public String toString() {
+		return "EmpDTO [empno=" + empno + ", ename=" + ename + ", job=" + job + ", mgr=" + mgr + ", hireDate="
+				+ hireDate + ", sal=" + sal + ", comm=" + comm + ", deptno=" + deptno + ", rnum=" + rnum + ", keyword="
+				+ keyword + ", type=" + type + ", checks=" + Arrays.toString(checks) + ", orderType=" + orderType
+				+ ", orderName=" + orderName + "]";
+	}
+	
+	
 
+	
 }

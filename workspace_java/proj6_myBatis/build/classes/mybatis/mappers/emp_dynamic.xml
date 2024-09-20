@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.emp.dynamic">
+
+	<!-- 
+		resultMap : 컬럼명이 다른 데이터를 뽑아올수 있게 한다.
+		
+		select 결과 컬럼명을 column에 적고 내 DTO의 필명을 property에 적으면 연결된다
+		
+		autoMapping 기본값 : true[기본값] : 나머지는 원래대로 동작(적지 않아도 공식에 따라 setter동작)
+							 false : 적지 않은 컬럼은 반영되지 않음
+							 
+		id는 select태그의 resultMap 속성에다가 적는다
+	 -->
+	<resultMap id="empResult" type="empDTO2" autoMapping="false">
+		<result property="empno" column="no"/>
+		<result property="ename" column="ename"/>
+		<result property="sal" column="sal"/>
+		<result property="job" column="job"/>
+		<result property="hireDate" column="hireDate"/>
+	</resultMap>
+
+	<select id="selectEmpList2" resultMap="empResult" parameterType="empDTO2">
+		select
+			empno as no, ename, sal, job, hiredate
+		from
+			emp0
+		<!-- 
+			if가 거짓일때 where만 남으면 오류나니까
+			항상 참인 1 = 1을 적어놓기도 한다.
+		where 1 = 1
+			<if test=" keyword != null amd keyword != '' ">
+				and ename like '%' || #{keyword} || '%'
+			</if>
+		 -->
+		 
+		 
+		<!-- 
+			<where> 는 태그안에 적힌 내용이 없으면 where 태그 자체를 지워줌
+			내용이 있으면 where문을 생성해줌
+			where 바로 다음에 and 나 or는 자동으로 지워준다.		
+		 -->
+		<where>
+			<if test="type != null and type != '' and keyword != null and keyword != '' ">
+<!-- 				<if test="type == 1"> -->
+<!-- 					lower(ename) like '%' || lower(#{keyword}) || '%' -->
+<!-- 				</if> -->
+<!-- 				<if test="type == 2"> -->
+<!-- 					lower(job) like '%' || lower(#{keyword}) || '%' -->
+<!-- 				</if> -->
+				<choose>
+					<when test="type == 1">
+						lower(ename) like '%' || lower(#{keyword}) || '%'
+					</when>
+					<when test="type == 2">
+						lower(job) like '%' || lower(#{keyword}) || '%'
+					</when>
+					<when test="type == 3">
+						and (
+						lower(ename) like '%' || lower(#{keyword}) || '%'
+						or
+						lower(job) like '%' || lower(#{keyword}) || '%'
+						)
+					</when>
+					<when test="type == 4">
+					<!-- <![CDATA[ <= ]]> 안에 있는 태그를 그대로 쓰게 해준다. xml 에서 < 는 사용 불가이기 때문에
+					이런 식으로 작성한다.  -->
+						and sal <![CDATA[ <= ]]> #{keyword}
+					</when>
+				</choose>
+			</if>
+			
+			<if test="checks != null">
+				and empno in 
+				<!-- 
+					xml의 foreach
+					item : 사용할 변수 foreach 안에서는 #{변수명} 으로 사용 가능하다
+					collection : 반복될 배열 또는 list
+								 dto나 map 안에 있으면 key나 필드명을 적음
+								 parameterType에 배열이 전달되었다면 "array" list가 전달되었다면 "list"
+					open : 반복문이 시작되면서 적어줌.
+					separator="," 아이템이 하나 끝날때마다 넣어주는 구분자
+					close : 반복문이 끝나면서 적어줌.
+				 -->
+				<foreach item="item" collection="checks" open="(" separator="," close=")">
+					#{item}
+				</foreach>
+			</if>
+		</where>
+		<if test="orderType == 'desc'">
+			order by ${orderName} desc
+		</if>
+		<if test="orderType == 'asc'">
+			order by ${orderName} asc
+		</if>
+	</select>
+	
+</mapper>

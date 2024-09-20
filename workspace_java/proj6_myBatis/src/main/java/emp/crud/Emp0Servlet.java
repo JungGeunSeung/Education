@@ -37,9 +37,30 @@ public class Emp0Servlet extends HttpServlet {
 		}
 		
 		if(cmd == null) {
-			EmpDAO dao = new EmpDAO();
-			List empList = dao.selectEmp();
+			
+			String[] checks = request.getParameterValues("check");
+			String type = request.getParameter("type");
+			String keyword = request.getParameter("keyword");
+			String orderType = request.getParameter("orderType");
+			String orderName = request.getParameter("orderName");
+			
+			EmpDTO empDTO = new EmpDTO();
+			
+			empDTO.setKeyword(keyword);
+			empDTO.setChecks(checks);
+			empDTO.setType(type);
+			empDTO.setOrderType(orderType);
+			empDTO.setOrderName(orderName);
+
+			EmpDAO empDAO = new EmpDAO();
+			
+			List<EmpDTO> empList = empDAO.selectEmpList(empDTO);
 			request.setAttribute("empList", empList);
+			request.setAttribute("keyword", keyword);
+			request.setAttribute("type", type);
+			request.setAttribute("orderType", orderType);
+			request.setAttribute("orderName", orderName);
+			
 			request.getRequestDispatcher("WEB-INF/views/emp.jsp").forward(request, response);
 			
 		} else if ("join".equals(cmd)) {
