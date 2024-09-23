@@ -28,7 +28,7 @@
 				검색 : <input type="text" name="keyword" placeholder="검색어를 입력하세요">
 				<input type="submit" value="검색">
 				<input type="hidden" name="orderType" value="${ orderType }">
-				<input type="hidden" name="orderName">
+				<input type="hidden" name="orderName" value="empno">
 				<table border="1">
 					<caption>회원 목록 표시</caption>
 					<thead>

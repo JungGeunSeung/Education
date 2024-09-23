@@ -89,6 +89,11 @@
 				</foreach>
 			</if>
 		</where>
+		<!-- 
+			#{} : 문자인경우 ''붙여주고, 숫자인경우 그냥 사용
+			${} : 무조건 그냥 사용 (해킹의 위험이 있다. 따라서 where 조건같은데에서 보단 order 같은 가벼운 곳에만
+									사용하자)
+		 -->
 		<if test="orderType == 'desc'">
 			order by ${orderName} desc
 		</if>
