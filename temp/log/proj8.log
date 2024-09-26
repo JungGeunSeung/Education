@@ -1,2 +1,3 @@
-[INFO ]:[24-09-25 14:30:23][kr.or.human.proj8.HomeController(27)] - Welcome home! The client locale is ko_KR.
-[INFO ]:[24-09-25 14:51:57][kr.or.human.proj8.HomeController(27)] - Welcome home! The client locale is ko_KR.
+[INFO ]:[24-09-26 16:15:38][kr.or.human.controller.EmpController(32)] - info list.size() : 13
+[WARN ]:[24-09-26 16:15:38][kr.or.human.controller.EmpController(33)] - warn list.size() : 13
+[ERROR]:[24-09-26 16:15:38][kr.or.human.controller.EmpController(34)] - error list.size() : 13

@@ -8,7 +8,7 @@
     </settings>
 
 	<typeAliases>
-		<typeAlias type="emp.crud.EmpDTO" alias="empDTO2" />
+		<typeAlias type="kr.or.human.dto.EmpDTO" alias="empDTO" />
 	</typeAliases>
 	
 </configuration>

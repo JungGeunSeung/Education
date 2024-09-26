@@ -3,6 +3,8 @@ package kr.or.human.dto;
 import java.sql.Date;
 import java.util.Arrays;
 
+import org.springframework.stereotype.Component;
+@Component
 public class EmpDTO {
 
     private Integer empno;
