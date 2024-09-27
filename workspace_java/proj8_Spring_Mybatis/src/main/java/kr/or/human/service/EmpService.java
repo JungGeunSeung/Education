@@ -6,7 +6,6 @@ import org.apache.ibatis.annotations.Mapper;
 
 import kr.or.human.dto.EmpDTO;
 
-@Mapper
 public interface EmpService {
 	
 	List<EmpDTO> listEmp();
