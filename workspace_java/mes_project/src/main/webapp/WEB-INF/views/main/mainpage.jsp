@@ -6,14 +6,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/GAW_project/CSS/category.css">
-    <link rel="stylesheet" href="/GAW_project/CSS/header.css">
-    <link rel="stylesheet" href="/GAW_project/CSS/footer.css">
+    <link rel="stylesheet" href="CSS/category.css">
+    <link rel="stylesheet" href="CSS/header.css">
+    <link rel="stylesheet" href="CSS/footer.css">
     <title>Grand All Win</title>
     <style>
-       
-
-        
 
         /*------------------------------ 메인 영역 ----------------------------------*/
 

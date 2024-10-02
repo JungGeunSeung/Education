@@ -8,16 +8,16 @@
 	</div>
 	<div class="certifiedImg">
 		<p>인증 목록</p>
-		<img src="/GAW_project/img/ce.png" alt="CE인증마크">
-		<img src="/GAW_project/img/fmApproved.jpg" alt="FM인증마크">
-		<img src="/GAW_project/img/iaf.png" alt="IAF인증마크">
-		<img src="/GAW_project/img/iso.png" alt="ISO인증마크">
-		<img src="/GAW_project/img/kab.png" alt="KAB인증마크">
-		<img src="/GAW_project/img/kc.png" alt="KC인증마크">
-		<img src="/GAW_project/img/kr.jpg" alt="KR인증마크">
-		<img src="/GAW_project/img/ksa.png" alt="KSA인증마크">
-		<img src="/GAW_project/img/nsf.png" alt="NSF인증마크">
-		<img src="/GAW_project/img/tuv.png" alt="TUV인증마크">
+		<img src="/resources/img/ce.png" alt="CE인증마크">
+		<img src="/resources/img/fmApproved.jpg" alt="FM인증마크">
+		<img src="/resources/img/iaf.png" alt="IAF인증마크">
+		<img src="/resources/img/iso.png" alt="ISO인증마크">
+		<img src="/resources/img/kab.png" alt="KAB인증마크">
+		<img src="/resources/img/kc.png" alt="KC인증마크">
+		<img src="/resources/img/kr.jpg" alt="KR인증마크">
+		<img src="/resources/img/ksa.png" alt="KSA인증마크">
+		<img src="/resources/img/nsf.png" alt="NSF인증마크">
+		<img src="/resources/img/tuv.png" alt="TUV인증마크">
 	</div>
 	<!-- 위로 가기 버튼 -->
 	<div class="back-to-top"
