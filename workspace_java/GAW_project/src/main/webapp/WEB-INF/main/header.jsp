@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<link rel="stylesheet" href="/GAW_project/CSS/header.css">
 <div class="header">
 	<div class="headerBox">
 		<div class="logo">

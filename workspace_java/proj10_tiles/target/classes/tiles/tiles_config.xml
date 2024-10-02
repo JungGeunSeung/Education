@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+"-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+"http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+<tiles-definitions>
+	
+	<definition name="baseLayout" template="/WEB-INF/views/common/layout.jsp">
+		<put-attribute name="header" value="/WEB-INF/views/common/header.jsp"/>
+		<put-attribute name="side" value="/WEB-INF/views/common/side.jsp"/>
+		<put-attribute name="footer" value="/WEB-INF/views/common/footer.jsp"/>
+	</definition>
+	
+	<definition name="baseLayout2" template="/WEB-INF/views/common/layout2.jsp">
+		<put-attribute name="header" value="/WEB-INF/views/common/header.jsp"/>
+		<put-attribute name="side" value="/WEB-INF/views/common/side.jsp"/>
+		<put-attribute name="footer" value="/WEB-INF/views/common/footer.jsp"/>
+	</definition>
+	
+	<definition name="login" extends="baseLayout2">
+		<put-attribute name="title" value="로그인"/>
+		<put-attribute name="content" value="/WEB-INF/views/main1.jsp"/>
+	</definition>
+
+	<!-- override 방식으로 name인 main으로 들어오면 baseLayout을 전부 가져와서 추가로 content도 보여주게 된다. -->
+	<definition name="main" extends="baseLayout">
+		<put-attribute name="content" value="/WEB-INF/views/main1.jsp"/>
+	</definition>
+	
+	<!-- put-attribute 에 같은 이름으로 다른 jsp를 불러와 덮어 쓸수도 있다. -->
+	<definition name="main2" extends="baseLayout">
+		<put-attribute name="content" value="/WEB-INF/views/main2.jsp"/>
+	</definition>
+
+	<!-- *.tiles 이런식으로 쓰면 자동으로 jsp가 인식한다. 대신 컨트롤러에 이름과 같게한다.-->
+	<definition name="*.tiles" extends="baseLayout">
+		<put-attribute name="content" value="/WEB-INF/views/{1}.jsp"/>
+	</definition>
+
+	<!-- *의 순서로 {1},{2} 에 할당한다. -->
+	<definition name="/*/*.tiles" extends="baseLayout">
+		<put-attribute name="content" value="/WEB-INF/{1}/{2}.jsp"/>
+	</definition>
+	
+</tiles-definitions>

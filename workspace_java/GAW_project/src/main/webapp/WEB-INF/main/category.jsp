@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<link rel="stylesheet" href="/GAW_project/CSS/category.css">
 <div class="menu-bar">
 
 	<!----------------- 상위 카테고리 ----------------->

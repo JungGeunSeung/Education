@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<link rel="stylesheet" href="/GAW_project/CSS/footer.css">
 <div class="footer-container">
 	<div class="footer-bottom">
 		<p>본사&공장: 충청남도 천안시 동남구 대흥로 215, 7층</p>

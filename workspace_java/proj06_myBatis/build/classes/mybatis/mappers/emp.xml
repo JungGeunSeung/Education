@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.emp">
+	
+<!-- resultType="emp.EmpDTO" : DTO의 값들을 자동으로 가져오기 위해 패키지.클래스 로 가져온다 import는 필요없다 -->
+	<select id="selectAllEmp" resultType="emp.EmpDTO">
+		select * from emp
+	</select>
+	
+	<!-- java.util.hashMap은 자바 mybatis가 알고있다. -->
+	<!-- java.util.hashMap : HashMap -->
+	<!-- java.util.Map : map -->
+	<!-- java.util.List : list -->
+	<!-- java.lang.String : string -->
+	<!-- java.lang.Integer : int -->
+<!-- 	<select id="selectAllEmpMap" resultType="java.util.hashMap"> -->
+	<!-- dto 대신에 map으로 받는다 -->
+	<select id="selectAllEmpMap" resultType="map">
+		select * from emp
+	</select>
+	<!-- resultType : Type은 클래스를 뜻한다. -->
+	<select id="selectOneEmp" resultType="emp.EmpDTO">
+		select empno, ename, sal from emp where empno = 7788
+	</select>
+	
+	<select id="selectTotalEmp" resultType="int">
+		select count(*) from emp
+	</select>
+	
+	<select id="selectStrEmp" resultType="string">
+		select ename from emp where empno = 7788
+	</select>
+
+	<!-- #{} 이렇게 쓰면 DTO 안에 있는 getter가 자동으로 채워진다. -->
+	<!-- map으로 쓰면 dto에 있는 get() 메소드를 실행한다. -->
+	<update id="updateEmp" parameterType="emp.EmpDTO">
+		update emp0 set ename=#{ename}, sal = #{sal} where empno = #{empno}
+	</update>
+
+	<!-- _parameter로 사용 가능하다 -->
+	<select id="selectEmpByEname" resultType="emp.EmpDTO" parameterType="string">
+		select * from emp0 where ename = #{_parameter}
+	</select>
+
+</mapper>
