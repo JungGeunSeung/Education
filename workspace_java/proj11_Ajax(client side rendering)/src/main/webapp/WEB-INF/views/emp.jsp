@@ -46,7 +46,7 @@
 								<th>job</th>
 								<th>sal</th>
 								<th>hireDate</th>
-								<!--                   <th>삭제</th> -->
+								<th>삭제</th>
 							</tr>
 						</thead>
 						<tbody id="list">
@@ -60,74 +60,182 @@
 	<footer>휴먼</footer>
 
 	<script>
-	
-	window.addEventListener("load", function(){
-		
+	window.addEventListener("load", function() {
+		getList();
+	});
+	function ajax(url, param, cb, method) {
+		if (!method) method = "get";
 		const xhr = new XMLHttpRequest();
-		const url = "listEmp";
+		xhr.open(method, url);
 		
-		xhr.open("get", url)
-// 		xhr.setRequestHeader("Content-Type","application/json");
-		xhr.send();
+		if(param) {
+			xhr.setRequestHeader("Content-Type", "application/json");
+			const data = JSON.stringify(param);
+			xhr.send(data);
+		} else {
+			xhr.send();
+		}
 		
-		xhr.onload = ()=> {
-			console.log(xhr.responseText)
-			
-				let html = "";
-			try{
-				const empList = JSON.parse(xhr.responseText);
-				for(let i=0; i<empList.length; i++){
-					console.log(empList[i].ename)
-					/*
-					html += '<tr>';
-			        html += '<td>';
-			        html += '<input type="checkbox" name="check" value="${empList[i].empno}">';
-			        html += '</td>';
-			        html += '<td>${empList[i].empno}</td>';
-			        html += '<td>${empList[i].ename}</td>';
-			        html += '<td>${empList[i].job}</td>';
-			        html += '<td>${empList[i].sal}</td>';
-			        html += '<td>';
-			        html += '<fmt:formatDate value="${empList[i].ename}" pattern="yyyy년 MM월 dd일 hh시 mm분 ss초" />';
-			        html += '</td> ';                   
-		            html += '</tr>
-					*/
-					// SQL에서 가져온 timestamp 값 (예: "2024-09-30 15:30:00")
-					let timestamp = empList[i].hireDate;
-					console.log(timestamp)
-					// timestamp를 Date 객체로 변환
-					let dateObj = new Date(timestamp);
-
-					// 원하는 형식으로 변환
-					// 예: YYYY-MM-DD HH:MM:SS 형식
-					let year = dateObj.getFullYear();
-					let month = ("0" + (dateObj.getMonth() + 1)).slice(-2); // 월은 0부터 시작하므로 +1
-					let day = ("0" + dateObj.getDate()).slice(-2);
-					let hours = ("0" + dateObj.getHours()).slice(-2);
-					let minutes = ("0" + dateObj.getMinutes()).slice(-2);
-					let seconds = ("0" + dateObj.getSeconds()).slice(-2);
-
-					// 최종 출력 포맷: "YYYY-MM-DD HH:MM:SS"
-					let formattedDate = `\${year}-\${month}-\${day} \${hours}:\${minutes}:\${seconds}`;
-					html = `
-					<tr>
-				        <td>
-				        <input type='checkbox' name='check'>
-				        </td>
-				        <td>\${empList[i].empno}</td>
-				        <td>\${empList[i].ename}</td>
-				        <td>\${empList[i].job}</td>
-				        <td>\${empList[i].sal}</td>
-				        <td>`+formattedDate+`</td>
-		            </tr>`;
-					document.querySelector('#list').innerHTML += html;
-				}
-			} catch(e) {
-				console.log("JSON parsing ERROR : url :", url, e);
+		if(typeof cb == "function"){
+			xhr.onload = function() {
+				cb(xhr.responseText);
 			}
+			}
+	}
+	
+	function getList() {
+		ajax("listEmp", null ,drawList, "get")
+	}
+	
+	function drawList(text) {
+		try {
+			const empList = JSON.parse(text);
+			let html = "";
+			for (let i = 0; i < empList.length; i++) {
+				let timestamp = empList[i].hireDate;
+				let dateObj = new Date(timestamp);
+
+				let year = dateObj.getFullYear();
+				let month = ("0" + (dateObj.getMonth() + 1)).slice(-2);
+				let day = ("0" + dateObj.getDate()).slice(-2);
+
+				let formattedDate = `\${year}년 \${month}월 \${day}일`;
+
+				html += `
+					<tr>
+						<td>
+							<input type='checkbox' name='check' value='${empList[i].empno}'>
+						</td>
+						<td>\${empList[i].empno}</td>
+						<td>\${empList[i].ename}</td>
+						<td>\${empList[i].job}</td>
+						<td>\${empList[i].sal}</td>
+						<td>\${formattedDate}</td>
+						<td><button type="button" data-empno="\${empList[i].empno}" class="btnDel" id="btn_\${empList[i].empno}">삭제</button></td>
+					</tr>`;
+			} // for END
 			
-		}		
-	})
+			document.querySelector('#list').innerHTML = html;
+			
+			bind();
+
+		} catch(e) {
+			console.log("JSON parsing ERROR: url:",e);
+		} // try catch END
+	}
+	
+	function bind() {
+		const delBtnList = document.querySelectorAll(".btnDel");
+		
+		for (let btn of delBtnList) {
+			btn.addEventListener("click", function(event) {
+				let empno = event.target.getAttribute("data-empno");
+				console.log("empno :",empno);
+				
+				const data = {
+				        empno: empno
+				    };
+				
+				ajax("delemp",data , function(result){
+					if(result != 0 ) {
+						getList();
+					} else {
+						alert("삭제 실패");
+					}
+				} , "delete")
+				
+			}) // btn.addEventListener END
+		} // for END
+	}
+	// 원본
+// 	window.addEventListener("load", function() {
+// 		const xhr = new XMLHttpRequest();
+// 		const url = "listEmp";
+		
+// 		xhr.open("get", url);
+// 		xhr.send();
+
+// 		xhr.onload = () => {
+// 			console.log(xhr.responseText);
+			
+// 			let html = ""; // 누적된 HTML을 담을 변수
+// 			try {
+// 				const empList = JSON.parse(xhr.responseText);
+// 				for (let i = 0; i < empList.length; i++) {
+// 					// SQL에서 가져온 timestamp 값 (예: "2024-09-30 15:30:00")
+// 					let timestamp = empList[i].hireDate;
+					
+// 					// timestamp를 Date 객체로 변환
+// 					let dateObj = new Date(timestamp);
+
+// 					// 원하는 형식으로 변환
+// 					let year = dateObj.getFullYear();
+// 					let month = ("0" + (dateObj.getMonth() + 1)).slice(-2); // 월은 0부터 시작하므로 +1
+// 					let day = ("0" + dateObj.getDate()).slice(-2);
+
+// 					// 최종 출력 포맷: "YYYY-MM-DD HH:MM:SS"
+// 					let formattedDate = `\${year}년 \${month}월 \${day}일`;
+
+// 					// HTML 누적
+// 					html += `
+// 						<tr>
+// 							<td>
+// 								<input type='checkbox' name='check' value='${empList[i].empno}'>
+// 							</td>
+// 							<td>\${empList[i].empno}</td>
+// 							<td>\${empList[i].ename}</td>
+// 							<td>\${empList[i].job}</td>
+// 							<td>\${empList[i].sal}</td>
+// 							<td>\${formattedDate}</td>
+// 							<td><button type="button" data-empno="\${empList[i].empno}" class="btnDel" id="btn_\${empList[i].empno}">삭제</button></td>
+// 						</tr>`;
+// 				} // for END
+				
+// 				// 누적된 HTML을 테이블에 추가
+// 				document.querySelector('#list').innerHTML = html;
+				
+// 				// [id^=btn_] : ^는 id가 btn_ 으로 시작하는 id값을 가져오는 방법중 하나이다.
+// // 				const delBtnList = document.querySelectorAll("[id^=btn_]");
+// 				const delBtnList = document.querySelectorAll(".btnDel");
+				
+// 				for (let btn of delBtnList) {
+// 					btn.addEventListener("click", function(event) {
+// // 						console.log(event.target)
+// 						let empno = event.target.getAttribute("data-empno");
+// 						console.log("empno :",empno);
+// 						// 이 empno를 ajax로 전달하여 deleteEmp 하기
+
+// 						const xhr2 = new XMLHttpRequest();
+// 						const url2 = "delemp";
+						
+// 						xhr2.open("delete", url2);
+// 						xhr2.setRequestHeader("Content-Type", "application/json");
+// 						const data = {
+// 						        empno: empno  // JSON 객체로 전달할 데이터
+// 						    };
+
+// 					    xhr2.send(JSON.stringify(data));
+						
+// 						xhr2.onload = () => {
+// 					        if (xhr.status === 200) {
+// 								console.log(xhr.responseText);
+// 					            console.log("deleted successfully");
+// 					            event.target.closest('tr').remove();
+// 					        } else {
+// 								console.log(xhr.responseText);
+// 					            console.log("Error deleting employee:", xhr.statusText);
+// 					        }
+// 						}
+						
+// 					}) // btn.addEventListener END
+// 				} // for END
+
+// 			} catch(e) {
+// 				console.log("JSON parsing ERROR: url:", url, e);
+// 			} // try catch END
+// 		} // xhr.onload END
+// 	}); // window.addEventListener END
+
 	
    document.querySelector("#empno").addEventListener("click", function(){
       const orderType = document.querySelector("[name=orderType]");

@@ -21,7 +21,6 @@ public class EmpDAOImpl implements EmpDAO {
 	public List<EmpDTO> selectEmp() {
 		// 모든 리스트 출력
 		List<EmpDTO> result = sqlSession.selectList("mapper.ajax.selectEmp");
-		System.out.println(result);
 		return result;
 	}
 	

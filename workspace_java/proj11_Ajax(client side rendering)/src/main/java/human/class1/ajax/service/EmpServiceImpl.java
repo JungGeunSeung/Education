@@ -17,7 +17,6 @@ public class EmpServiceImpl implements EmpService {
 	public List<EmpDTO> listEmp() {
 
 		List<EmpDTO> list = empDAO.selectEmp();
-		System.out.println(list);
 		return list;
 	}
 
