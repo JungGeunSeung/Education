@@ -25,7 +25,7 @@
 	</appender>
 	
 	<appender name="daily" class="org.apache.log4j.DailyRollingFileAppender">
-        <param name="file" value="D:/workspace/temp/log/proj8.log"/> <!-- 저장위치 -->
+        <param name="file" value="C:/Users/bijou/Documents/Education/temp/log/proj8.log"/> <!-- 저장위치 -->
         <param name="Append" value="true"/> <!-- 한줄씩 엔터 -->
         <param name="DatePattern" value="'.'yyMMdd.txt"/> <!-- proj8.240925.log 처럼 파일을 백업시킨다. -->
         <layout class="org.apache.log4j.PatternLayout">
@@ -34,7 +34,7 @@
     </appender>
     
 	<appender name="rolling" class="org.apache.log4j.RollingFileAppender">
-        <param name="file" value="D:/workspace/temp/log/proj8_size.log"/>
+        <param name="file" value="C:/Users/bijou/Documents/Education/temp/log/proj8_size.log"/>
         <param name="Append" value="true"/>
         <param name="MaxFileSize" value="1KB"/> <!-- 파일을 나눌 크기 -->
         <param name="MaxBackupIndex" value="10"/> <!-- 파일 최대 개수 -->

@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
 
 import kr.or.human.dto.EmpDTO;
 
@@ -23,6 +22,15 @@ public class EmpDAOImpl implements EmpDAO {
 		List<EmpDTO> result = sqlSession.selectList("mapper.emp.selectEmp");
 		return result;
 	}
+
+	@Override
+	public EmpDTO selectEmpOne(int empno) {
+		// 하나만 읽기
+		EmpDTO empDTO = null;
+		empDTO = sqlSession.selectOne("mapper.emp.ListEmpOne", empno);
+		return empDTO;
+	}
+	
 	@Override
 	public int updateEmp(EmpDTO dto) {
 		// 수정
@@ -32,6 +40,7 @@ public class EmpDAOImpl implements EmpDAO {
 		return result;
 		
 	}
+	
 	@Override
 	public int deleteEmp(EmpDTO dto) {
 		// 삭제

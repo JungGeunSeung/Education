@@ -6,6 +6,10 @@
 	<select id="selectEmp" resultType="empDTO">
 		select * from emp0
 	</select>
+
+	<select id="selectEmpOne" resultType="empDTO" parameterType="int">
+		select * from emp0 where empno = #{empno}
+	</select>
 	
 	<insert id="insertEmp" parameterType="empDTO">
 		INSERT INTO emp0 (empno, ename, job, hiredate) VALUES (#{empno}, #{ename}, #{job}, #{hireDate})
@@ -18,4 +22,6 @@
 	<delete id="deleteEmp" parameterType="empDTO">
 		delete from emp0 where empno=#{empno}
 	</delete>
+	
+	
 </mapper>

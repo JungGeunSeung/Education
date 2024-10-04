@@ -36,6 +36,15 @@ public class EmpController {
 		return "listEmp";
 	}
 	
+	@RequestMapping("/member/one")
+	public String listEmpOne(Model model, EmpDTO dto) {
+		
+		List<EmpDTO> list = empService.listEmpOne(dto);
+		model.addAttribute("list",list);
+		
+		return "listEmp";
+	}
+	
 	@RequestMapping("/member/write/update")
 	public String inupdate(Model model, EmpDTO dto) {
 		model.addAttribute("list",dto);

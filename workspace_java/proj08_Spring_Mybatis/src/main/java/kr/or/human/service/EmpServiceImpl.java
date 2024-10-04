@@ -14,23 +14,30 @@ public class EmpServiceImpl implements EmpService {
 	@Autowired
 	EmpDAO empDAO;
 	
-	
 	@Override
 	public List<EmpDTO> listEmp() {
-		
 		List<EmpDTO> list = empDAO.selectEmp();
 		return list;
 	}
+
+	@Override
+	public List<EmpDTO> listEmpOne(int empno) {
+		List<EmpDTO> list = empDAO.selectEmpOne(empno);
+		return list;
+	}
+	
 	public int updateEmp(EmpDTO dto) {
 		int result = -1;
 		result = empDAO.updateEmp(dto);
 		return result;
 	}
+	
 	public int deleteEmp(EmpDTO dto) {
 		int result = -1;
 		result = empDAO.deleteEmp(dto);
 		return result;
 	}
+	
 	public int insertEmp(EmpDTO dto) {
 		int result = -1;
 		result = empDAO.insertEmp(dto);
