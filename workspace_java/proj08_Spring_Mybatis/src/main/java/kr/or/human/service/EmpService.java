@@ -12,5 +12,5 @@ public interface EmpService {
 	int updateEmp(EmpDTO dto);
 	int deleteEmp(EmpDTO dto);
 	int insertEmp(EmpDTO dto);
-	List<EmpDTO> listEmpOne(int empno);
+	EmpDTO listEmpOne(int empno);
 }

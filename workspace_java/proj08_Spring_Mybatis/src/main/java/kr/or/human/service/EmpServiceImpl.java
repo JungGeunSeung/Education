@@ -21,8 +21,8 @@ public class EmpServiceImpl implements EmpService {
 	}
 
 	@Override
-	public List<EmpDTO> listEmpOne(int empno) {
-		List<EmpDTO> list = empDAO.selectEmpOne(empno);
+	public EmpDTO listEmpOne(int empno) {
+		EmpDTO list = empDAO.selectEmpOne(empno);
 		return list;
 	}
 	

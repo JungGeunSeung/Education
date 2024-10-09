@@ -37,10 +37,10 @@ public class EmpController {
 	}
 	
 	@RequestMapping("/member/one")
-	public String listEmpOne(Model model, EmpDTO dto) {
+	public String listEmpOne(Model model, int empno) {
 		
-		List<EmpDTO> list = empService.listEmpOne(dto);
-		model.addAttribute("list",list);
+		EmpDTO dto = empService.listEmpOne(empno);
+		model.addAttribute("list",dto);
 		
 		return "listEmp";
 	}
