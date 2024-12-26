@@ -1,0 +1,90 @@
+1강. ARM프로세서 개요 1
+ARM회사의 Cortex-M시리즈를 가격, 성능으로 구분하여 종류를 만듦.
+-Cortex는 인체 대외의 피질을 의미함.
+-A: Application(Thumb, Thumb-2 명령어 Set를 사용)
+-R: Real Time(Thumb, Thumb-2 명령어 Set를 사용)
+-M: Microcontroller(Thumb-2 명령어 Set를 사용)
+
+2강. ARM프로세서 개요 2
+-ARM Cortex는 The core of IoT Device
+-1993~2013(fully 20 years)
+-Quantity: over 50,000,000,000
+-50% for Smart Phone or Tablet
+-20% for Embedded System
+-16% for Enterprise Devices,
+-Smart Factory/Farm/Warehouse
+-6% for Home Device or Wi-Fi Access Point
+
+3강. Cortex M3기본 1
+-지정된 Memory Map은 Interrupt Controller 또는 Debug장치 같은 내장된 장치의 접근 가능
+-C프로그램으로 대부분의 Registers에 접근 가능
+-4GB의 Memory공간의 Map구조에 최적화된 내부 Bus로 설계되고,
+-Data Memory가 Code영역에 위치 프로그램 Code가 external RAM영역에 위치
+-System영역에는 고정된 주소에 Interrupt제어기
+-Debug장치를 배치하여 이식성을 개선하여 여타 회사의 Cortex M3에 호환됨.
+
+4강. Cortex M3기본 2
+1. Debug지원
+-JTAG(Joint Test Action Group)또는 Serial Wire debug Interface를 지원함.
+-CoreSightDebugging기법의 적용으로 Core가 수행되고 있는 도중에도 프로세서 상태 또는 메모리 내용을 파악할 수 있음.
+-6개의 Breakpoint와 4개의 Watchpoint기능을 내장함.
+-DWT(Data Watchpoint and Trace)를 이용한 명령어 Trace와 데이터 Trace를 위하여 ITM(Instru mentation Trace Microcell)과 ETM(Embedded Trace Microcell)의 선택이 가능함.
+-Fault Status Register, Fault Exception, Flash Patch 기능의 추가로 Debugging용이성이 향상됨.
+-DWT속의 Program Counter Sampler와 Counter를 이용한 Code-profiling정보를 획득함.
+
+5강. 명령어 집합 1
+- CortexM3에서 명령어
+-LDR:Loadword (memory => Register)
+-LDRH: Load Half word(memory =>Register)
+-STR: Store word (Register => Memory)
+-STRD: Store Double word (Register =>Memory)
+- 16bit 분기 연산 vs. 32bit 분기 연산
+-B: Branch
+-BL:BranchandLink
+-IT: IF-THEN(architecture v7)
+-TBB: Table Branch byte
+-TBH: Table Branch Half word
+
+6강. 명령어 집합 2
+1. ARM 프로세서는
+-Pre-indexing: Memory 주소를 보관하고 있는 레지스터의 내용이 변경된 다음에 메모리에 접근하는 방법
+-Post-indexing: 주소를 보관하고 있는 레지스터의 내용이 변경되기 전에 메모리에 접근하는 방법
+-Pre-indexing Memory 접근은 다양한 전송크기(bit, byte, word)를 갖는 load, store명령어에 적용됨.
+
+7강. 메모리 시스템 1
+1.Cortex M3는 :기존의 ARM프로세서와 다른 Memory구조를 갖고 있음.
+-미리 정의된 메모리 맵
+-특수 레지스터용 Bit-band의 지원
+-비정렬전송
+-Little Endian, Big Endian을 지원
+
+8강. 메모리 시스템 2
+-Cortex-M3가 SWP 명령어를 가지고 있지 않음.
+-SWP 명령어는 ARM7TDMI와 같은 전통적인 ARM 프로세서에서 세마포어 동작을 위해 사용되었음.
+-Cortex-M3에서는 배타적 접근 동작이 이를 대신함.
+-배타적 접근이란 아키텍처v6에서 처음으로 지원되었음.
+-새로운 ARM 프로세서에서는 READ/WRITE 접근이 분리된 버스에 의해 수행될 수 있음.
+-그러한 상황에서는 SWP 명령어는 메모리 접근을 단일화하기 위해 더 이상 사용될 수 없음.
+-이유는 Lock전송 과정에서 읽고 쓰는 동작이 같은 버스에서 이루어져야 하기 때문임.
+-세마포어를위한 메모리 위치가 동일한 프로세스에서 동작하는 다른 버스 마스터나 다른 프로세스에 의해 접근될 수 있는 가능성을 제공함.
+
+9강. Cortex M3의 구현1
+-Cortex M3는 3단계 명령
+-Fetch, Decode, Execution 파이프라인을 가짐.
+-대부분의 Program이 16bit명령어로 이루어질 경우에는 Fetch를 수행하지 않음.
+-분기명령에 대하여 파이프라인은 Flush되고,
+-분기의 목적지에서 명령어는 Fetch하여 파이프라인을 새로 채움.
+
+10강. Cortex M3의 구현 2
+1. Cortex M3의 외부 구성
+-Bus multiplexer or AHB Bus Matrix
+-Additional
+-SRAM
+-Debug Components
+-SRAM External Memory Controller
+-MPU:MemoryProtectionUnit
+-SW: Serial Wire(ex: RS-232 Cable)
+-DP: Debug Port
+-AHB: Advanced High-performance Bus
+-APB: Advanced Peripheral Bus
+-I/O, UART, Timer
