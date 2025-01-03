@@ -88,3 +88,39 @@ ARM회사의 Cortex-M시리즈를 가격, 성능으로 구분하여 종류를 �
 -AHB: Advanced High-performance Bus
 -APB: Advanced Peripheral Bus
 -I/O, UART, Timer
+
+11강. STM32F103 개요 1
+1. ARM Cortex M3 32bit RISC core
+-72MHz Clock 주파수
+-1.25 DMIPS/MHz (Dhrystone)
+-단일 Cycle의 ALU-4~16MHz 수정 발진자(Oscillator)
+-PLL(Phase Locked Loop)을 이용한 CPU Clock생성
+-Sleep, Stop, Standby Mode
+-RTC(Real Time Clock)과 Backup Register용 [V] battery supply
+-온도 센서
+
+12강. STM32F103 개요 2
+1. STM32F103의 특징은
+-8MHz CLK(Clock)를 사용하여 90 DMIPS(Dhrystone Million Instruction Per Second)동작(72MHz)
+-PWM(Pulse Width Modulation) 18 Port 내장
+-Timer 7개 내장 (Watchdog 포함)
+-I/O Max 49개 사용
+-USB 2.0 Full Speed (12MBit/s) 지원
+-3가지 모드의 절전모드 지원
+-3CH UART (IrDA 지원: Infrared Data Association)
+-CAN(Controller Area Network) 인터페이스 지원
+-16 CH(Channel) 12bit A/D Converter
+-3.3V Operating Voltage
+-Internal RC 내장 (8MHz, 32KHz)
+
+13강. Reset and Clock Control 1
+-Reset Source는 WWDG, IWDG, Power, Software, Low-power management 이다.
+-Clock Source는 HSI, HSE, PLL, MSI(Multi Speed Internal) 이다.
+
+14강. Reset and Clock Control 2
+-Clock Control Register의 25번째 Bit는 PLLRDY이다.
+-PLL은 VCO, LPF, Phase Detector, 주파수 체배기로 구성된다.
+-Clock Configuration Register의 17번째 Bit는 PLLXTPRE이다.
+-Clock Interrupt Register는 Trigger를 제어한다.
+-Backup Domain Control Register의 1번째 Bit는 LSIRDY이다.
+
